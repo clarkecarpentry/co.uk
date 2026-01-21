@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm add:*)",
+      "Bash(npm install:*)",
+      "mcp__firecrawl__firecrawl_scrape",
+      "Bash(curl:*)",
+      "Bash(pnpm dlx:*)",
+      "Bash(pnpm check:*)",
+      "Bash(git add:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "shadcn"
+  ]
+}
