@@ -98,45 +98,50 @@ Created `docs/content-brief.md` with:
 - [x] About page template (story paragraphs, values, certifications)
 - [x] Blog post template (4 types with structures, checklist, voice notes)
 
-#### 2.2.3 Generate Page Content
+#### 2.2.3 Generate Page Content ✅
+
+**Status:** Complete
 
 Update existing data files with improved copy:
 
-- [ ] Update `src/lib/data/services.ts` - flesh out all 11 service descriptions:
-  - [ ] Project Management
-  - [ ] First Fix Carpentry
-  - [ ] Second Fix Carpentry
-  - [ ] Dry Lining
-  - [ ] Extensions
-  - [ ] Traditional Cut Roofs
-  - [ ] New Build
-  - [ ] Renovations
-  - [ ] Bespoke Joinery
-  - [ ] Kitchen Fitting
-  - [ ] Timber Frame Construction
-- [ ] Update `src/lib/data/projects.ts` - expand 12 project descriptions
-- [ ] Update `src/app/about/page.tsx`:
-  - [ ] Change "10 years" to "15 years"
-  - [ ] Add Mike Clarke's story (sole trader to larger projects)
-  - [ ] Review/update values and certifications copy
-- [ ] Review homepage copy (`src/app/page.tsx`)
+- [x] Update `src/lib/data/services.ts` - flesh out all 11 service descriptions:
+  - [x] Project Management
+  - [x] First Fix Carpentry
+  - [x] Second Fix Carpentry
+  - [x] Dry Lining
+  - [x] Extensions
+  - [x] Traditional Cut Roofs
+  - [x] New Build
+  - [x] Renovations
+  - [x] Bespoke Joinery
+  - [x] Kitchen Fitting
+  - [x] Timber Frame Construction
+- [x] Update `src/lib/data/projects.ts` - expand 12 project descriptions
+- [x] Update `src/app/about/page.tsx`:
+  - [x] Change "10 years" to "15 years"
+  - [x] Add Mike Clarke's story (sole trader to larger projects)
+  - [x] Review/update values and certifications copy
+- [x] Review homepage copy (`src/app/page.tsx`)
 
-#### 2.2.4 Generate Blog Content (3-5 posts)
+#### 2.2.4 Generate Blog Content (3-5 posts) ✅
 
-Save as markdown in `content/generated/blog/` for Sanity migration:
+**Status:** Complete
 
-- [ ] "First Fix vs Second Fix Carpentry: What's Involved"
-- [ ] "Why We Still Cut Traditional Roofs"
-- [ ] "What Main Contractors Should Expect from Their Carpentry Subcontractor"
-- [ ] Project spotlight: Wilder House case study
-- [ ] (Optional) Building regs / industry update post
+Created blog posts in `src/lib/data/blog-posts.ts` and migrated to Sanity:
 
-#### 2.2.5 Review & Consistency Check
+- [x] "First Fix vs Second Fix Carpentry: What's Involved" (Technical Explainer)
+- [x] "Why We Still Cut Traditional Roofs" (Industry Insight)
+- [x] "What Main Contractors Should Expect from Their Carpentry Subcontractor" (Industry Insight)
+- [x] "Wilder House: 41 Flats in Bristol City Centre" (Project Spotlight)
 
-- [ ] All content matches brand voice guidelines
-- [ ] Key messages present across pages
-- [ ] CTAs appropriate for each page context
-- [ ] Ready for Sanity migration in phase 2.3
+#### 2.2.5 Review & Consistency Check ✅
+
+**Status:** Complete
+
+- [x] All content matches brand voice guidelines
+- [x] Key messages present across pages
+- [x] CTAs appropriate for each page context
+- [x] Ready for Sanity migration in phase 2.3
 
 ---
 
@@ -157,15 +162,16 @@ Save as markdown in `content/generated/blog/` for Sanity migration:
 - [x] `siteSettings` - company info, contact details, social links
 - [x] `blockContent` - reusable Portable Text type
 
-#### Content Migration Script
-- [ ] Create script to convert static data to Sanity documents
-- [ ] Map content structure to Sanity schemas
-- [ ] Push generated content (from 2.2) to Sanity via API
-- [ ] Push legacy project data to Sanity
-- [ ] Verify all 12 projects migrated
-- [ ] Verify all 11 services migrated
-- [ ] Verify 6 testimonials migrated
-- [ ] Switch pages to fetch from Sanity
+#### Content Migration Script ✅
+- [x] Create script to convert static data to Sanity documents (`scripts/migrate-to-sanity.ts`)
+- [x] Map content structure to Sanity schemas
+- [x] Push generated content (from 2.2) to Sanity via API
+- [x] Push legacy project data to Sanity
+- [x] Verify all 12 projects migrated
+- [x] Verify all 11 services migrated
+- [x] Verify 6 testimonials migrated
+- [x] Verify 4 blog posts migrated
+- [x] Switch pages to fetch from Sanity (with static fallback)
 
 ---
 

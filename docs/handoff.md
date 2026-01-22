@@ -12,48 +12,63 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Current Focus
 
-**Phase 2.3 Sanity CMS** - NEAR COMPLETE
+**Phase 2.2.4 Blog Content** - COMPLETE
 
-Sanity Studio, schemas, and page integration are ready. Migration script created. Just need to run migration to populate Sanity.
+Blog pages are wired up to Sanity, 4 launch blog posts generated and migrated to Sanity CMS.
 
 ---
 
 ## Recent Work
 
-1. **Sanity Page Integration**
-   - Created `src/sanity/lib/types.ts` with TypeScript types
-   - Updated fetch.ts with typed functions and static data fallback
-   - Updated all pages (home, services, projects) to fetch from Sanity
-   - Pages gracefully fallback to static data when Sanity is empty
+1. **Blog Functionality**
+   - Wired up `/blog` and `/blog/[slug]` pages to fetch from Sanity
+   - Created `src/components/portable-text.tsx` for rich content rendering
+   - Created `src/lib/data/blog-posts.ts` with 4 launch posts
+   - Updated migration script to include blog posts
+   - Migrated all blog posts to Sanity
 
-2. **Migration Script**
-   - Created `scripts/migrate-to-sanity.ts`
-   - Migrates services, projects, testimonials, and siteSettings
-   - Usage: `SANITY_API_KEY=<token> pnpm migrate`
+2. **Blog Posts Created**
+   - "First Fix vs Second Fix Carpentry: What's Involved" (Technical Explainer)
+   - "Why We Still Cut Traditional Roofs" (Industry Insight)
+   - "What Main Contractors Should Expect from Their Carpentry Subcontractor" (Industry Insight)
+   - "Wilder House: 41 Flats in Bristol City Centre" (Project Spotlight)
 
-3. **Sanity CMS Setup (Phase 2.3)**
-   - Embedded Studio at `/studio` route using `next-sanity`
-   - Created 6 schema types: service, project, blogPost, testimonial, siteSettings, blockContent
-   - Configured Sanity client with GROQ queries
-   - Added env vars to `env.js` and `.env.example`
+3. **Content Rewrite (Phase 2.2.3)**
+   - Improved services and projects descriptions following content brief
+   - Applied brand voice guidelines (professional, technical, expert-focused)
+   - Re-migrated all content to Sanity
+
+4. **Sanity CMS (Phase 2.3)**
+   - Embedded Studio at `/studio` route
+   - All schemas working: service, project, blogPost, testimonial, siteSettings, blockContent
+   - Migration script handles all content types
+   - Pages fetch from Sanity with static fallback
 
 ---
 
 ## What's Next
 
-### Immediate (Phase 2.3 completion)
+### Immediate
 
-1. **Run migration** - Get Sanity API token and run `SANITY_API_KEY=<token> pnpm migrate`
-2. **Test** - Verify pages work with Sanity data
-3. **Remove static fallback** (optional) - Once confirmed working
-
-### Then
-
-- **2.2 Content Generation** - Use content agents to generate improved copy
 - **2.5 Design Beautification** - Need model website URL from user
-- **2.6 SEO Technical**
-- **2.7 Testing**
-- **2.8 Launch**
+- **2.6 SEO Technical** - Meta tags, structured data, sitemap
+- **2.7 Testing** - Cross-browser, mobile, accessibility
+- **2.8 Launch** - Deploy to production
+
+---
+
+## Blog Quick Reference
+
+| Route | Description |
+|-------|-------------|
+| `/blog` | Blog listing page with all posts |
+| `/blog/[slug]` | Individual blog post pages |
+
+**4 Blog Posts:**
+- `/blog/first-fix-vs-second-fix-carpentry`
+- `/blog/why-we-still-cut-traditional-roofs`
+- `/blog/what-main-contractors-should-expect`
+- `/blog/wilder-house-project-spotlight`
 
 ---
 
@@ -74,50 +89,44 @@ Sanity Studio, schemas, and page integration are ready. Migration script created
 **Commands:**
 ```bash
 pnpm dev                                    # Run Next.js + Studio
-SANITY_API_KEY=<token> pnpm migrate         # Migrate static data to Sanity
-# Get token from: https://www.sanity.io/manage/project/07w52gq6/api
+export $(grep -v '^#' .env | xargs) && pnpm migrate   # Migrate content to Sanity
 ```
 
 ---
 
 ## Blockers / Pending Decisions
 
-- **Sanity API key**: Need write token to run migration
 - **Design**: Need model website reference before starting 2.5
-- **Resend API**: Placeholder key in `.env` - user needs to add real key for testing
+- **Resend API**: Placeholder key in `.env` - user needs to add real key for contact form
 
 ---
 
 ## Environment Notes
 
-- On `develop` branch (3 commits ahead of origin)
-- Sanity deps: `sanity@4`, `next-sanity@11`, `@sanity/vision@4`, `@sanity/image-url@1`, `@sanity/client@7` (dev)
-- Migration deps: `tsx@4` (dev)
-- Studio configured for MCP (VS Code, Claude Code)
+- On `develop` branch
+- Build passes with `pnpm build`
+- All blog pages are statically generated at build time
+- Blog content stored in Sanity, editable via `/studio`
 
 ---
 
 ## File Changes This Session
 
 **Created:**
-- `scripts/migrate-to-sanity.ts` - Migration script
-- `src/sanity/lib/types.ts` - TypeScript types for Sanity data
+- `src/components/portable-text.tsx` - PortableText renderer for blog content
+- `src/lib/data/blog-posts.ts` - 4 blog posts with Portable Text content
 
 **Modified:**
-- `src/app/page.tsx` - Uses Sanity fetch with fallback
-- `src/app/services/page.tsx` - Uses Sanity fetch with fallback
-- `src/app/services/[slug]/page.tsx` - Uses Sanity fetch with fallback
-- `src/app/projects/page.tsx` - Uses Sanity fetch with fallback
-- `src/app/projects/[slug]/page.tsx` - Uses Sanity fetch with fallback
-- `src/sanity/lib/fetch.ts` - Added types, fallback, getFeaturedTestimonials
-- `package.json` - Added migrate script, tsx, @sanity/client
+- `scripts/migrate-to-sanity.ts` - Added blog posts migration
+- `src/app/blog/page.tsx` - Fetches from Sanity
+- `src/app/blog/[slug]/page.tsx` - Fetches from Sanity, renders PortableText
 
 ---
 
 ## Git Status
 
 - Branch: `develop`
-- 3 commits ahead of origin:
-  1. Sanity Studio setup and schemas
-  2. Migration script
-  3. Page updates with Sanity fetch
+- Recent commits:
+  1. Add blog functionality with 4 launch posts
+  2. Rewrite content for Phase 2.2.3 quality improvements
+  3. Update pages to fetch from Sanity with static fallback
