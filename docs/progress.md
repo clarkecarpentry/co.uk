@@ -140,6 +140,46 @@ Project documentation is now in a standard `docs/` directory that any LLM tool c
 
 ---
 
+## 2026-01-22: Phase 2.4 Contact Form
+
+**Goal:** Implement working contact form with email delivery via Resend.
+
+### Completed
+
+- Installed Resend SDK and @react-email/components
+- Created Zod validation schema (`src/lib/validations/contact.ts`)
+- Built React Email template (`src/emails/contact-form.tsx`)
+- Created tRPC contact router with form submission mutation
+- Built client-side form component with validation and error handling
+- Updated contact page to use new form component
+- Configured environment variables for Resend API
+
+### Features
+
+- Client-side validation with real-time error feedback
+- Server-side validation with Zod
+- Loading state during submission
+- Success state with "send another" option
+- Error handling with user-friendly messages
+- Professional HTML email template
+
+### Files Created
+
+```
+src/
+├── lib/validations/contact.ts     # Zod schema
+├── emails/contact-form.tsx        # React Email template
+├── server/api/routers/contact.ts  # tRPC router
+└── components/contact-form.tsx    # Client form component
+```
+
+### Environment Variables Added
+
+- `RESEND_API_KEY` - API key from resend.com
+- `CONTACT_EMAIL` - Recipient email address
+
+---
+
 ## Next Steps
 
 See [roadmap.md](./roadmap.md) for current phase and task breakdown.
