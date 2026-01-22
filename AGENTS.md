@@ -116,16 +116,16 @@ Break work into small steps. Confirm each with the smallest relevant check befor
 
 ## Do Not Assume
 
-These are **NOT** integrated yet. Do not write code that depends on them:
+These are **NOT** fully integrated yet:
 
-- **Sanity CMS** - not integrated (Phase 2.3)
+- **Sanity CMS** - Studio + schemas ready, **no content migrated yet** (Phase 2.3)
 - **Blog content** - pages are placeholders only
 - **Database** - none exists, using static data
 - **Light mode** - does not exist, dark only
 - **Image CDN** - not configured yet
 - **Analytics** - not integrated yet
 
-Static data in `src/lib/data/` is the source of truth until Phase 2.3.
+**Static data in `src/lib/data/` is the source of truth until content migration is complete.**
 
 ---
 
@@ -181,11 +181,11 @@ git flow feature finish <name>
 
 See `docs/state.json` for machine-readable project state.
 
-- **Current Phase**: 2.4 complete, working on 2.2-2.8
+- **Current Phase**: 2.3 partial + 2.4 complete
 - **Launch Date**: 2026-01-29
 - **Services**: 11
 - **Projects**: 12
-- **CMS**: Planned (not integrated)
+- **CMS**: Sanity Studio ready at `/studio`, content pending
 - **Contact Form**: Complete
 
 ---

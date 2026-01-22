@@ -12,60 +12,71 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Current Focus
 
-**Content Agent Enhancements** - COMPLETE
+**Phase 2.3 Sanity CMS** - PARTIAL COMPLETE
 
-Enhanced content-writer agent and content-generation skill with:
-- Market research workflow (keyword research, competitor analysis)
-- Portable Text JSON output for Sanity CMS integration
-- Local SEO keyword targeting (Bristol/Bath/South West)
+Sanity Studio and schemas are ready. Content migration is next.
 
 ---
 
 ## Recent Work
 
-1. Enhanced content agents with market research + Portable Text
-   - Added WebSearch/WebFetch/firecrawl tools to content-writer
-   - Added market research workflow for blog topic discovery
-   - Added Portable Text JSON output format for Sanity
+1. **Sanity CMS Setup (Phase 2.3 partial)**
+   - Embedded Studio at `/studio` route using `next-sanity`
+   - Created 6 schema types: service, project, blogPost, testimonial, siteSettings, blockContent
+   - Configured Sanity client with GROQ queries
+   - Added env vars to `env.js` and `.env.example`
+   - Structured Studio with siteSettings as singleton
 
-2. Created Claude Code subagents (`.claude/agents/`)
-   - project-manager: Plans work, no code edits
-   - dev-implementer: Implements with smallest diffs
-   - content-writer: Generates copy without inventing facts
-   - tester-qa: Minimal tests for Phase 2.7
-   - seo-tech: Technical SEO for Phase 2.6
+2. Enhanced content agents with market research + Portable Text
 
-2. Created Codex skills (`.codex/skills/`)
-   - pm-audit: Project audit and task planning
-   - implement-feature: Feature implementation with verification
-   - content-generation: Structured content generation
-   - test-happy-paths: Minimal testing
-   - seo-nextjs: Technical SEO implementation
-
-3. Updated AGENTS.md with Codex skills invocation note
+3. Created Claude Code subagents and Codex skills
 
 4. Earlier: Implemented contact form with Resend SDK (Phase 2.4)
-
-5. Earlier: Created LLM-agnostic documentation structure
 
 ---
 
 ## What's Next
 
-Priority order for remaining phases:
+### Immediate (Phase 2.3 completion)
 
-1. **2.2 Content Brief & Generation** - Being done by separate agent
-2. **2.3 Sanity CMS** - Requires user to create Sanity project first
-3. **2.5 Design Beautification** - Need model website URL from user
-4. **2.6 SEO Technical**
-5. **2.7 Testing**
-6. **2.8 Launch**
+1. **Run the Studio** - `pnpm dev` then visit `http://localhost:3000/studio`
+2. **Test schemas** - Create a test service/project in Studio to verify
+3. **Content migration** - Create script to migrate static data to Sanity
+4. **Switch pages** - Update pages to fetch from Sanity instead of static data
+
+### Then
+
+- **2.2 Content Generation** - Use content agents to generate improved copy
+- **2.5 Design Beautification** - Need model website URL from user
+- **2.6 SEO Technical**
+- **2.7 Testing**
+- **2.8 Launch**
+
+---
+
+## Sanity Quick Reference
+
+| Item | Value |
+|------|-------|
+| Project ID | `07w52gq6` |
+| Dataset | `production` |
+| Studio URL | `http://localhost:3000/studio` |
+| Schemas | `src/sanity/schemaTypes/` |
+| Client | `src/sanity/lib/client.ts` |
+| Queries | `src/sanity/lib/queries.ts` |
+| Fetch helpers | `src/sanity/lib/fetch.ts` |
+
+**Commands:**
+```bash
+pnpm dev              # Run Next.js + Studio
+# Visit http://localhost:3000/studio
+```
 
 ---
 
 ## Blockers / Pending Decisions
 
-- **Sanity CMS**: Waiting for user to create Sanity project and provide credentials
+- **Content migration**: Need to decide whether to migrate via script or manual entry
 - **Design**: Need model website reference before starting 2.5
 - **Resend API**: Placeholder key in `.env` - user needs to add real key for testing
 
@@ -74,11 +85,37 @@ Priority order for remaining phases:
 ## Environment Notes
 
 - On `develop` branch
-- Build passing (32 pages)
-- Contact form ready but needs real Resend API key to test
+- Sanity deps installed: `sanity@4`, `next-sanity@11`, `@sanity/vision@4`, `@sanity/image-url@1`
+- Studio configured for MCP (VS Code, Claude Code)
 
 ---
 
-## Recent User Context
+## File Changes This Session
 
-User is managing multiple LLM tools (Claude Code, Codex) and wanted documentation structure that works across all of them. Created AGENTS.md and supporting docs to enable seamless tool switching.
+**Created:**
+- `src/sanity/schemaTypes/blockContent.ts`
+- `src/sanity/schemaTypes/service.ts`
+- `src/sanity/schemaTypes/project.ts`
+- `src/sanity/schemaTypes/blogPost.ts`
+- `src/sanity/schemaTypes/testimonial.ts`
+- `src/sanity/schemaTypes/siteSettings.ts`
+- `src/sanity/lib/queries.ts`
+- `src/sanity/lib/fetch.ts`
+
+**Modified:**
+- `src/sanity/schemaTypes/index.ts` - exports all schemas
+- `src/sanity/structure.ts` - custom structure with siteSettings singleton
+- `src/env.js` - added Sanity client vars
+- `.env.example` - added Sanity vars documentation
+- `docs/llm.md` - updated Sanity status
+- `docs/roadmap.md` - ticked 2.3 setup items
+- `docs/handoff.md` - this file
+
+**Created by Sanity CLI:**
+- `sanity.config.ts`
+- `sanity.cli.ts`
+- `src/app/studio/[[...tool]]/page.tsx`
+- `src/sanity/env.ts`
+- `src/sanity/lib/client.ts`
+- `src/sanity/lib/image.ts`
+- `src/sanity/lib/live.ts`

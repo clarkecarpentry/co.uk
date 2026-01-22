@@ -13,7 +13,7 @@ This file contains essential context for LLM coding assistants working on this p
 
 ## Current State
 
-### What's Done (Phase 1 + 2.1 + 2.4)
+### What's Done (Phase 1 + 2.1 + 2.3 partial + 2.4)
 
 - ✅ All page routes created and rendering
 - ✅ Responsive navigation and footer
@@ -22,6 +22,9 @@ This file contains essential context for LLM coding assistants working on this p
 - ✅ Git flow workflow established
 - ✅ v1.0.0 released (placeholder landing page)
 - ✅ Contact form with Resend email integration
+- ✅ Sanity Studio embedded at `/studio` route
+- ✅ Sanity schemas created (service, project, blogPost, testimonial, siteSettings)
+- ✅ Sanity client + GROQ queries ready for content fetch
 
 ### Pages Built
 
@@ -96,25 +99,35 @@ See `docs/roadmap.md` for full breakdown. Priority order:
 
 ## Do Not Assume
 
-These are **NOT** integrated yet. Do not write code that depends on them:
+These are **NOT** fully integrated yet. Do not write code that depends on them:
 
 | What | Status | Phase |
 |------|--------|-------|
-| Sanity CMS | Not integrated | 2.3 |
+| Sanity CMS | Studio + schemas ready, **no content yet** | 2.3 |
 | Blog content | Placeholders only | 2.3 |
 | Database | None exists | - |
 | Light mode | Does not exist | - |
 | Image CDN | Not configured | 2.5 |
 | Analytics | Not integrated | 2.8 |
 
-**Static data in `src/lib/data/` is the source of truth until Phase 2.3.**
+**Static data in `src/lib/data/` is the source of truth until content migration is complete.**
+
+### Sanity Integration Status
+
+| Component | Status |
+|-----------|--------|
+| Studio | ✅ Embedded at `/studio` |
+| Schemas | ✅ service, project, blogPost, testimonial, siteSettings |
+| Client | ✅ Configured in `src/sanity/lib/client.ts` |
+| Queries | ✅ Ready in `src/sanity/lib/queries.ts` |
+| Content | ❌ Not migrated yet (use static data) |
 
 ## Tech Stack
 
 - Next.js 15 (App Router, React 19)
 - Tailwind CSS v4 + shadcn/ui
 - tRPC for API routes
-- Sanity.io for CMS (not yet integrated)
+- Sanity.io for CMS (Studio + schemas ready, content pending)
 - Resend for email (integrated - Phase 2.4 complete)
 - Vercel for hosting
 
@@ -145,12 +158,16 @@ git flow feature finish <name>
 
 ## Reminders for Specific Phases
 
-### When starting 2.3 (Sanity CMS)
-Prompt user to:
-1. Create Sanity project at sanity.io
-2. Provide project ID and dataset name
-3. Create API token with write access
-4. Add credentials to `.env.local`
+### Phase 2.3 (Sanity CMS) - Partial Complete
+Sanity is set up:
+- **Project ID**: `07w52gq6`
+- **Dataset**: `production`
+- **Studio URL**: `http://localhost:3000/studio`
+
+**Next steps for 2.3:**
+1. Migrate static content from `src/lib/data/` to Sanity
+2. Create migration script in `scripts/` folder
+3. Switch pages to fetch from Sanity instead of static data
 
 ### When starting 2.5 (Design Beautification)
 Ask user for:

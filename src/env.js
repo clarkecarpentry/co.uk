@@ -10,7 +10,9 @@ export const env = createEnv({
     NODE_ENV: z.enum(["development", "test", "production"]),
     RESEND_API_KEY: z.string().min(1),
     CONTACT_EMAIL: z.string().email(),
-    SANITY_API_KEY: z.string().min(1),
+    // Optional: Only needed for server-side write operations (content migration scripts)
+    // Studio uses browser auth, not hardcoded tokens
+    SANITY_API_KEY: z.string().min(1).optional(),
   },
 
   /**
@@ -19,7 +21,9 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_SANITY_PROJECT_ID: z.string().min(1),
+    NEXT_PUBLIC_SANITY_DATASET: z.string().min(1),
+    NEXT_PUBLIC_SANITY_API_VERSION: z.string().optional(),
   },
 
   /**
@@ -31,7 +35,9 @@ export const env = createEnv({
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     CONTACT_EMAIL: process.env.CONTACT_EMAIL,
     SANITY_API_KEY: process.env.SANITY_API_KEY,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+    NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    NEXT_PUBLIC_SANITY_API_VERSION: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

@@ -142,32 +142,30 @@ Save as markdown in `content/generated/blog/` for Sanity migration:
 
 ### 2.3 CMS Integration (Sanity.io)
 
-> **REMINDER:** When starting this phase, prompt user to:
-> 1. Create Sanity project at sanity.io
-> 2. Provide project ID and dataset name
-> 3. Create API token with write access
-> 4. Add credentials to `.env.local`
+**Sanity Project:** `07w52gq6` | **Dataset:** `production`
 
-#### Sanity Setup
-- [ ] Install Sanity client packages
-- [ ] Configure Sanity client with environment variables
-- [ ] Set up Sanity Studio (embedded or separate)
+#### Sanity Setup ✅
+- [x] Install Sanity client packages (`sanity`, `next-sanity`, `@sanity/vision`, `@sanity/image-url`)
+- [x] Configure Sanity client with environment variables
+- [x] Set up Sanity Studio (embedded at `/studio`)
 
-#### Content Schemas
-- [ ] `service` - name, slug, description, features, image
-- [ ] `project` - name, slug, description, client, date, images, services
-- [ ] `blogPost` - title, slug, content, excerpt, author, publishedAt, image
-- [ ] `testimonial` - quote, clientName, company, project
-- [ ] `siteSettings` - company info, contact details, social links
+#### Content Schemas ✅
+- [x] `service` - name, slug, description, features, image
+- [x] `project` - name, slug, description, client, date, images, services
+- [x] `blogPost` - title, slug, content, excerpt, author, publishedAt, image
+- [x] `testimonial` - quote, clientName, company, project
+- [x] `siteSettings` - company info, contact details, social links
+- [x] `blockContent` - reusable Portable Text type
 
 #### Content Migration Script
-- [ ] Create script to convert markdown to Portable Text
+- [ ] Create script to convert static data to Sanity documents
 - [ ] Map content structure to Sanity schemas
 - [ ] Push generated content (from 2.2) to Sanity via API
 - [ ] Push legacy project data to Sanity
 - [ ] Verify all 12 projects migrated
 - [ ] Verify all 11 services migrated
 - [ ] Verify 6 testimonials migrated
+- [ ] Switch pages to fetch from Sanity
 
 ---
 
