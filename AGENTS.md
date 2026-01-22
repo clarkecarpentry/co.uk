@@ -11,6 +11,7 @@ Canonical entrypoint for LLM coding assistants. This file is auto-discovered by 
 3. **Check `docs/roadmap.md`** for current phase and tasks
 4. **Check `docs/handoff.md`** to see where the last session left off
 5. Follow project-specific rules below; ask the user when instructions conflict
+6. **Codex users:** If you need deep, task-specific instructions, explicitly invoke the matching `.codex/skills/*` skill (Codex only preloads skill name/description/path, not the full body)
 
 ---
 
