@@ -4,36 +4,51 @@ This project uses an LLM-agnostic documentation structure that works with any AI
 
 ## Start Here
 
-**Read `docs/llm.md` first** - it contains all essential context for working on this project.
+**Primary entrypoint:** `AGENTS.md` in repo root - contains operational rules, agent conduct, and session workflow.
+
+Then read:
+1. `docs/llm.md` - full project context
+2. `docs/handoff.md` - where the last session left off
+3. `docs/roadmap.md` - current phase and tasks
 
 ## Documentation Structure
 
 ```
+AGENTS.md              # Primary entrypoint (repo root)
+CLAUDE.md              # Claude Code specific (repo root)
+
 docs/
-├── GUIDE.md      # This file - explains the docs structure
-├── llm.md        # Essential context for LLM assistants (READ THIS FIRST)
-├── roadmap.md    # Current phase and task checklist
-├── progress.md   # Completed work history
-└── README.md     # Human-readable project overview
+├── GUIDE.md           # This file - explains the docs structure
+├── llm.md             # Essential project context
+├── handoff.md         # Current status, where we left off
+├── roadmap.md         # Phase breakdown, task checklist
+├── progress.md        # Completed work history
+├── state.json         # Machine-readable project state
+├── portability.md     # Notes on LLM-agnostic design
+└── README.md          # Human-readable project overview
 ```
 
 ## File Purposes
 
 | File | Purpose | When to Read |
 |------|---------|--------------|
-| **llm.md** | Project summary, current state, key decisions, tech stack, file locations | Start of every session |
-| **roadmap.md** | Phase breakdown, task checklists, what's left to build | When planning work |
-| **progress.md** | Completed work log, what's been built, when it was done | When catching up on history |
-| **README.md** | Quick start guide, project structure (for humans) | Optional reference |
+| **AGENTS.md** | Operational rules, agent conduct, workflow | Start of every session |
+| **llm.md** | Project summary, tech stack, decisions | Start of every session |
+| **handoff.md** | Current focus, where we left off | Start of every session |
+| **roadmap.md** | Phase breakdown, task checklists | When planning work |
+| **progress.md** | Completed work log | When catching up on history |
+| **state.json** | Machine-readable state snapshot | For programmatic context |
+| **README.md** | Quick start guide (for humans) | Optional reference |
 
 ## Tool-Specific Files
 
-- **Claude Code**: See `CLAUDE.md` in project root for Claude-specific instructions
-- **Other tools**: Use the `docs/` directory directly
+- **All tools**: Start with `AGENTS.md` in repo root
+- **Claude Code**: See `CLAUDE.md` for additional T3/tRPC architecture details
+- **Codex**: `AGENTS.md` is auto-discovered as primary reference
 
 ## Key Information Quick Reference
 
-All of these are detailed in `docs/llm.md`:
+All of these are detailed in `docs/llm.md` and `docs/state.json`:
 
 - **Current Phase**: 2.4 complete (contact form), working on 2.2-2.8
 - **Launch Date**: Wednesday, January 29, 2026
@@ -42,13 +57,13 @@ All of these are detailed in `docs/llm.md`:
 - **Git Workflow**: git flow (main/develop/feature/* branches)
 - **Build Status**: 32 pages, all passing
 
-## How to Use This Structure
+## Session Workflow
 
-1. **First session**: Read `docs/llm.md` completely
-2. **Subsequent sessions**: Skim `docs/llm.md` to refresh context
-3. **Starting new work**: Check `docs/roadmap.md` for current phase tasks
-4. **After completing work**: Update `docs/progress.md` and `docs/roadmap.md`
+1. **Start**: Read `AGENTS.md` → `docs/llm.md` → `docs/handoff.md`
+2. **Plan**: Check `docs/roadmap.md` for current phase tasks
+3. **Work**: Follow rules in `AGENTS.md`, verify with `pnpm check`
+4. **End**: Update `docs/handoff.md`, `docs/progress.md`, `docs/roadmap.md`
 
 ---
 
-**Note**: This structure was created in Phase 2.1b specifically to enable switching between different LLM coding tools while maintaining consistent context.
+**Note**: This structure was created in Phase 2.1b and enhanced with portability improvements to enable seamless switching between different LLM coding tools.

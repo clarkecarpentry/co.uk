@@ -2,6 +2,8 @@
 
 This file contains essential context for LLM coding assistants working on this project. Read this file at the start of a session.
 
+> **See also:** `AGENTS.md` in repo root for operational rules, agent conduct, and session workflow.
+
 ## Project Summary
 
 **What:** Professional website for Clarke Carpentry Contractors Ltd
@@ -62,6 +64,50 @@ See `docs/roadmap.md` for full breakdown. Priority order:
 6. **No Co-Authored-By** - Don't include AI attribution in commit messages
 
 7. **pnpm only** - Package manager is pnpm, not npm or yarn
+
+## Working Agreement
+
+### Change Strategy
+- Prefer the **smallest possible diff**
+- Do **not** refactor unrelated code
+- One feature per branch
+- Search for existing patterns before creating new ones
+
+### Component Rules
+- Default to **Server Components**
+- Add `"use client"` only when browser APIs or tRPC hooks are required
+- Use shadcn/ui components from `src/components/ui/` where applicable
+
+### tRPC Rules
+- Every new router **must** be registered in `src/server/api/root.ts`
+- Use Zod for input validation
+- Use `publicProcedure` from `~/server/api/trpc`
+
+### Environment Variables
+- New env vars **must** be added to:
+  1. `src/env.js` Zod schema (server or client section)
+  2. `runtimeEnv` object in same file
+  3. `.env.example` with placeholder value
+
+### Data Rules
+- Service/project slugs are source of truth
+- Slugs must stay in sync with routes and data files
+- Update `generateStaticParams` when adding/removing items
+
+## Do Not Assume
+
+These are **NOT** integrated yet. Do not write code that depends on them:
+
+| What | Status | Phase |
+|------|--------|-------|
+| Sanity CMS | Not integrated | 2.3 |
+| Blog content | Placeholders only | 2.3 |
+| Database | None exists | - |
+| Light mode | Does not exist | - |
+| Image CDN | Not configured | 2.5 |
+| Analytics | Not integrated | 2.8 |
+
+**Static data in `src/lib/data/` is the source of truth until Phase 2.3.**
 
 ## Tech Stack
 

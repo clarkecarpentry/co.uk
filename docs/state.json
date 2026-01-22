@@ -1,0 +1,51 @@
+{
+  "project": "Clarke Carpentry Website",
+  "lastUpdated": "2026-01-22",
+  "launchDate": "2026-01-29",
+  "currentPhase": "2.4",
+  "phaseStatus": "complete",
+  "nextPhases": ["2.2", "2.3", "2.5", "2.6", "2.7", "2.8"],
+  "techStack": {
+    "framework": "Next.js 15",
+    "react": "19",
+    "styling": "Tailwind CSS v4",
+    "ui": "shadcn/ui",
+    "api": "tRPC",
+    "cms": "Sanity.io",
+    "email": "Resend",
+    "hosting": "Vercel"
+  },
+  "domains": {
+    "production": "clarkecarpentry.co.uk",
+    "staging": "next.clarkecarpentry.co.uk"
+  },
+  "content": {
+    "services": 11,
+    "projects": 12,
+    "testimonials": 6,
+    "blogPosts": 0
+  },
+  "integrations": {
+    "cms": "planned",
+    "contactForm": "complete",
+    "email": "configured",
+    "analytics": "planned",
+    "seo": "planned"
+  },
+  "build": {
+    "status": "passing",
+    "pages": 32,
+    "staticPages": 30,
+    "dynamicPages": 2
+  },
+  "git": {
+    "workflow": "git-flow",
+    "mainBranch": "main",
+    "developBranch": "develop",
+    "currentBranch": "develop"
+  },
+  "theme": {
+    "mode": "dark-only",
+    "accent": "green"
+  }
+}
