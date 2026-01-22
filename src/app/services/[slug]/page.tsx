@@ -6,6 +6,7 @@ import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { ArrowLeft, ArrowRight, CheckCircle, Phone } from "lucide-react";
 import { getServices, getServiceBySlug, getProjects } from "~/sanity/lib/fetch";
+import { ServiceJsonLd } from "~/components/json-ld";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -31,8 +32,22 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${service.name} | Clarke Carpentry Contractors Ltd`,
+    title: service.name,
     description: service.description,
+    openGraph: {
+      title: `${service.name} | Clarke Carpentry Contractors Ltd`,
+      description: service.description,
+      url: `/services/${slug}`,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${service.name} | Clarke Carpentry Contractors Ltd`,
+      description: service.description,
+    },
+    alternates: {
+      canonical: `/services/${slug}`,
+    },
   };
 }
 
@@ -71,6 +86,11 @@ export default async function ServicePage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen">
+      <ServiceJsonLd
+        name={service.name}
+        description={service.description}
+        slug={service.slug}
+      />
       {/* Hero Section */}
       <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
         <div className="container mx-auto px-4">

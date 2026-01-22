@@ -36,9 +36,28 @@ export async function generateMetadata({
     };
   }
 
+  const truncatedDescription =
+    project.description.length > 160
+      ? project.description.substring(0, 157) + "..."
+      : project.description;
+
   return {
-    title: `${project.name} | Clarke Carpentry Contractors Ltd`,
-    description: project.description,
+    title: project.name,
+    description: truncatedDescription,
+    openGraph: {
+      title: `${project.name} | Clarke Carpentry Contractors Ltd`,
+      description: truncatedDescription,
+      url: `/projects/${slug}`,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.name} | Clarke Carpentry Contractors Ltd`,
+      description: truncatedDescription,
+    },
+    alternates: {
+      canonical: `/projects/${slug}`,
+    },
   };
 }
 

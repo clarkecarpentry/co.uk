@@ -5,9 +5,25 @@ import { ArrowRight } from "lucide-react";
 import { getServices } from "~/sanity/lib/fetch";
 
 export const metadata: Metadata = {
-  title: "Our Services | Clarke Carpentry Contractors Ltd",
+  title: "Our Services",
   description:
     "Comprehensive carpentry services for commercial and domestic projects across Bristol, Bath and the South West. First fix, second fix, extensions, new builds and more.",
+  openGraph: {
+    title: "Our Services | Clarke Carpentry Contractors Ltd",
+    description:
+      "Comprehensive carpentry services for commercial and domestic projects across Bristol, Bath and the South West. First fix, second fix, extensions, new builds and more.",
+    url: "/services",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Services | Clarke Carpentry Contractors Ltd",
+    description:
+      "Comprehensive carpentry services for commercial and domestic projects across Bristol, Bath and the South West.",
+  },
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 export default async function ServicesPage() {

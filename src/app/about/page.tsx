@@ -4,9 +4,25 @@ import { Card, CardContent } from "~/components/ui/card";
 import { CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Us | Clarke Carpentry Contractors Ltd",
+  title: "About Us",
   description:
     "Learn about Clarke Carpentry Contractors Ltd - 15 years experience delivering quality carpentry across Bristol, Bath and the South West. CSCS certified team.",
+  openGraph: {
+    title: "About Us | Clarke Carpentry Contractors Ltd",
+    description:
+      "Learn about Clarke Carpentry Contractors Ltd - 15 years experience delivering quality carpentry across Bristol, Bath and the South West.",
+    url: "/about",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | Clarke Carpentry Contractors Ltd",
+    description:
+      "Learn about Clarke Carpentry Contractors Ltd - 15 years experience delivering quality carpentry across Bristol, Bath and the South West.",
+  },
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 const certifications = [

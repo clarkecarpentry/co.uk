@@ -216,6 +216,7 @@ CONTACT_EMAIL=clarkecarpentry@proton.me
 - [ ] Review model website for inspiration
 - [ ] Create consistent component library
 - [ ] Design hero sections for each page
+- [ ] Create Open Graph image (`public/og-image.png`, 1200×630px)
 - [ ] Image optimization pipeline (next/image, WebP)
 - [ ] Responsive design verification (mobile-first)
 - [ ] Typography and spacing refinement
@@ -225,15 +226,26 @@ CONTACT_EMAIL=clarkecarpentry@proton.me
 
 ### 2.6 SEO Technical
 
+**Status:** Complete
+
 #### Implementation
-- [ ] Schema.org markup (LocalBusiness, Service, Article for blog)
-- [ ] Meta tags for all pages (title, description)
-- [ ] Open Graph tags for social sharing
-- [ ] Sitemap generation (`next-sitemap`)
-- [ ] robots.txt configuration
-- [ ] Semantic HTML structure
-- [ ] Image alt tags
-- [ ] Internal linking strategy
+- [x] Schema.org markup (LocalBusiness, Service, Article for blog)
+- [x] Meta tags for all pages (title, description)
+- [x] Open Graph tags for social sharing
+- [x] Twitter card tags
+- [x] Sitemap generation (`next-sitemap`)
+- [x] robots.txt configuration
+- [x] Semantic HTML structure (already in place)
+- [x] Image alt tags (already in place)
+- [ ] Internal linking strategy (ongoing)
+
+#### Files Created/Modified
+- `src/components/json-ld.tsx` - JSON-LD components for LocalBusiness, Service, Article
+- `src/app/layout.tsx` - Root metadata with OG/Twitter tags, LocalBusiness JSON-LD
+- `src/app/*/page.tsx` - All pages updated with OG/Twitter metadata
+- `next-sitemap.config.cjs` - Sitemap configuration
+- `public/sitemap.xml` - Generated sitemap (32 URLs)
+- `public/robots.txt` - Generated robots.txt
 
 ---
 

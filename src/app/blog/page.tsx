@@ -6,9 +6,25 @@ import { ArrowRight } from "lucide-react";
 import { getBlogPosts } from "~/sanity/lib/fetch";
 
 export const metadata: Metadata = {
-  title: "Blog | Clarke Carpentry Contractors Ltd",
+  title: "Blog",
   description:
     "News, tips, and insights from Clarke Carpentry Contractors Ltd. Read about carpentry projects, industry updates, and expert advice.",
+  openGraph: {
+    title: "Blog | Clarke Carpentry Contractors Ltd",
+    description:
+      "News, tips, and insights from Clarke Carpentry Contractors Ltd. Read about carpentry projects, industry updates, and expert advice.",
+    url: "/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Clarke Carpentry Contractors Ltd",
+    description:
+      "News, tips, and insights from Clarke Carpentry Contractors Ltd. Read about carpentry projects and expert advice.",
+  },
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 export default async function BlogPage() {

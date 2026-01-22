@@ -6,9 +6,25 @@ import { ArrowRight } from "lucide-react";
 import { getProjects } from "~/sanity/lib/fetch";
 
 export const metadata: Metadata = {
-  title: "Our Projects | Clarke Carpentry Contractors Ltd",
+  title: "Our Projects",
   description:
     "View our portfolio of completed carpentry projects across Bristol, Bath and the South West. Commercial and domestic work including new builds, extensions, and renovations.",
+  openGraph: {
+    title: "Our Projects | Clarke Carpentry Contractors Ltd",
+    description:
+      "View our portfolio of completed carpentry projects across Bristol, Bath and the South West. Commercial and domestic work including new builds, extensions, and renovations.",
+    url: "/projects",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Projects | Clarke Carpentry Contractors Ltd",
+    description:
+      "View our portfolio of completed carpentry projects across Bristol, Bath and the South West.",
+  },
+  alternates: {
+    canonical: "/projects",
+  },
 };
 
 export default async function ProjectsPage() {

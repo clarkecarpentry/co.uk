@@ -12,37 +12,31 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Current Focus
 
-**Phase 2.2.4 Blog Content** - COMPLETE
+**Phase 2.6 SEO Technical** - COMPLETE
 
-Blog pages are wired up to Sanity, 4 launch blog posts generated and migrated to Sanity CMS.
+All SEO technical implementation complete: meta tags, OG/Twitter cards, JSON-LD structured data, sitemap, and robots.txt.
 
 ---
 
 ## Recent Work
 
-1. **Blog Functionality**
+1. **SEO Technical (Phase 2.6)**
+   - Added comprehensive metadata to root layout (title template, description, keywords)
+   - Added Open Graph and Twitter card tags to all pages
+   - Created JSON-LD components for LocalBusiness, Service, and Article schemas
+   - Installed and configured `next-sitemap` for automatic sitemap generation
+   - Generated `robots.txt` with proper disallow rules for `/studio` and `/api/`
+   - Sitemap includes all 32 public URLs with appropriate priorities
+
+2. **Blog Functionality (Previous Session)**
    - Wired up `/blog` and `/blog/[slug]` pages to fetch from Sanity
    - Created `src/components/portable-text.tsx` for rich content rendering
    - Created `src/lib/data/blog-posts.ts` with 4 launch posts
-   - Updated migration script to include blog posts
    - Migrated all blog posts to Sanity
-
-2. **Blog Posts Created**
-   - "First Fix vs Second Fix Carpentry: What's Involved" (Technical Explainer)
-   - "Why We Still Cut Traditional Roofs" (Industry Insight)
-   - "What Main Contractors Should Expect from Their Carpentry Subcontractor" (Industry Insight)
-   - "Wilder House: 41 Flats in Bristol City Centre" (Project Spotlight)
 
 3. **Content Rewrite (Phase 2.2.3)**
    - Improved services and projects descriptions following content brief
    - Applied brand voice guidelines (professional, technical, expert-focused)
-   - Re-migrated all content to Sanity
-
-4. **Sanity CMS (Phase 2.3)**
-   - Embedded Studio at `/studio` route
-   - All schemas working: service, project, blogPost, testimonial, siteSettings, blockContent
-   - Migration script handles all content types
-   - Pages fetch from Sanity with static fallback
 
 ---
 
@@ -51,9 +45,28 @@ Blog pages are wired up to Sanity, 4 launch blog posts generated and migrated to
 ### Immediate
 
 - **2.5 Design Beautification** - Need model website URL from user
-- **2.6 SEO Technical** - Meta tags, structured data, sitemap
 - **2.7 Testing** - Cross-browser, mobile, accessibility
 - **2.8 Launch** - Deploy to production
+
+---
+
+## SEO Quick Reference
+
+### Metadata
+- Root layout uses title template: `%s | Clarke Carpentry Contractors Ltd`
+- All pages have OG and Twitter card tags
+- Canonical URLs set for all pages
+
+### JSON-LD Schemas
+- **LocalBusiness**: In root layout (`src/app/layout.tsx`)
+- **Service**: On individual service pages (`src/app/services/[slug]/page.tsx`)
+- **Article**: On blog post pages (`src/app/blog/[slug]/page.tsx`)
+
+### Sitemap & Robots
+- Sitemap: `public/sitemap.xml` (generated at build time)
+- Robots: `public/robots.txt` (generated at build time)
+- Config: `next-sitemap.config.cjs`
+- Generated files are in `.gitignore` (regenerated on each build)
 
 ---
 
@@ -98,6 +111,7 @@ export $(grep -v '^#' .env | xargs) && pnpm migrate   # Migrate content to Sanit
 
 - **Design**: Need model website reference before starting 2.5
 - **Resend API**: Placeholder key in `.env` - user needs to add real key for contact form
+- **OG Image**: `public/og-image.png` referenced but not created - need to create or update to use existing logo
 
 ---
 
@@ -105,28 +119,36 @@ export $(grep -v '^#' .env | xargs) && pnpm migrate   # Migrate content to Sanit
 
 - On `develop` branch
 - Build passes with `pnpm build`
-- All blog pages are statically generated at build time
-- Blog content stored in Sanity, editable via `/studio`
+- Sitemap generated automatically via `postbuild` script
+- All pages statically generated at build time
 
 ---
 
 ## File Changes This Session
 
 **Created:**
-- `src/components/portable-text.tsx` - PortableText renderer for blog content
-- `src/lib/data/blog-posts.ts` - 4 blog posts with Portable Text content
+- `src/components/json-ld.tsx` - JSON-LD components (LocalBusiness, Service, Article, Breadcrumb)
+- `next-sitemap.config.cjs` - Sitemap generation config
+- `public/sitemap.xml` - Generated sitemap (32 URLs)
+- `public/robots.txt` - Generated robots.txt
 
 **Modified:**
-- `scripts/migrate-to-sanity.ts` - Added blog posts migration
-- `src/app/blog/page.tsx` - Fetches from Sanity
-- `src/app/blog/[slug]/page.tsx` - Fetches from Sanity, renders PortableText
+- `src/app/layout.tsx` - Added comprehensive metadata, OG/Twitter tags, LocalBusiness JSON-LD
+- `src/app/about/page.tsx` - Added OG/Twitter metadata
+- `src/app/services/page.tsx` - Added OG/Twitter metadata
+- `src/app/services/[slug]/page.tsx` - Added OG/Twitter metadata, Service JSON-LD
+- `src/app/projects/page.tsx` - Added OG/Twitter metadata
+- `src/app/projects/[slug]/page.tsx` - Added OG/Twitter metadata
+- `src/app/contact/page.tsx` - Added OG/Twitter metadata
+- `src/app/blog/page.tsx` - Added OG/Twitter metadata
+- `src/app/blog/[slug]/page.tsx` - Added OG/Twitter metadata, Article JSON-LD
+- `package.json` - Added `next-sitemap` dependency and `postbuild` script
+- `.gitignore` - Added generated sitemap/robots files
+- `docs/roadmap.md` - Marked Phase 2.6 complete
 
 ---
 
 ## Git Status
 
 - Branch: `develop`
-- Recent commits:
-  1. Add blog functionality with 4 launch posts
-  2. Rewrite content for Phase 2.2.3 quality improvements
-  3. Update pages to fetch from Sanity with static fallback
+- Changes: Phase 2.6 SEO Technical implementation (uncommitted)

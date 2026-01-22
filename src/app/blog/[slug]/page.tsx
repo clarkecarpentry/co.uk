@@ -8,6 +8,7 @@ import { ArrowLeft, Calendar, User, Phone } from "lucide-react";
 import { getBlogPosts, getBlogPostBySlug } from "~/sanity/lib/fetch";
 import { PortableText } from "~/components/portable-text";
 import type { PortableTextBlock } from "next-sanity";
+import { ArticleJsonLd } from "~/components/json-ld";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -33,8 +34,24 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${post.title} | Clarke Carpentry Contractors Ltd`,
+    title: post.title,
     description: post.excerpt,
+    openGraph: {
+      title: `${post.title} | Clarke Carpentry Contractors Ltd`,
+      description: post.excerpt,
+      url: `/blog/${slug}`,
+      type: "article",
+      publishedTime: post.publishedAt,
+      authors: [post.author ?? "Mike Clarke"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${post.title} | Clarke Carpentry Contractors Ltd`,
+      description: post.excerpt,
+    },
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
   };
 }
 
@@ -50,6 +67,13 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen">
+      <ArticleJsonLd
+        title={title}
+        description={excerpt}
+        slug={slug}
+        publishedAt={publishedAt}
+        author={author}
+      />
       {/* Hero Section */}
       <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
         <div className="container mx-auto px-4">

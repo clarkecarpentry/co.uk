@@ -4,9 +4,25 @@ import { ContactForm } from "~/components/contact-form";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Clarke Carpentry Contractors Ltd",
+  title: "Contact Us",
   description:
     "Get in touch with Clarke Carpentry Contractors Ltd for a quote or to discuss your carpentry project. Based in Keynsham, serving Bristol, Bath and the South West.",
+  openGraph: {
+    title: "Contact Us | Clarke Carpentry Contractors Ltd",
+    description:
+      "Get in touch with Clarke Carpentry Contractors Ltd for a quote or to discuss your carpentry project. Based in Keynsham, serving Bristol, Bath and the South West.",
+    url: "/contact",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | Clarke Carpentry Contractors Ltd",
+    description:
+      "Get in touch with Clarke Carpentry Contractors Ltd for a quote or to discuss your carpentry project.",
+  },
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default function ContactPage() {
