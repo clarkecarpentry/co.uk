@@ -64,13 +64,13 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="border-b border-border/50 bg-gradient-to-b from-neutral-900/50 via-background to-background py-16">
+      <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               About Us
             </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="text-muted-foreground mt-4 text-lg">
               Over 10 years of experience delivering high quality carpentry
               across Bristol, Bath and the South West
             </p>
@@ -83,7 +83,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl">
             <h2 className="text-2xl font-semibold">Our Story</h2>
-            <div className="mt-6 space-y-4 text-muted-foreground">
+            <div className="text-muted-foreground mt-6 space-y-4">
               <p>
                 Clarke Carpentry Contractors Ltd comes from a wealth of
                 experience with over 10 years in the industry. We pride
@@ -108,7 +108,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="border-t border-border/50 bg-card/30 py-16">
+      <section className="border-border/50 bg-card/30 border-t py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-center text-2xl font-semibold">Our Values</h2>
           <div className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2">
@@ -119,7 +119,7 @@ export default function AboutPage() {
                     <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-green-500" />
                     <div>
                       <h3 className="font-semibold">{value.title}</h3>
-                      <p className="mt-1 text-sm text-muted-foreground">
+                      <p className="text-muted-foreground mt-1 text-sm">
                         {value.description}
                       </p>
                     </div>
@@ -137,7 +137,7 @@ export default function AboutPage() {
           <h2 className="text-center text-2xl font-semibold">
             Certifications & Accreditations
           </h2>
-          <p className="mt-2 text-center text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-center">
             Fully qualified and certified to industry standards
           </p>
           <div className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -151,7 +151,7 @@ export default function AboutPage() {
                     {cert.name}
                   </Badge>
                   <p className="mt-2 text-sm font-medium">{cert.fullName}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
+                  <p className="text-muted-foreground mt-1 text-xs">
                     {cert.description}
                   </p>
                 </CardContent>

@@ -18,7 +18,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
 
@@ -44,7 +46,7 @@ export default async function ServicePage({ params }: PageProps) {
 
   // Find related projects
   const relatedProjects = projects.filter((project) =>
-    project.services.includes(service.name)
+    project.services.includes(service.name),
   );
 
   // Find other services for navigation
@@ -55,11 +57,11 @@ export default async function ServicePage({ params }: PageProps) {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="border-b border-border/50 bg-gradient-to-b from-neutral-900/50 via-background to-background py-16">
+      <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
         <div className="container mx-auto px-4">
           <Link
             href="/services"
-            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm"
           >
             <ArrowLeft className="mr-1 h-4 w-4" />
             All Services
@@ -67,7 +69,7 @@ export default async function ServicePage({ params }: PageProps) {
           <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
             {service.name}
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+          <p className="text-muted-foreground mt-4 max-w-2xl text-lg">
             {service.description}
           </p>
         </div>
@@ -80,7 +82,7 @@ export default async function ServicePage({ params }: PageProps) {
             {/* Features List */}
             <div>
               <h2 className="text-2xl font-semibold">What We Offer</h2>
-              <p className="mt-2 text-muted-foreground">
+              <p className="text-muted-foreground mt-2">
                 Our {service.name.toLowerCase()} services include:
               </p>
               <ul className="mt-6 space-y-3">
@@ -91,7 +93,7 @@ export default async function ServicePage({ params }: PageProps) {
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 text-sm text-muted-foreground">
+              <p className="text-muted-foreground mt-6 text-sm">
                 If you require another service not listed then please get in
                 touch.
               </p>
@@ -104,15 +106,12 @@ export default async function ServicePage({ params }: PageProps) {
                   <h3 className="text-xl font-semibold">
                     Interested in {service.name}?
                   </h3>
-                  <p className="mt-2 text-muted-foreground">
+                  <p className="text-muted-foreground mt-2">
                     Get in touch to discuss your project requirements. We
                     provide free quotes for all work.
                   </p>
                   <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                    <Button
-                      asChild
-                      className="bg-green-600 hover:bg-green-500"
-                    >
+                    <Button asChild className="bg-green-600 hover:bg-green-500">
                       <a href="tel:01225350376">
                         <Phone className="mr-2 h-4 w-4" />
                         Call Us
@@ -131,16 +130,16 @@ export default async function ServicePage({ params }: PageProps) {
 
       {/* Related Projects */}
       {relatedProjects.length > 0 && (
-        <section className="border-t border-border/50 bg-card/30 py-16">
+        <section className="border-border/50 bg-card/30 border-t py-16">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl font-semibold">Related Projects</h2>
-            <p className="mt-2 text-muted-foreground">
+            <p className="text-muted-foreground mt-2">
               See examples of our {service.name.toLowerCase()} work
             </p>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {relatedProjects.slice(0, 3).map((project) => (
                 <Link key={project.slug} href={`/projects/${project.slug}`}>
-                  <Card className="group h-full border-border/50 transition-all hover:border-green-500/30">
+                  <Card className="group border-border/50 h-full transition-all hover:border-green-500/30">
                     <CardContent className="p-6">
                       <Badge
                         variant="secondary"
@@ -149,7 +148,7 @@ export default async function ServicePage({ params }: PageProps) {
                         {project.type}
                       </Badge>
                       <h3 className="mt-3 font-semibold">{project.name}</h3>
-                      <p className="mt-1 text-sm text-muted-foreground">
+                      <p className="text-muted-foreground mt-1 text-sm">
                         {project.completedDate}
                       </p>
                     </CardContent>
@@ -162,12 +161,12 @@ export default async function ServicePage({ params }: PageProps) {
       )}
 
       {/* Service Navigation */}
-      <section className="border-t border-border/50 py-8">
+      <section className="border-border/50 border-t py-8">
         <div className="container mx-auto flex items-center justify-between px-4">
           {prevService ? (
             <Link
               href={`/services/${prevService.slug}`}
-              className="flex items-center text-sm text-muted-foreground hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground flex items-center text-sm"
             >
               <ArrowLeft className="mr-1 h-4 w-4" />
               {prevService.name}
@@ -178,7 +177,7 @@ export default async function ServicePage({ params }: PageProps) {
           {nextService && (
             <Link
               href={`/services/${nextService.slug}`}
-              className="flex items-center text-sm text-muted-foreground hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground flex items-center text-sm"
             >
               {nextService.name}
               <ArrowRight className="ml-1 h-4 w-4" />

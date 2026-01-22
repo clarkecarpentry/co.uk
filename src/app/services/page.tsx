@@ -14,13 +14,13 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="border-b border-border/50 bg-gradient-to-b from-neutral-900/50 via-background to-background py-16">
+      <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Our Services
             </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="text-muted-foreground mt-4 text-lg">
               Comprehensive carpentry services for commercial and domestic
               projects across Bristol, Bath and the South West
             </p>
@@ -34,10 +34,10 @@ export default function ServicesPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
               <Link key={service.slug} href={`/services/${service.slug}`}>
-                <Card className="group h-full border-border/50 transition-all duration-200 hover:border-green-500/30 hover:bg-card/80">
+                <Card className="group border-border/50 hover:bg-card/80 h-full transition-all duration-200 hover:border-green-500/30">
                   <CardContent className="flex h-full flex-col p-6">
                     <h2 className="text-xl font-semibold">{service.name}</h2>
-                    <p className="mt-2 flex-1 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mt-2 flex-1 text-sm">
                       {service.description}
                     </p>
                     <div className="mt-4 flex items-center text-sm font-medium text-green-500">
@@ -53,10 +53,10 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="border-t border-border/50 bg-card/30 py-16">
+      <section className="border-border/50 bg-card/30 border-t py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl font-semibold">Need a Service Not Listed?</h2>
-          <p className="mt-2 text-muted-foreground">
+          <p className="text-muted-foreground mt-2">
             We undertake all aspects of carpentry. Get in touch to discuss your
             project.
           </p>

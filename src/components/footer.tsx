@@ -20,13 +20,13 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/50 bg-card/30">
+    <footer className="border-border/50 bg-card/30 border-t">
       <div className="container mx-auto px-4 py-12">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
           <div>
             <h3 className="text-lg font-semibold">Clarke Carpentry</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="text-muted-foreground mt-2 text-sm">
               Specialist carpenters covering projects across Bristol, Bath and
               the South West. Over 10 years experience delivering high quality
               carpentry at a fair price.
@@ -43,7 +43,7 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            <h3 className="text-muted-foreground text-sm font-semibold tracking-wider uppercase">
               Services
             </h3>
             <ul className="mt-4 space-y-2">
@@ -51,7 +51,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -62,7 +62,7 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            <h3 className="text-muted-foreground text-sm font-semibold tracking-wider uppercase">
               Company
             </h3>
             <ul className="mt-4 space-y-2">
@@ -70,7 +70,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -81,11 +81,11 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            <h3 className="text-muted-foreground text-sm font-semibold tracking-wider uppercase">
               Contact
             </h3>
             <ul className="mt-4 space-y-3">
-              <li className="flex items-start gap-2 text-sm text-muted-foreground">
+              <li className="text-muted-foreground flex items-start gap-2 text-sm">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
                 <span>
                   Unit 5 Wansdyke Workshops
@@ -98,7 +98,7 @@ export function Footer() {
               <li>
                 <a
                   href="tel:01225350376"
-                  className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors"
                 >
                   <Phone className="h-4 w-4" />
                   01225 350376
@@ -107,7 +107,7 @@ export function Footer() {
               <li>
                 <a
                   href="mailto:info@clarkecarpentry.co.uk"
-                  className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors"
                 >
                   <Mail className="h-4 w-4" />
                   info@clarkecarpentry.co.uk
@@ -118,7 +118,7 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="mt-12 border-t border-border/50 pt-6 text-center text-sm text-muted-foreground">
+        <div className="border-border/50 text-muted-foreground mt-12 border-t pt-6 text-center text-sm">
           &copy; {new Date().getFullYear()} Clarke Carpentry Contractors Ltd.
           All rights reserved.
         </div>
