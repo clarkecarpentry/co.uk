@@ -19,36 +19,49 @@
 
 ## Phase 2: Full Website
 
-### 2.1 Foundation & Structure
+### 2.1 Foundation & Structure ✅
+
+**Status:** Complete
 
 #### Routes & Pages
-- [ ] Home (enhance existing placeholder)
-- [ ] About page
-- [ ] Services overview page
-- [ ] Individual service pages (11 total - see services list below)
-- [ ] Projects overview page
-- [ ] Individual project pages (12 total from legacy content)
-- [ ] Contact page (form added in 2.4)
-- [ ] Blog list page
-- [ ] Blog post page template
+- [x] Home (enhanced with nav/footer, testimonials, service links)
+- [x] About page (company story, values, certifications)
+- [x] Services overview page
+- [x] Individual service pages (11 total)
+- [x] Projects overview page
+- [x] Individual project pages (12 total)
+- [x] Contact page (form UI ready for backend)
+- [x] Blog list page (placeholder)
+- [x] Blog post page template (placeholder)
 
 #### Content Cleanup
-- [ ] Remove "Loft Conversions" from services (spinning off to separate brand)
-- [ ] Remove "Loft Extensions" from services
-- [ ] Update any references throughout the site
+- [x] Remove "Loft Conversions" from services
+- [x] Remove "Loft Extensions" from services
+- [x] Services data file updated (11 services)
 
-#### Services List (Final - 11 services)
-1. Project Management
-2. First Fix Carpentry
-3. Second Fix Carpentry
-4. Dry Lining
-5. Extensions
-6. Traditional Cut Roofs
-7. New Build
-8. Renovations
-9. Bespoke Joinery
-10. Kitchen Fitting
-11. Timber Frame Construction
+#### Components Created
+- [x] Nav (responsive with mobile menu)
+- [x] Footer (4-column with links and contact)
+
+#### Data Layer
+- [x] `src/lib/data/services.ts` - 11 services
+- [x] `src/lib/data/projects.ts` - 12 projects
+- [x] `src/lib/data/testimonials.ts` - 6 testimonials
+
+---
+
+### 2.1b LLM-Agnostic Documentation ✅
+
+**Status:** Complete
+
+Restructure project documentation for compatibility with any LLM coding assistant (Claude Code, Codex, Cursor, etc.).
+
+- [x] Create `docs/` directory for shared documentation
+- [x] Move `roadmap.md` from `.claude/` to `docs/`
+- [x] Move `progress.md` from `.claude/` to `docs/`
+- [x] Create `docs/README.md` with project overview for LLMs
+- [x] Update `CLAUDE.md` to reference new locations
+- [x] Keep `.claude/` for Claude-specific settings only
 
 ---
 
@@ -56,23 +69,72 @@
 
 > **Note:** This phase can run in parallel with 2.1 and 2.3. Content generation can happen in a separate LLM session while technical work proceeds.
 
-#### Content Brief
-- [ ] Create LLM content generation instructions doc at `.claude/content-brief.md`
-- [ ] Include brand voice guidelines
-- [ ] Include target keywords for SEO
-- [ ] Include content structure templates for each page type
+#### 2.2.1 Create Content Brief Document
 
-#### Content Generation
-- [ ] Homepage copy
-- [ ] About page copy
-- [ ] Each service page copy (11 pages)
-- [ ] Projects overview copy
-- [ ] Contact page copy
-- [ ] Initial blog posts (3-5 for launch)
+Create `.claude/content-brief.md` with:
 
-#### Output
-- [ ] All generated content saved to `content/generated/` as markdown
-- [ ] Ready for migration to Sanity in phase 2.3
+- [ ] Brand voice guidelines (professional, technical, expert-focused, plain English)
+- [ ] Company facts (15 years experience, Bristol/Bath/South West, accreditations list)
+- [ ] Mike Clarke bio points (sole trader origin, business growth over time, relentless work ethic, attention to detail, straightforward demeanour)
+- [ ] Key messages to weave throughout:
+  - On time and on budget delivery
+  - Handpicked staff for quality and professionalism
+  - Repeat client relationships (Juniper Homes etc.)
+  - H&S credentials (CSCS, CITB, SSSTS, SMSTS, PASMA)
+- [ ] CTA strategy:
+  - Phone primary (prominent on every page, construction industry norm)
+  - Contact form secondary (out-of-hours, written project details)
+  - Context-specific wording per page type
+- [ ] SEO target keywords per page type
+
+#### 2.2.2 Content Templates
+
+Templates matching the existing data structures in `src/lib/data/`:
+
+- [ ] Service template (`name`, `slug`, `description`, `features[]`)
+- [ ] Project template (`name`, `slug`, `type`, `client?`, `description`, `completedDate`, `services[]`)
+- [ ] About page template (story paragraphs, values, certifications)
+- [ ] Blog post template (for Sanity: `title`, `slug`, `content`, `excerpt`)
+
+#### 2.2.3 Generate Page Content
+
+Update existing data files with improved copy:
+
+- [ ] Update `src/lib/data/services.ts` - flesh out all 11 service descriptions:
+  - [ ] Project Management
+  - [ ] First Fix Carpentry
+  - [ ] Second Fix Carpentry
+  - [ ] Dry Lining
+  - [ ] Extensions
+  - [ ] Traditional Cut Roofs
+  - [ ] New Build
+  - [ ] Renovations
+  - [ ] Bespoke Joinery
+  - [ ] Kitchen Fitting
+  - [ ] Timber Frame Construction
+- [ ] Update `src/lib/data/projects.ts` - expand 12 project descriptions
+- [ ] Update `src/app/about/page.tsx`:
+  - [ ] Change "10 years" to "15 years"
+  - [ ] Add Mike Clarke's story (sole trader to larger projects)
+  - [ ] Review/update values and certifications copy
+- [ ] Review homepage copy (`src/app/page.tsx`)
+
+#### 2.2.4 Generate Blog Content (3-5 posts)
+
+Save as markdown in `content/generated/blog/` for Sanity migration:
+
+- [ ] "First Fix vs Second Fix Carpentry: What's Involved"
+- [ ] "Why We Still Cut Traditional Roofs"
+- [ ] "What Main Contractors Should Expect from Their Carpentry Subcontractor"
+- [ ] Project spotlight: Wilder House case study
+- [ ] (Optional) Building regs / industry update post
+
+#### 2.2.5 Review & Consistency Check
+
+- [ ] All content matches brand voice guidelines
+- [ ] Key messages present across pages
+- [ ] CTAs appropriate for each page context
+- [ ] Ready for Sanity migration in phase 2.3
 
 ---
 

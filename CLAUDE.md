@@ -2,12 +2,15 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Progress
+## Project Documentation
 
-- **Roadmap:** [.claude/roadmap.md](.claude/roadmap.md) - Current phase and planned work
-- **History:** [.claude/progress.md](.claude/progress.md) - Completed work log
+Documentation is kept in the `docs/` directory for LLM-agnostic access (works with Claude Code, Codex, Cursor, etc.):
 
-**Current Priority:** Phase 1 - Simple placeholder landing page (logo, services overview, contact info)
+- **[docs/README.md](docs/README.md)** - Project overview for LLM assistants
+- **[docs/roadmap.md](docs/roadmap.md)** - Current phase and planned work
+- **[docs/progress.md](docs/progress.md)** - Completed work log
+
+**Current Phase:** 2 - Full Website (see roadmap for task breakdown)
 
 ## Project Overview
 

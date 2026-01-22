@@ -89,10 +89,57 @@ legacy/content/
 
 ---
 
+## 2026-01-22: Phase 2.1 Foundation & Structure
+
+**Goal:** Create all page routes and foundational components for full website.
+
+### Completed
+
+#### Pages Created
+- Home (enhanced with testimonials, service links, CTA section)
+- About (company story, values, 5 certifications)
+- Services overview + 11 individual service pages
+- Projects overview + 12 individual project pages
+- Contact (form UI, contact info, call CTA)
+- Blog list + post template (placeholders for Sanity integration)
+
+#### Components
+- `Nav` - Sticky responsive navigation with mobile hamburger menu
+- `Footer` - 4-column footer (company info, services links, company links, contact)
+
+#### Data Layer
+- `src/lib/data/services.ts` - 11 services (removed loft conversions/extensions)
+- `src/lib/data/projects.ts` - 12 projects with metadata
+- `src/lib/data/testimonials.ts` - 6 client testimonials
+
+### Build Output
+
+32 pages statically generated:
+- 11 service pages (SSG)
+- 12 project pages (SSG)
+- 6 static pages (home, about, services, projects, contact, blog)
+- Blog post template (dynamic)
+
+---
+
+## 2026-01-22: Phase 2.1b LLM-Agnostic Documentation
+
+**Goal:** Restructure documentation for compatibility with any LLM coding assistant.
+
+### Completed
+
+- Moved `roadmap.md` from `.claude/` to `docs/`
+- Moved `progress.md` from `.claude/` to `docs/`
+- Created `docs/README.md` with project overview for LLM assistants
+- Updated `CLAUDE.md` to reference new `docs/` locations
+- `.claude/` now reserved for Claude-specific settings only
+
+### Rationale
+
+Project documentation is now in a standard `docs/` directory that any LLM tool can access (Claude Code, Codex, Cursor, etc.), enabling seamless switching between tools.
+
+---
+
 ## Next Steps
 
-- [ ] Deploy to staging (next.clarkecarpentry.co.uk)
-- [ ] Deploy to production (clarkecarpentry.co.uk)
-- [ ] Add actual logo image (Phase 2)
-
-Phase 2 (full site) deferred until after initial launch.
+See [roadmap.md](./roadmap.md) for current phase and task breakdown.
