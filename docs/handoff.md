@@ -12,26 +12,30 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Current Focus
 
-**Phase 2.3 Sanity CMS** - PARTIAL COMPLETE
+**Phase 2.3 Sanity CMS** - NEAR COMPLETE
 
-Sanity Studio and schemas are ready. Content migration is next.
+Sanity Studio, schemas, and page integration are ready. Migration script created. Just need to run migration to populate Sanity.
 
 ---
 
 ## Recent Work
 
-1. **Sanity CMS Setup (Phase 2.3 partial)**
+1. **Sanity Page Integration**
+   - Created `src/sanity/lib/types.ts` with TypeScript types
+   - Updated fetch.ts with typed functions and static data fallback
+   - Updated all pages (home, services, projects) to fetch from Sanity
+   - Pages gracefully fallback to static data when Sanity is empty
+
+2. **Migration Script**
+   - Created `scripts/migrate-to-sanity.ts`
+   - Migrates services, projects, testimonials, and siteSettings
+   - Usage: `SANITY_API_KEY=<token> pnpm migrate`
+
+3. **Sanity CMS Setup (Phase 2.3)**
    - Embedded Studio at `/studio` route using `next-sanity`
    - Created 6 schema types: service, project, blogPost, testimonial, siteSettings, blockContent
    - Configured Sanity client with GROQ queries
    - Added env vars to `env.js` and `.env.example`
-   - Structured Studio with siteSettings as singleton
-
-2. Enhanced content agents with market research + Portable Text
-
-3. Created Claude Code subagents and Codex skills
-
-4. Earlier: Implemented contact form with Resend SDK (Phase 2.4)
 
 ---
 
@@ -39,10 +43,9 @@ Sanity Studio and schemas are ready. Content migration is next.
 
 ### Immediate (Phase 2.3 completion)
 
-1. **Run the Studio** - `pnpm dev` then visit `http://localhost:3000/studio`
-2. **Test schemas** - Create a test service/project in Studio to verify
-3. **Content migration** - Create script to migrate static data to Sanity
-4. **Switch pages** - Update pages to fetch from Sanity instead of static data
+1. **Run migration** - Get Sanity API token and run `SANITY_API_KEY=<token> pnpm migrate`
+2. **Test** - Verify pages work with Sanity data
+3. **Remove static fallback** (optional) - Once confirmed working
 
 ### Then
 
@@ -65,18 +68,21 @@ Sanity Studio and schemas are ready. Content migration is next.
 | Client | `src/sanity/lib/client.ts` |
 | Queries | `src/sanity/lib/queries.ts` |
 | Fetch helpers | `src/sanity/lib/fetch.ts` |
+| Types | `src/sanity/lib/types.ts` |
+| Migration | `scripts/migrate-to-sanity.ts` |
 
 **Commands:**
 ```bash
-pnpm dev              # Run Next.js + Studio
-# Visit http://localhost:3000/studio
+pnpm dev                                    # Run Next.js + Studio
+SANITY_API_KEY=<token> pnpm migrate         # Migrate static data to Sanity
+# Get token from: https://www.sanity.io/manage/project/07w52gq6/api
 ```
 
 ---
 
 ## Blockers / Pending Decisions
 
-- **Content migration**: Need to decide whether to migrate via script or manual entry
+- **Sanity API key**: Need write token to run migration
 - **Design**: Need model website reference before starting 2.5
 - **Resend API**: Placeholder key in `.env` - user needs to add real key for testing
 
@@ -84,8 +90,9 @@ pnpm dev              # Run Next.js + Studio
 
 ## Environment Notes
 
-- On `develop` branch
-- Sanity deps installed: `sanity@4`, `next-sanity@11`, `@sanity/vision@4`, `@sanity/image-url@1`
+- On `develop` branch (3 commits ahead of origin)
+- Sanity deps: `sanity@4`, `next-sanity@11`, `@sanity/vision@4`, `@sanity/image-url@1`, `@sanity/client@7` (dev)
+- Migration deps: `tsx@4` (dev)
 - Studio configured for MCP (VS Code, Claude Code)
 
 ---
@@ -93,29 +100,24 @@ pnpm dev              # Run Next.js + Studio
 ## File Changes This Session
 
 **Created:**
-- `src/sanity/schemaTypes/blockContent.ts`
-- `src/sanity/schemaTypes/service.ts`
-- `src/sanity/schemaTypes/project.ts`
-- `src/sanity/schemaTypes/blogPost.ts`
-- `src/sanity/schemaTypes/testimonial.ts`
-- `src/sanity/schemaTypes/siteSettings.ts`
-- `src/sanity/lib/queries.ts`
-- `src/sanity/lib/fetch.ts`
+- `scripts/migrate-to-sanity.ts` - Migration script
+- `src/sanity/lib/types.ts` - TypeScript types for Sanity data
 
 **Modified:**
-- `src/sanity/schemaTypes/index.ts` - exports all schemas
-- `src/sanity/structure.ts` - custom structure with siteSettings singleton
-- `src/env.js` - added Sanity client vars
-- `.env.example` - added Sanity vars documentation
-- `docs/llm.md` - updated Sanity status
-- `docs/roadmap.md` - ticked 2.3 setup items
-- `docs/handoff.md` - this file
+- `src/app/page.tsx` - Uses Sanity fetch with fallback
+- `src/app/services/page.tsx` - Uses Sanity fetch with fallback
+- `src/app/services/[slug]/page.tsx` - Uses Sanity fetch with fallback
+- `src/app/projects/page.tsx` - Uses Sanity fetch with fallback
+- `src/app/projects/[slug]/page.tsx` - Uses Sanity fetch with fallback
+- `src/sanity/lib/fetch.ts` - Added types, fallback, getFeaturedTestimonials
+- `package.json` - Added migrate script, tsx, @sanity/client
 
-**Created by Sanity CLI:**
-- `sanity.config.ts`
-- `sanity.cli.ts`
-- `src/app/studio/[[...tool]]/page.tsx`
-- `src/sanity/env.ts`
-- `src/sanity/lib/client.ts`
-- `src/sanity/lib/image.ts`
-- `src/sanity/lib/live.ts`
+---
+
+## Git Status
+
+- Branch: `develop`
+- 3 commits ahead of origin:
+  1. Sanity Studio setup and schemas
+  2. Migration script
+  3. Page updates with Sanity fetch
