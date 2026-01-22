@@ -12,24 +12,33 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Current Focus
 
-**Phase 2.4 (Contact Form)** - COMPLETE
+**Specialized Agents & Skills System** - COMPLETE
 
-Just finished implementing the contact form with Resend email integration. All form logic, validation, and email templates are working.
+Added a robust, repeatable agent/skill system for both Claude Code and Codex, aligned to existing docs and workflow.
 
 ---
 
 ## Recent Work
 
-1. Implemented contact form with Resend SDK
-   - Zod validation schema
-   - tRPC mutation
-   - React Email template
-   - Client-side form component with error handling
+1. Created Claude Code subagents (`.claude/agents/`)
+   - project-manager: Plans work, no code edits
+   - dev-implementer: Implements with smallest diffs
+   - content-writer: Generates copy without inventing facts
+   - tester-qa: Minimal tests for Phase 2.7
+   - seo-tech: Technical SEO for Phase 2.6
 
-2. Created LLM-agnostic documentation structure
-   - `AGENTS.md` - canonical entrypoint for all LLM tools
-   - `docs/state.json` - machine-readable project state
-   - Updated existing docs for portability
+2. Created Codex skills (`.codex/skills/`)
+   - pm-audit: Project audit and task planning
+   - implement-feature: Feature implementation with verification
+   - content-generation: Structured content generation
+   - test-happy-paths: Minimal testing
+   - seo-nextjs: Technical SEO implementation
+
+3. Updated AGENTS.md with Codex skills invocation note
+
+4. Earlier: Implemented contact form with Resend SDK (Phase 2.4)
+
+5. Earlier: Created LLM-agnostic documentation structure
 
 ---
 
