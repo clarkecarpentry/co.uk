@@ -15,7 +15,7 @@ export const projects: Project[] = [
     type: "Commercial",
     client: "Juniper Homes",
     description:
-      "Working with Juniper Homes, Clarke Carpentry Contractors Ltd was awarded the contract to complete the entire second fix of these 41 high end flats. Originally an office block, this project in the centre of Bristol included raising structural floor levels to accommodate a new storey. The work was completed on time and on budget.",
+      "A major conversion project in Bristol city centre, transforming a former office block into 41 high-end residential flats. We were awarded the complete second fix carpentry contract, which included work across all units plus communal areas. The project presented particular challenges with structural floor levels being raised to accommodate an additional storey. Working to Juniper Homes' exacting standards, we delivered the full package on time and on budget.",
     completedDate: "August 2018",
     services: ["Second Fix Carpentry"],
   },
@@ -25,7 +25,7 @@ export const projects: Project[] = [
     type: "Commercial",
     client: "Juniper Homes",
     description:
-      "A new build development in Rangeworthy, working with Juniper Homes on a multi-unit residential project requiring comprehensive carpentry services.",
+      "A new build residential development in Rangeworthy comprising multiple units. We delivered the complete carpentry package from first fix through to second fix, working alongside other trades to maintain the build programme. This was our second major project with Juniper Homes, building on the successful delivery at Wilder House.",
     completedDate: "February 2020",
     services: ["First Fix Carpentry", "Second Fix Carpentry", "New Build"],
   },
@@ -35,7 +35,7 @@ export const projects: Project[] = [
     type: "Commercial",
     client: "Juniper Homes",
     description:
-      "New build development in Bristol, delivering complete carpentry packages for this residential project with Juniper Homes.",
+      "Another new build development with Juniper Homes, this time in Bristol. We provided comprehensive carpentry services across the scheme, handling both structural first fix work and the finishing second fix elements. Our ongoing relationship with Juniper Homes reflects the consistent quality and reliability we bring to multi-unit developments.",
     completedDate: "September 2020",
     services: ["First Fix Carpentry", "Second Fix Carpentry", "New Build"],
   },
@@ -43,8 +43,9 @@ export const projects: Project[] = [
     name: "Walcot House",
     slug: "walcot-house",
     type: "Commercial",
+    client: undefined,
     description:
-      "Commercial refurbishment project in the heart of Bath, transforming an existing building with high-quality carpentry work.",
+      "A commercial refurbishment project in central Bath, bringing a tired building back to life. The work involved stripping back to the structure and completing a full internal fit-out, requiring careful coordination with other trades in a constrained city centre site. The finished space now serves its new commercial purpose while respecting the character of this historic Bath location.",
     completedDate: "December 2017",
     services: ["Second Fix Carpentry", "Renovations"],
   },
@@ -54,7 +55,7 @@ export const projects: Project[] = [
     type: "Domestic",
     client: "CTS Design",
     description:
-      "Grade 2 listed property extension requiring sensitive carpentry work that respects the building's heritage while delivering modern functionality.",
+      "Extension work on a Grade 2 listed property, where heritage requirements added significant complexity to the carpentry specification. Working in collaboration with CTS Design, we delivered bespoke joinery that complemented the building's period features while meeting modern building regulations. Listed building work demands particular care - both in protecting existing fabric and in ensuring new elements are sympathetic to the original architecture.",
     completedDate: "April 2018",
     services: ["Extensions", "Bespoke Joinery"],
   },
@@ -63,7 +64,7 @@ export const projects: Project[] = [
     slug: "rockview",
     type: "Domestic",
     description:
-      "Domestic extension improvement project delivering high-quality carpentry work to enhance the property.",
+      "A domestic extension project delivering additional living space for the homeowner. We handled the complete carpentry package including the structural extension work and all second fix finishing. The project required careful integration between the new extension and existing property to ensure a seamless result.",
     completedDate: "December 2019",
     services: ["Extensions", "Second Fix Carpentry"],
   },
@@ -73,7 +74,7 @@ export const projects: Project[] = [
     type: "Domestic",
     client: "By Design",
     description:
-      "First and second fix carpentry package delivered to an exceptional finish, working closely with By Design to meet their high standards.",
+      "A complete first and second fix carpentry package working alongside By Design. The project demanded high standards throughout - from the structural first fix elements through to the finishing details. We delivered an exceptional finish that met the exacting requirements of both the designer and homeowner. This project demonstrates our capability to work within design-led briefs where quality of finish is paramount.",
     completedDate: "July 2020",
     services: ["First Fix Carpentry", "Second Fix Carpentry"],
   },
@@ -82,7 +83,7 @@ export const projects: Project[] = [
     slug: "porlock-road",
     type: "Domestic",
     description:
-      "Kitchen installation project in Bath, delivering a complete kitchen fitting service with attention to detail.",
+      "A kitchen installation project in Bath, fitting a complete new kitchen for a domestic client. Kitchen work requires particular precision - units must be perfectly level, doors properly aligned, and worktops fitted with tight joints. We handled the full installation including all units, worktops and appliance housing, delivering a finished kitchen ready for the client to enjoy.",
     completedDate: "June 2019",
     services: ["Kitchen Fitting"],
   },
@@ -91,7 +92,7 @@ export const projects: Project[] = [
     slug: "number-three-hair-salon",
     type: "Commercial",
     description:
-      "Bespoke joinery project for a hair salon in Bath, creating custom mirrors and features for their new studio space.",
+      "Bespoke joinery for a hair salon in Bath, creating custom mirrors and features for their new studio space. Commercial joinery work needs to be both attractive and durable - standing up to daily use in a busy salon environment. We worked efficiently to minimise disruption to the business, completing the installation on schedule so the salon could open as planned.",
     completedDate: "November 2017",
     services: ["Bespoke Joinery"],
   },
@@ -100,7 +101,7 @@ export const projects: Project[] = [
     slug: "box-hill",
     type: "Domestic",
     description:
-      "Decking and outdoor space project, creating a beautiful external area for the client.",
+      "An external project creating a new decking area and outdoor living space. Good decking requires proper groundwork, appropriate timber selection, and careful construction to ensure longevity. We delivered a finished outdoor space that extends the usable living area of the property and has been built to last.",
     completedDate: "March 2019",
     services: ["Bespoke Joinery"],
   },
@@ -109,7 +110,7 @@ export const projects: Project[] = [
     slug: "masters-church",
     type: "Commercial",
     description:
-      "Terrace houses development in Kingswood, providing comprehensive carpentry services for this multi-unit project.",
+      "A terrace housing development in Kingswood comprising multiple new build units. We provided comprehensive carpentry services across the scheme, from structural first fix through to all second fix finishing work. Multi-unit developments require consistent quality across every plot while maintaining the programme - we delivered both.",
     completedDate: "November 2020",
     services: ["First Fix Carpentry", "Second Fix Carpentry", "New Build"],
   },
@@ -118,7 +119,7 @@ export const projects: Project[] = [
     slug: "oldland-common",
     type: "Domestic",
     description:
-      "New build bungalow project delivering complete carpentry packages from first fix through to completion.",
+      "A new build bungalow project where we delivered the complete carpentry package from foundation to finish. Bungalow construction presents its own considerations - particularly around roof structure where there's no upper floor to work from. We completed all first fix and second fix elements, handing over a property ready for decoration and occupation.",
     completedDate: "2021",
     services: ["First Fix Carpentry", "Second Fix Carpentry", "New Build"],
   },

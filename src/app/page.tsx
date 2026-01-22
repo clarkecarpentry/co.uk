@@ -76,15 +76,15 @@ export default async function Home() {
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-2xl font-semibold">About Us</h2>
             <p className="text-muted-foreground mt-4 leading-relaxed">
-              Clarke Carpentry Contractors Ltd comes from a wealth of experience
-              with over 10 years in the industry. We pride ourselves on
-              delivering high quality carpentry at a fair price.
+              With 15 years in the industry, we deliver quality carpentry across
+              Bristol, Bath and the South West. From domestic extensions to
+              multi-unit residential developments, our CSCS-certified team
+              handles projects of all scales.
             </p>
             <p className="text-muted-foreground mt-3 leading-relaxed">
-              Based between Bristol and Bath, we undertake all aspects of
-              carpentry no matter how large or small the project. All work is
-              carried out by fully qualified staff, handpicked for their quality
-              and professionalism.
+              Every carpenter is handpicked for their skill and professionalism.
+              Our repeat relationships with clients like Juniper Homes reflect
+              what we deliver: quality work, on time and on budget.
             </p>
             <Link
               href="/about"

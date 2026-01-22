@@ -6,34 +6,34 @@ import { CheckCircle } from "lucide-react";
 export const metadata: Metadata = {
   title: "About Us | Clarke Carpentry Contractors Ltd",
   description:
-    "Learn about Clarke Carpentry Contractors Ltd - over 10 years experience delivering high quality carpentry across Bristol, Bath and the South West.",
+    "Learn about Clarke Carpentry Contractors Ltd - 15 years experience delivering quality carpentry across Bristol, Bath and the South West. CSCS certified team.",
 };
 
 const certifications = [
   {
-    name: "CITB",
-    fullName: "Construction Industry Training Board",
-    description: "Registered with the industry training board",
-  },
-  {
     name: "CSCS",
     fullName: "Construction Skills Certification Scheme",
-    description: "All staff hold valid CSCS cards",
+    description: "All carpenters hold valid CSCS cards proving their qualifications",
+  },
+  {
+    name: "CITB",
+    fullName: "Construction Industry Training Board",
+    description: "Registered with the industry training and standards body",
   },
   {
     name: "SSSTS",
     fullName: "Site Supervisor Safety Training Scheme",
-    description: "Site supervision qualifications",
+    description: "Site supervisors trained in health, safety and welfare management",
   },
   {
     name: "SMSTS",
     fullName: "Site Management Safety Training Scheme",
-    description: "Site management qualifications",
+    description: "Site managers hold full safety management certification",
   },
   {
     name: "PASMA",
     fullName: "Prefabricated Access Suppliers and Manufacturers Association",
-    description: "Mobile access tower trained",
+    description: "Trained and certified for safe use of mobile access towers",
   },
 ];
 
@@ -41,22 +41,22 @@ const values = [
   {
     title: "Quality Workmanship",
     description:
-      "Every project is completed to the highest standards by fully qualified staff handpicked for their quality of work.",
+      "Every carpenter is handpicked for their skill and attention to detail. We deliver work that stands up to close inspection.",
   },
   {
-    title: "Fair Pricing",
+    title: "On Time, On Budget",
     description:
-      "We pride ourselves on delivering high quality carpentry at a fair price, with no hidden costs.",
+      "We deliver when we say we will, at the price we quoted. Main contractors rely on us to keep their programmes on track.",
   },
   {
-    title: "Professionalism",
+    title: "Straightforward Approach",
     description:
-      "Our team maintains the highest level of professionalism, from initial consultation through to project completion.",
+      "We say what we mean and deliver what we promise. No surprises, no excuses - just reliable carpentry.",
   },
   {
-    title: "Strong Relationships",
+    title: "Repeat Clients",
     description:
-      "We build lasting relationships with our customers, demonstrated through numerous repeat order clients.",
+      "Our best evidence is that clients come back. Juniper Homes has trusted us with multiple developments.",
   },
 ];
 
@@ -71,8 +71,8 @@ export default function AboutPage() {
               About Us
             </h1>
             <p className="text-muted-foreground mt-4 text-lg">
-              Over 10 years of experience delivering high quality carpentry
-              across Bristol, Bath and the South West
+              15 years of experience delivering quality carpentry across
+              Bristol, Bath and the South West
             </p>
           </div>
         </div>
@@ -85,22 +85,32 @@ export default function AboutPage() {
             <h2 className="text-2xl font-semibold">Our Story</h2>
             <div className="text-muted-foreground mt-6 space-y-4">
               <p>
-                Clarke Carpentry Contractors Ltd comes from a wealth of
-                experience with over 10 years in the industry. We pride
-                ourselves on delivering high quality carpentry at a fair price.
+                Clarke Carpentry started when Mike Clarke set out as a sole
+                trader, taking on domestic carpentry work across Bristol and
+                Bath. With a relentless work ethic and genuine attention to
+                detail, the business grew through word of mouth and repeat
+                custom.
               </p>
               <p>
-                Based between Bristol and Bath, we undertake all aspects of
-                carpentry no matter how large or small the project. From
-                domestic extensions to large commercial developments, our team
-                has the expertise to deliver exceptional results.
+                Over 15 years, that reputation has opened doors to larger
+                projects. Today we handle everything from kitchen installations
+                to multi-unit residential developments - including a 41-flat
+                conversion in Bristol city centre. The scale has changed, but
+                the approach hasn&apos;t: do the job right, finish on time, and
+                stand behind the work.
               </p>
               <p>
-                All of the work is carried out by fully qualified staff that are
-                handpicked for their quality of work and professionalism. As a
-                company it is important to us to build strong working
-                relationships with all of our customers, and this is shown
-                through a number of repeat order clients.
+                Every carpenter on our team is CSCS-certified and handpicked for
+                their quality of workmanship. Mike remains hands-on with project
+                delivery, bringing the same straightforward approach that built
+                the business from day one.
+              </p>
+              <p>
+                Based in Keynsham between Bristol and Bath, we cover the South
+                West and work with main contractors, developers and private
+                clients. Our repeat relationships - particularly with Juniper
+                Homes across multiple developments - reflect the trust we&apos;ve
+                earned through consistent delivery.
               </p>
             </div>
           </div>
