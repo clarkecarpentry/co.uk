@@ -28,7 +28,7 @@
 - [ ] Individual service pages (11 total - see services list below)
 - [ ] Projects overview page
 - [ ] Individual project pages (12 total from legacy content)
-- [ ] Contact page with form
+- [ ] Contact page (form added in 2.4)
 - [ ] Blog list page
 - [ ] Blog post page template
 
@@ -52,7 +52,31 @@
 
 ---
 
-### 2.2 CMS Integration (Sanity.io)
+### 2.2 Content Brief & Generation
+
+> **Note:** This phase can run in parallel with 2.1 and 2.3. Content generation can happen in a separate LLM session while technical work proceeds.
+
+#### Content Brief
+- [ ] Create LLM content generation instructions doc at `.claude/content-brief.md`
+- [ ] Include brand voice guidelines
+- [ ] Include target keywords for SEO
+- [ ] Include content structure templates for each page type
+
+#### Content Generation
+- [ ] Homepage copy
+- [ ] About page copy
+- [ ] Each service page copy (11 pages)
+- [ ] Projects overview copy
+- [ ] Contact page copy
+- [ ] Initial blog posts (3-5 for launch)
+
+#### Output
+- [ ] All generated content saved to `content/generated/` as markdown
+- [ ] Ready for migration to Sanity in phase 2.3
+
+---
+
+### 2.3 CMS Integration (Sanity.io)
 
 > **REMINDER:** When starting this phase, prompt user to:
 > 1. Create Sanity project at sanity.io
@@ -73,16 +97,17 @@
 - [ ] `siteSettings` - company info, contact details, social links
 
 #### Content Migration Script
-- [ ] Create script to convert legacy markdown to Portable Text
-- [ ] Map legacy content structure to Sanity schemas
-- [ ] Push content to Sanity via API
+- [ ] Create script to convert markdown to Portable Text
+- [ ] Map content structure to Sanity schemas
+- [ ] Push generated content (from 2.2) to Sanity via API
+- [ ] Push legacy project data to Sanity
 - [ ] Verify all 12 projects migrated
 - [ ] Verify all 11 services migrated
 - [ ] Verify 6 testimonials migrated
 
 ---
 
-### 2.3 Contact Form
+### 2.4 Contact Form
 
 #### Implementation
 - [ ] Install Resend SDK
@@ -98,7 +123,7 @@
 
 ---
 
-### 2.4 Design Beautification
+### 2.5 Design Beautification
 
 > **REMINDER:** When starting this phase, ask user for:
 > - Model website URL(s) for design reference
@@ -115,9 +140,9 @@
 
 ---
 
-### 2.5 SEO & Content
+### 2.6 SEO Technical
 
-#### SEO Optimizations
+#### Implementation
 - [ ] Schema.org markup (LocalBusiness, Service, Article for blog)
 - [ ] Meta tags for all pages (title, description)
 - [ ] Open Graph tags for social sharing
@@ -126,26 +151,6 @@
 - [ ] Semantic HTML structure
 - [ ] Image alt tags
 - [ ] Internal linking strategy
-
-#### Content Generation
-- [ ] Create LLM content generation instructions doc (see `.claude/content-brief.md`)
-- [ ] Generate SEO-optimized copy for:
-  - [ ] Homepage
-  - [ ] About page
-  - [ ] Each service page (11)
-  - [ ] Projects overview
-  - [ ] Contact page
-  - [ ] Initial blog posts (3-5 for launch)
-
----
-
-### 2.6 Blog Section
-
-- [ ] Blog list page with pagination
-- [ ] Individual blog post template
-- [ ] Blog post Sanity schema (already in 2.2)
-- [ ] Categories/tags system (optional)
-- [ ] Related posts component
 
 ---
 
@@ -203,13 +208,15 @@
 
 ## Content Sources
 
-All legacy content available in `legacy/content/`:
-- Logo: `legacy/content/images/logo-diamond.png` (also copied to `public/logo.png`)
+**Legacy content** (from Wix scrape) in `legacy/content/`:
+- Logo: `legacy/content/images/logo-diamond.png` (also `public/logo.png`)
 - About text: `legacy/content/home/index.md`
 - Services: `legacy/content/services/*.md` (12 files, removing 2)
 - Projects: `legacy/content/projects/*.md` (12 files)
 - Testimonials: `legacy/content/other/testimonials.md` (6 quotes)
 - Images: `legacy/content/images/` (21 images)
+
+**Generated content** (from phase 2.2) will be in `content/generated/`
 
 ---
 
