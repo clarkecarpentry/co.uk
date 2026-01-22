@@ -28,86 +28,99 @@ Canonical entrypoint for LLM coding assistants. This file is auto-discovered by 
 ## Agent Conduct
 
 ### Work Doggedly
+
 Be autonomous. If you know the user's goal and can still make progress, keep working. When you stop, be prepared to justify why.
 
 ### Work Smart
+
 When debugging, step back and think deeply. Add logging to check assumptions. Don't guess - verify.
 
 ### Check Your Work
+
 After writing code, find a way to run it and verify it works. Don't assume - confirm. Run `pnpm check` after changes. Run `pnpm build` if routing or metadata changed.
 
 ### Terminal Caution
+
 Before every terminal command, consider: will it exit on its own, or run indefinitely? For dev servers, watchers, or long processes, warn the user or run in background. Never leave hanging processes.
 
 ### Stop on Failure
+
 Don't plow ahead when something breaks. Stop, summarize the root cause, propose the smallest fix. Ask if unclear.
 
 ### Show Plan Before Large Edits
+
 For multi-file changes or architectural decisions, summarize intent first so the user can redirect early.
 
 ### Incremental Steps
+
 Break work into small steps. Confirm each with the smallest relevant check before moving on.
 
 ---
 
 ## Project Rules (Non-Negotiable)
 
-| Rule | Details |
-|------|---------|
-| **Package manager** | `pnpm` only. Never npm or yarn. |
-| **Git workflow** | git flow only. Features branch from develop. |
-| **Commits** | No `Co-Authored-By` trailers. Concise messages. |
-| **Theme** | Dark mode only. No light mode toggle. |
-| **Accent color** | Green for CTAs and highlights. |
-| **Data source** | Static files in `src/lib/data/` until Sanity integration. |
+| Rule                | Details                                                   |
+| ------------------- | --------------------------------------------------------- |
+| **Package manager** | `pnpm` only. Never npm or yarn.                           |
+| **Git workflow**    | git flow only. Features branch from develop.              |
+| **Commits**         | No `Co-Authored-By` trailers. Concise messages.           |
+| **Theme**           | Dark mode only. No light mode toggle.                     |
+| **Accent color**    | Green for CTAs and highlights.                            |
+| **Data source**     | Static files in `src/lib/data/` until Sanity integration. |
 
 ---
 
 ## File Locations
 
-| What | Where |
-|------|-------|
-| Pages | `src/app/` |
-| Components | `src/components/` |
-| UI components (shadcn) | `src/components/ui/` |
-| Static data | `src/lib/data/` |
-| Validation schemas | `src/lib/validations/` |
-| tRPC routers | `src/server/api/routers/` |
-| Email templates | `src/emails/` |
-| Legacy content | `legacy/content/` (read-only reference) |
-| Documentation | `docs/` |
+| What                   | Where                                   |
+| ---------------------- | --------------------------------------- |
+| Pages                  | `src/app/`                              |
+| Components             | `src/components/`                       |
+| UI components (shadcn) | `src/components/ui/`                    |
+| Static data            | `src/lib/data/`                         |
+| Validation schemas     | `src/lib/validations/`                  |
+| tRPC routers           | `src/server/api/routers/`               |
+| Email templates        | `src/emails/`                           |
+| Legacy content         | `legacy/content/` (read-only reference) |
+| Documentation          | `docs/`                                 |
 
 ---
 
 ## Working Agreement
 
 ### Change Strategy
+
 - Prefer the **smallest possible diff**
 - Do **not** refactor unrelated code
 - One feature per branch
 
 ### Component Rules
+
 - Default to **Server Components**
 - Add `"use client"` only when browser APIs or tRPC hooks are required
 - Use shadcn/ui components where applicable
 
 ### Styling Rules
+
 - Use Tailwind CSS v4 classes
 - Theme defined in `src/styles/globals.css`
 - Green accent: `bg-green-600`, `text-green-500`, etc.
 
 ### tRPC Rules
+
 - Every new router **must** be registered in `src/server/api/root.ts`
 - Use Zod for input validation
 - Use `publicProcedure` from `~/server/api/trpc`
 
 ### Environment Variables
+
 - New env vars **must** be added to:
   1. `src/env.js` Zod schema (server or client section)
   2. `runtimeEnv` object in same file
   3. `.env.example` with placeholder
 
 ### Data Rules
+
 - Service/project slugs are source of truth
 - Slugs must stay in sync with routes and data files
 - Update `generateStaticParams` when adding/removing items
@@ -144,11 +157,11 @@ These are **NOT** fully integrated yet:
 
 Keep these updated as you work:
 
-| File | Purpose | When to Update |
-|------|---------|----------------|
-| `docs/handoff.md` | Current status, where we left off | End of every session or major task |
-| `docs/progress.md` | Completed work log | After completing a feature/phase |
-| `docs/roadmap.md` | Task checklist | Tick items as completed |
+| File               | Purpose                           | When to Update                     |
+| ------------------ | --------------------------------- | ---------------------------------- |
+| `docs/handoff.md`  | Current status, where we left off | End of every session or major task |
+| `docs/progress.md` | Completed work log                | After completing a feature/phase   |
+| `docs/roadmap.md`  | Task checklist                    | Tick items as completed            |
 
 ---
 
@@ -167,6 +180,7 @@ Keep these updated as you work:
 ```bash
 pnpm dev          # Start dev server (Turbopack)
 pnpm build        # Production build
+pnpm build:quiet # preferred build command, prints only pass/fail
 pnpm check        # Lint + typecheck
 pnpm format:write # Format with Prettier
 
@@ -174,6 +188,12 @@ pnpm format:write # Format with Prettier
 git flow feature start <name>
 git flow feature finish <name>
 ```
+
+### Token-aware verification
+
+- Prefer `pnpm check` for most tasks.
+- If a build is required, run `pnpm build:quiet` (prints only pass/fail).
+- Only include build output in chat if the build fails.
 
 ---
 
