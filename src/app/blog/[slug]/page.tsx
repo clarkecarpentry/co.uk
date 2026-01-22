@@ -6,7 +6,9 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug: _slug } = await params;
 
   return {
@@ -22,11 +24,11 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="border-b border-border/50 bg-gradient-to-b from-neutral-900/50 via-background to-background py-16">
+      <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
         <div className="container mx-auto px-4">
           <Link
             href="/blog"
-            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm"
           >
             <ArrowLeft className="mr-1 h-4 w-4" />
             Back to Blog
@@ -45,7 +47,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               <h2 className="text-xl font-semibold text-amber-400">
                 Coming Soon
               </h2>
-              <p className="mt-2 text-muted-foreground">
+              <p className="text-muted-foreground mt-2">
                 This blog post is not yet available. Check back soon for expert
                 carpentry advice and project insights.
               </p>

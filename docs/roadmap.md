@@ -169,19 +169,34 @@ Save as markdown in `content/generated/blog/` for Sanity migration:
 
 ---
 
-### 2.4 Contact Form
+### 2.4 Contact Form ✅
+
+**Status:** Complete
 
 #### Implementation
-- [ ] Install Resend SDK
-- [ ] Create contact form UI component
-- [ ] Add Zod validation schema
-- [ ] Create tRPC mutation for form submission
-- [ ] Set up Resend email template (React Email)
-- [ ] Configure environment variables
+- [x] Install Resend SDK
+- [x] Create contact form UI component
+- [x] Add Zod validation schema
+- [x] Create tRPC mutation for form submission
+- [x] Set up Resend email template (React Email)
+- [x] Configure environment variables
 
 #### Email Configuration
 - **Development/Testing:** `clarkecarpentry@proton.me`
-- **Production:** Client's real email (to be provided)
+- **Production:** `info@clarkecarpentry.co.uk`
+
+#### Files Created
+- `src/lib/validations/contact.ts` - Zod schema
+- `src/emails/contact-form.tsx` - React Email template
+- `src/server/api/routers/contact.ts` - tRPC router
+- `src/components/contact-form.tsx` - Client form component
+
+#### Setup Required
+To enable the contact form, add to `.env.local`:
+```
+RESEND_API_KEY=re_your_api_key
+CONTACT_EMAIL=clarkecarpentry@proton.me
+```
 
 ---
 

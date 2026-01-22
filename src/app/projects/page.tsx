@@ -20,20 +20,20 @@ export default function ProjectsPage() {
   });
 
   const commercialProjects = sortedProjects.filter(
-    (p) => p.type === "Commercial"
+    (p) => p.type === "Commercial",
   );
   const domesticProjects = sortedProjects.filter((p) => p.type === "Domestic");
 
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="border-b border-border/50 bg-gradient-to-b from-neutral-900/50 via-background to-background py-16">
+      <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Our Projects
             </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="text-muted-foreground mt-4 text-lg">
               A selection of commercial and domestic projects we&apos;ve
               completed across Bristol, Bath and the South West
             </p>
@@ -45,13 +45,13 @@ export default function ProjectsPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-semibold">Commercial Projects</h2>
-          <p className="mt-2 text-muted-foreground">
+          <p className="text-muted-foreground mt-2">
             Large-scale developments and commercial refurbishments
           </p>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {commercialProjects.map((project) => (
               <Link key={project.slug} href={`/projects/${project.slug}`}>
-                <Card className="group h-full border-border/50 transition-all duration-200 hover:border-green-500/30 hover:bg-card/80">
+                <Card className="group border-border/50 hover:bg-card/80 h-full transition-all duration-200 hover:border-green-500/30">
                   <CardContent className="flex h-full flex-col p-6">
                     <div className="flex items-center justify-between">
                       <Badge
@@ -60,7 +60,7 @@ export default function ProjectsPage() {
                       >
                         Commercial
                       </Badge>
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-muted-foreground text-xs">
                         {project.completedDate}
                       </span>
                     </div>
@@ -72,7 +72,7 @@ export default function ProjectsPage() {
                         {project.client}
                       </p>
                     )}
-                    <p className="mt-2 flex-1 text-sm text-muted-foreground line-clamp-3">
+                    <p className="text-muted-foreground mt-2 line-clamp-3 flex-1 text-sm">
                       {project.description}
                     </p>
                     <div className="mt-4 flex items-center text-sm font-medium text-green-500">
@@ -88,16 +88,16 @@ export default function ProjectsPage() {
       </section>
 
       {/* Domestic Projects */}
-      <section className="border-t border-border/50 bg-card/30 py-16">
+      <section className="border-border/50 bg-card/30 border-t py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-semibold">Domestic Projects</h2>
-          <p className="mt-2 text-muted-foreground">
+          <p className="text-muted-foreground mt-2">
             Home improvements, extensions, and bespoke carpentry
           </p>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {domesticProjects.map((project) => (
               <Link key={project.slug} href={`/projects/${project.slug}`}>
-                <Card className="group h-full border-border/50 transition-all duration-200 hover:border-green-500/30 hover:bg-card/80">
+                <Card className="group border-border/50 hover:bg-card/80 h-full transition-all duration-200 hover:border-green-500/30">
                   <CardContent className="flex h-full flex-col p-6">
                     <div className="flex items-center justify-between">
                       <Badge
@@ -106,7 +106,7 @@ export default function ProjectsPage() {
                       >
                         Domestic
                       </Badge>
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-muted-foreground text-xs">
                         {project.completedDate}
                       </span>
                     </div>
@@ -118,7 +118,7 @@ export default function ProjectsPage() {
                         {project.client}
                       </p>
                     )}
-                    <p className="mt-2 flex-1 text-sm text-muted-foreground line-clamp-3">
+                    <p className="text-muted-foreground mt-2 line-clamp-3 flex-1 text-sm">
                       {project.description}
                     </p>
                     <div className="mt-4 flex items-center text-sm font-medium text-green-500">

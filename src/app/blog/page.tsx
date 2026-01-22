@@ -41,13 +41,13 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="border-b border-border/50 bg-gradient-to-b from-neutral-900/50 via-background to-background py-16">
+      <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Blog
             </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="text-muted-foreground mt-4 text-lg">
               News, tips, and insights from our team of expert carpenters
             </p>
           </div>
@@ -79,13 +79,13 @@ export default function BlogPage() {
                       >
                         {post.category}
                       </Badge>
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-muted-foreground text-xs">
                         {post.date}
                       </span>
                     </div>
                     <h2 className="mt-3 text-xl font-semibold">{post.title}</h2>
-                    <p className="mt-2 text-muted-foreground">{post.excerpt}</p>
-                    <div className="mt-4 flex items-center text-sm font-medium text-muted-foreground">
+                    <p className="text-muted-foreground mt-2">{post.excerpt}</p>
+                    <div className="text-muted-foreground mt-4 flex items-center text-sm font-medium">
                       Coming soon
                       <ArrowRight className="ml-1 h-4 w-4" />
                     </div>

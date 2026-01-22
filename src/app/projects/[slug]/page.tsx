@@ -23,7 +23,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
 
@@ -55,11 +57,11 @@ export default async function ProjectPage({ params }: PageProps) {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="border-b border-border/50 bg-gradient-to-b from-neutral-900/50 via-background to-background py-16">
+      <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
         <div className="container mx-auto px-4">
           <Link
             href="/projects"
-            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm"
           >
             <ArrowLeft className="mr-1 h-4 w-4" />
             All Projects
@@ -97,7 +99,7 @@ export default async function ProjectPage({ params }: PageProps) {
             {/* Main Content */}
             <div className="lg:col-span-2">
               <h2 className="text-2xl font-semibold">Project Overview</h2>
-              <p className="mt-4 text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground mt-4 leading-relaxed">
                 {project.description}
               </p>
 
@@ -126,26 +128,26 @@ export default async function ProjectPage({ params }: PageProps) {
                   <h3 className="font-semibold">Project Details</h3>
                   <dl className="mt-4 space-y-3">
                     <div className="flex items-center gap-3">
-                      <Calendar className="h-4 w-4 text-muted-foreground" />
+                      <Calendar className="text-muted-foreground h-4 w-4" />
                       <div>
-                        <dt className="text-xs text-muted-foreground">
+                        <dt className="text-muted-foreground text-xs">
                           Completed
                         </dt>
                         <dd className="text-sm">{project.completedDate}</dd>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Building2 className="h-4 w-4 text-muted-foreground" />
+                      <Building2 className="text-muted-foreground h-4 w-4" />
                       <div>
-                        <dt className="text-xs text-muted-foreground">Type</dt>
+                        <dt className="text-muted-foreground text-xs">Type</dt>
                         <dd className="text-sm">{project.type}</dd>
                       </div>
                     </div>
                     {project.client && (
                       <div className="flex items-center gap-3">
-                        <Building2 className="h-4 w-4 text-muted-foreground" />
+                        <Building2 className="text-muted-foreground h-4 w-4" />
                         <div>
-                          <dt className="text-xs text-muted-foreground">
+                          <dt className="text-muted-foreground text-xs">
                             Client
                           </dt>
                           <dd className="text-sm">{project.client}</dd>
@@ -159,10 +161,8 @@ export default async function ProjectPage({ params }: PageProps) {
               {/* CTA Card */}
               <Card className="border-border/50 bg-card/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">
-                    Interested in Similar Work?
-                  </h3>
-                  <p className="mt-2 text-sm text-muted-foreground">
+                  <h3 className="font-semibold">Interested in Similar Work?</h3>
+                  <p className="text-muted-foreground mt-2 text-sm">
                     Get in touch to discuss your project requirements.
                   </p>
                   <div className="mt-4 flex flex-col gap-2">
@@ -187,12 +187,12 @@ export default async function ProjectPage({ params }: PageProps) {
       </section>
 
       {/* Project Navigation */}
-      <section className="border-t border-border/50 py-8">
+      <section className="border-border/50 border-t py-8">
         <div className="container mx-auto flex items-center justify-between px-4">
           {prevProject ? (
             <Link
               href={`/projects/${prevProject.slug}`}
-              className="flex items-center text-sm text-muted-foreground hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground flex items-center text-sm"
             >
               <ArrowLeft className="mr-1 h-4 w-4" />
               {prevProject.name}
@@ -203,7 +203,7 @@ export default async function ProjectPage({ params }: PageProps) {
           {nextProject && (
             <Link
               href={`/projects/${nextProject.slug}`}
-              className="flex items-center text-sm text-muted-foreground hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground flex items-center text-sm"
             >
               {nextProject.name}
               <ArrowRight className="ml-1 h-4 w-4" />

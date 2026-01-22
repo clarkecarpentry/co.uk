@@ -11,7 +11,7 @@ This file contains essential context for LLM coding assistants working on this p
 
 ## Current State
 
-### What's Done (Phase 1 + 2.1)
+### What's Done (Phase 1 + 2.1 + 2.4)
 
 - ✅ All page routes created and rendering
 - ✅ Responsive navigation and footer
@@ -19,6 +19,7 @@ This file contains essential context for LLM coding assistants working on this p
 - ✅ Build passes cleanly (32 static pages)
 - ✅ Git flow workflow established
 - ✅ v1.0.0 released (placeholder landing page)
+- ✅ Contact form with Resend email integration
 
 ### Pages Built
 
@@ -40,7 +41,7 @@ See `docs/roadmap.md` for full breakdown. Priority order:
 
 1. **2.2 Content Brief & Generation** - Being done by separate agent
 2. **2.3 Sanity CMS** - Schemas, client setup, content migration
-3. **2.4 Contact Form** - Resend integration, validation
+3. ~~**2.4 Contact Form**~~ ✅ - Complete (Resend + tRPC + React Email)
 4. **2.5 Design Beautification** - Ask user for model website reference
 5. **2.6 SEO Technical** - Schema markup, sitemap, meta tags
 6. **2.7 Testing** - Minimal: unit tests for form, E2E happy paths

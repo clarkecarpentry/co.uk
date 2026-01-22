@@ -13,16 +13,16 @@ export default function Home() {
   const featuredTestimonials = testimonials.slice(0, 2);
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="bg-background min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-border/50 bg-gradient-to-b from-neutral-900/50 via-background to-background py-24">
+      <section className="border-border/50 via-background to-background relative overflow-hidden border-b bg-gradient-to-b from-neutral-900/50 py-24">
         {/* Background decoration */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -left-1/4 -top-1/4 h-96 w-96 rounded-full bg-white/[0.02] blur-3xl" />
-          <div className="absolute -right-1/4 top-0 h-80 w-80 rounded-full bg-white/[0.02] blur-3xl" />
+          <div className="absolute -top-1/4 -left-1/4 h-96 w-96 rounded-full bg-white/[0.02] blur-3xl" />
+          <div className="absolute top-0 -right-1/4 h-80 w-80 rounded-full bg-white/[0.02] blur-3xl" />
         </div>
 
-        <div className="container relative mx-auto px-4 text-center">
+        <div className="relative container mx-auto px-4 text-center">
           <div className="mx-auto mb-8 flex h-28 w-28 items-center justify-center rounded-2xl bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 p-1 ring-1 ring-white/10">
             <Image
               src="/logo.png"
@@ -34,11 +34,11 @@ export default function Home() {
           </div>
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
             Clarke Carpentry
-            <span className="mt-2 block text-foreground/80">
+            <span className="text-foreground/80 mt-2 block">
               Contractors Ltd
             </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+          <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-lg">
             Specialist carpenters covering projects across Bristol, Bath and the
             South West
           </p>
@@ -74,12 +74,12 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-2xl font-semibold">About Us</h2>
-            <p className="mt-4 leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground mt-4 leading-relaxed">
               Clarke Carpentry Contractors Ltd comes from a wealth of experience
               with over 10 years in the industry. We pride ourselves on
               delivering high quality carpentry at a fair price.
             </p>
-            <p className="mt-3 leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground mt-3 leading-relaxed">
               Based between Bristol and Bath, we undertake all aspects of
               carpentry no matter how large or small the project. All work is
               carried out by fully qualified staff, handpicked for their quality
@@ -104,13 +104,13 @@ export default function Home() {
       <section className="py-14">
         <div className="container mx-auto px-4">
           <h2 className="text-center text-2xl font-semibold">Our Services</h2>
-          <p className="mt-2 text-center text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-center">
             Comprehensive carpentry for commercial and domestic projects
           </p>
           <div className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
             {services.map((service) => (
               <Link key={service.slug} href={`/services/${service.slug}`}>
-                <Card className="h-full border-border/50 bg-card/50 text-center transition-colors hover:border-green-500/30 hover:bg-card/80">
+                <Card className="border-border/50 bg-card/50 hover:bg-card/80 h-full text-center transition-colors hover:border-green-500/30">
                   <CardContent className="p-3">
                     <p className="text-sm">{service.name}</p>
                   </CardContent>
@@ -140,7 +140,7 @@ export default function Home() {
           <h2 className="text-center text-2xl font-semibold">
             What Our Clients Say
           </h2>
-          <p className="mt-2 text-center text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-center">
             Trusted by contractors and homeowners across the South West
           </p>
           <div className="mx-auto mt-8 grid max-w-4xl gap-6 md:grid-cols-2">
@@ -148,7 +148,7 @@ export default function Home() {
               <Card key={index} className="border-border/50">
                 <CardContent className="p-6">
                   <Quote className="h-8 w-8 text-green-500/20" />
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  <p className="text-muted-foreground mt-4 text-sm leading-relaxed">
                     &ldquo;{testimonial.quote}&rdquo;
                   </p>
                   <div className="mt-4">
@@ -178,7 +178,7 @@ export default function Home() {
               <h2 className="text-2xl font-semibold">
                 Ready to Start Your Project?
               </h2>
-              <p className="mt-2 text-muted-foreground">
+              <p className="text-muted-foreground mt-2">
                 Get in touch for a free quote or to discuss your carpentry
                 requirements.
               </p>
