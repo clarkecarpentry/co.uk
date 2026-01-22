@@ -12,15 +12,23 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Current Focus
 
-**Specialized Agents & Skills System** - COMPLETE
+**Content Agent Enhancements** - COMPLETE
 
-Added a robust, repeatable agent/skill system for both Claude Code and Codex, aligned to existing docs and workflow.
+Enhanced content-writer agent and content-generation skill with:
+- Market research workflow (keyword research, competitor analysis)
+- Portable Text JSON output for Sanity CMS integration
+- Local SEO keyword targeting (Bristol/Bath/South West)
 
 ---
 
 ## Recent Work
 
-1. Created Claude Code subagents (`.claude/agents/`)
+1. Enhanced content agents with market research + Portable Text
+   - Added WebSearch/WebFetch/firecrawl tools to content-writer
+   - Added market research workflow for blog topic discovery
+   - Added Portable Text JSON output format for Sanity
+
+2. Created Claude Code subagents (`.claude/agents/`)
    - project-manager: Plans work, no code edits
    - dev-implementer: Implements with smallest diffs
    - content-writer: Generates copy without inventing facts
