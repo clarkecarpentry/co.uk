@@ -69,32 +69,34 @@ Restructure project documentation for compatibility with any LLM coding assistan
 
 > **Note:** This phase can run in parallel with 2.1 and 2.3. Content generation can happen in a separate LLM session while technical work proceeds.
 
-#### 2.2.1 Create Content Brief Document
+#### 2.2.1 Create Content Brief Document ✅
 
-Create `docs/content-brief.md` with:
+**Status:** Complete
 
-- [ ] Brand voice guidelines (professional, technical, expert-focused, plain English)
-- [ ] Company facts (15 years experience, Bristol/Bath/South West, accreditations list)
-- [ ] Mike Clarke bio points (sole trader origin, business growth over time, relentless work ethic, attention to detail, straightforward demeanour)
-- [ ] Key messages to weave throughout:
+Created `docs/content-brief.md` with:
+
+- [x] Brand voice guidelines (professional, technical, expert-focused, plain English)
+- [x] Company facts (15 years experience, Bristol/Bath/South West, accreditations list)
+- [x] Mike Clarke bio points (sole trader origin, business growth over time, relentless work ethic, attention to detail, straightforward demeanour)
+- [x] Key messages to weave throughout:
   - On time and on budget delivery
   - Handpicked staff for quality and professionalism
   - Repeat client relationships (Juniper Homes etc.)
   - H&S credentials (CSCS, CITB, SSSTS, SMSTS, PASMA)
-- [ ] CTA strategy:
+- [x] CTA strategy:
   - Phone primary (prominent on every page, construction industry norm)
   - Contact form secondary (out-of-hours, written project details)
   - Context-specific wording per page type
-- [ ] SEO target keywords per page type
+- [x] SEO target keywords per page type
 
-#### 2.2.2 Content Templates
+#### 2.2.2 Content Templates ✅
 
-Templates matching the existing data structures in `src/lib/data/`:
+**Status:** Complete (included in content-brief.md section 7-8)
 
-- [ ] Service template (`name`, `slug`, `description`, `features[]`)
-- [ ] Project template (`name`, `slug`, `type`, `client?`, `description`, `completedDate`, `services[]`)
-- [ ] About page template (story paragraphs, values, certifications)
-- [ ] Blog post template (for Sanity: `title`, `slug`, `content`, `excerpt`)
+- [x] Service template (`name`, `slug`, `description`, `features[]`)
+- [x] Project template (`name`, `slug`, `type`, `client?`, `description`, `completedDate`, `services[]`)
+- [x] About page template (story paragraphs, values, certifications)
+- [x] Blog post template (4 types with structures, checklist, voice notes)
 
 #### 2.2.3 Generate Page Content
 
