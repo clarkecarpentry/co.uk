@@ -2,13 +2,20 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Start Here
+
+**Read `docs/llm.md` first** - it contains essential project context, current state, and key decisions.
+
 ## Project Documentation
 
-Documentation is kept in the `docs/` directory for LLM-agnostic access (works with Claude Code, Codex, Cursor, etc.):
+Documentation is in `docs/` (LLM-agnostic, works with Claude Code, Codex, Cursor, etc.):
 
-- **[docs/README.md](docs/README.md)** - Project overview for LLM assistants
-- **[docs/roadmap.md](docs/roadmap.md)** - Current phase and planned work
-- **[docs/progress.md](docs/progress.md)** - Completed work log
+| File | Purpose |
+|------|---------|
+| **[docs/llm.md](docs/llm.md)** | Essential context for LLM assistants (read first) |
+| [docs/roadmap.md](docs/roadmap.md) | Current phase and task checklist |
+| [docs/progress.md](docs/progress.md) | Completed work history |
+| [docs/README.md](docs/README.md) | Human-readable project overview |
 
 **Current Phase:** 2 - Full Website (see roadmap for task breakdown)
 

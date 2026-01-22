@@ -1,51 +1,89 @@
-# Project Documentation
+# Clarke Carpentry Website
 
-This directory contains project documentation designed to be consumed by any LLM-based coding assistant (Claude Code, Codex, Cursor, etc.).
+Professional website for Clarke Carpentry Contractors Ltd, a carpentry business serving Bristol, Bath and the South West.
 
-## Quick Links
+## Quick Start
 
-- **[Roadmap](./roadmap.md)** - Current phase, planned work, task checklists
-- **[Progress](./progress.md)** - Completed work history
+```bash
+pnpm install
+pnpm dev
+```
 
-## Project Overview
+Open [http://localhost:3000](http://localhost:3000).
 
-**Client:** Clarke Carpentry Contractors Ltd
-**Purpose:** Professional business website for tender submissions
-**Stack:** Next.js 15, Tailwind CSS v4, shadcn/ui, tRPC, Sanity.io (CMS)
+## Project Status
 
-### Domains
+**Current Phase:** Full website build (Phase 2)
+**Target Launch:** Wednesday, January 29, 2026
 
-| Environment | Domain |
-|-------------|--------|
-| Production | clarkecarpentry.co.uk |
-| Staging | next.clarkecarpentry.co.uk |
+See [roadmap.md](./roadmap.md) for detailed task breakdown.
 
-### Key Directories
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Styling:** Tailwind CSS v4 + shadcn/ui
+- **CMS:** Sanity.io (planned)
+- **Email:** Resend (planned)
+- **Hosting:** Vercel
+
+## Project Structure
 
 ```
 src/
-├── app/              # Next.js App Router pages
-├── components/       # React components (nav, footer, ui/)
-├── lib/data/         # Static data (services, projects, testimonials)
-├── server/api/       # tRPC routers
-└── styles/           # Global CSS
+├── app/                  # Pages (Next.js App Router)
+│   ├── about/
+│   ├── blog/
+│   ├── contact/
+│   ├── projects/
+│   ├── services/
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/           # React components
+│   ├── ui/              # shadcn/ui components
+│   ├── nav.tsx
+│   └── footer.tsx
+├── lib/
+│   ├── data/            # Static data (services, projects, testimonials)
+│   └── utils.ts
+└── server/api/          # tRPC routers
 
-docs/                 # Project documentation (this directory)
-legacy/content/       # Scraped content from old Wix site
+docs/                    # Project documentation
+legacy/content/          # Scraped content from old Wix site
 ```
 
-## For LLM Assistants
+## Documentation
 
-When working on this project:
+| File | Description |
+|------|-------------|
+| [roadmap.md](./roadmap.md) | Current phase, tasks, and checklist |
+| [progress.md](./progress.md) | Completed work history |
+| [llm.md](./llm.md) | Context for LLM coding assistants |
 
-1. **Check the roadmap** (`docs/roadmap.md`) to understand current priorities
-2. **Check progress** (`docs/progress.md`) for context on completed work
-3. **Use git flow** for branching (see CLAUDE.md for workflow details)
-4. **Services list** has 11 items (loft conversions/extensions removed)
-5. **Content** will come from Sanity CMS (not yet integrated)
+## Environments
 
-### Content Sources
+| Environment | Domain | Status |
+|-------------|--------|--------|
+| Production | clarkecarpentry.co.uk | Not deployed |
+| Staging | next.clarkecarpentry.co.uk | Not deployed |
 
-- Legacy Wix content: `legacy/content/`
-- Static data files: `src/lib/data/`
-- Generated content (future): `content/generated/`
+## Key Commands
+
+```bash
+pnpm dev          # Development server
+pnpm build        # Production build
+pnpm check        # Lint + typecheck
+pnpm format:write # Format code
+```
+
+## Git Workflow
+
+This project uses **git flow**:
+
+```bash
+git flow feature start my-feature   # Start feature
+git flow feature finish my-feature  # Merge to develop
+git flow release start 1.0.0        # Start release
+git flow release finish 1.0.0       # Merge to main, tag
+```
+
+See [CLAUDE.md](../CLAUDE.md) for full workflow details.
