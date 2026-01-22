@@ -55,6 +55,50 @@ pnpm format:check     # Check code formatting with Prettier
 pnpm format:write     # Format code with Prettier
 ```
 
+## Git Workflow
+
+This project uses **git flow** for branch management.
+
+### Branch Structure
+
+| Branch | Purpose |
+|--------|---------|
+| `main` | Production releases only |
+| `develop` | Integration branch for features |
+| `feature/*` | New features |
+| `bugfix/*` | Bug fixes for develop |
+| `release/*` | Release preparation |
+| `hotfix/*` | Urgent production fixes |
+
+### Common Commands
+
+```bash
+# Features
+git flow feature start my-feature    # Create feature branch from develop
+git flow feature finish my-feature   # Merge feature into develop
+
+# Releases
+git flow release start 1.0.0         # Create release branch
+git flow release finish 1.0.0        # Merge to main and develop, tag
+
+# Hotfixes
+git flow hotfix start fix-name       # Create hotfix from main
+git flow hotfix finish fix-name      # Merge to main and develop, tag
+```
+
+### Workflow Rules
+
+1. **Never commit directly to `main`** - only via release or hotfix finish
+2. **Features branch from `develop`** - not from main
+3. **Use descriptive branch names** - e.g., `feature/contact-form`, `hotfix/phone-link`
+4. **Tag releases** - git flow handles this automatically on release finish
+
+### Commit Messages
+
+- Use concise, descriptive commit messages
+- Add bullet points for details when helpful
+- **Do NOT include `Co-Authored-By` trailers** - keep messages clean
+
 ## Architecture
 
 ### tRPC Setup
