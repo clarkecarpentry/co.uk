@@ -18,6 +18,7 @@ import {createClient} from '@sanity/client'
 import {services} from '../src/lib/data/services'
 import {projects} from '../src/lib/data/projects'
 import {testimonials} from '../src/lib/data/testimonials'
+import {blogPosts} from '../src/lib/data/blog-posts'
 
 // Check for API key
 const token = process.env.SANITY_API_KEY
@@ -141,6 +142,77 @@ async function migrateTestimonials() {
   console.log(`  → ${testimonials.length} testimonials migrated`)
 }
 
+async function migrateBlogPosts() {
+  console.log('\n📝 Migrating blog posts...')
+
+  for (const post of blogPosts) {
+    // Map service slugs to service references
+    const serviceRefs = post.relatedServices.map((serviceSlug) => {
+      return {
+        _type: 'reference',
+        _ref: slugToId('service', serviceSlug),
+        _key: serviceSlug,
+      }
+    })
+
+    // Transform content blocks to include unique keys
+    let blockIndex = 0
+    const contentWithKeys = post.content.map((contentBlock) => {
+      blockIndex++
+      const blockKey = `block-${blockIndex}`
+
+      // Process children to ensure unique keys
+      let spanIndex = 0
+      const childrenWithKeys = contentBlock.children.map((child) => {
+        spanIndex++
+        return {
+          ...child,
+          _key: `${blockKey}-span-${spanIndex}`,
+        }
+      })
+
+      // Process markDefs if present
+      let markIndex = 0
+      const markDefsWithKeys = contentBlock.markDefs.map((mark) => {
+        markIndex++
+        return {
+          ...mark,
+          _key: `${blockKey}-mark-${markIndex}`,
+        }
+      })
+
+      return {
+        ...contentBlock,
+        _key: blockKey,
+        children: childrenWithKeys,
+        markDefs: markDefsWithKeys,
+      }
+    })
+
+    const doc = {
+      _id: slugToId('blogPost', post.slug),
+      _type: 'blogPost',
+      title: post.title,
+      slug: {_type: 'slug', current: post.slug},
+      excerpt: post.excerpt,
+      author: post.author,
+      publishedAt: post.publishedAt,
+      categories: post.categories,
+      relatedServices: serviceRefs,
+      content: contentWithKeys,
+    }
+
+    try {
+      await client.createOrReplace(doc)
+      console.log(`  ✓ ${post.title}`)
+    } catch (error) {
+      console.error(`  ✗ ${post.title}:`, error)
+    }
+  }
+
+  console.log(`  → ${blogPosts.length} blog posts migrated`)
+}
+
 async function migrateSiteSettings() {
   console.log('\n⚙️  Creating site settings...')
 
@@ -176,6 +248,7 @@ async function main() {
   await migrateServices()
   await migrateProjects()
   await migrateTestimonials()
+  await migrateBlogPosts()
   await migrateSiteSettings()
 
   console.log('\n✅ Migration complete!')
