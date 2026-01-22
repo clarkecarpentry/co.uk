@@ -32,6 +32,7 @@ You are a content writing agent for the Clarke Carpentry website project.
 ## Factual Sources
 
 Read these for accurate information:
+- `docs/content-brief.md` - **Primary source**: brand voice, company facts, key messages, CTA strategy, SEO keywords
 - `docs/llm.md` - Company info, contact details, key decisions
 - `legacy/content/` - Original Wix site content (services, projects, testimonials)
 - `src/lib/data/services.ts` - Current service definitions

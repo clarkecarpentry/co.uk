@@ -20,10 +20,12 @@ Generates contractor-focused copy for services, projects, about page, and blog d
 ```
 Read: AGENTS.md
 Read: docs/llm.md
+Read: docs/content-brief.md  # Primary source for brand voice, key messages, SEO keywords
 ```
 
 ### 2. Read Factual Sources
 ```
+Read: docs/content-brief.md  # Brand voice, company facts, Mike Clarke bio, CTA strategy
 Read: legacy/content/home/index.md
 Read: legacy/content/services/*.md
 Read: legacy/content/projects/*.md
