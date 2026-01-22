@@ -11,13 +11,14 @@ import {
   Building2,
   Phone,
 } from "lucide-react";
-import { projects, getProjectBySlug } from "~/lib/data/projects";
+import { getProjects, getProjectBySlug } from "~/sanity/lib/fetch";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
+  const projects = await getProjects();
   return projects.map((project) => ({
     slug: project.slug,
   }));
@@ -27,7 +28,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     return {
@@ -41,9 +42,24 @@ export async function generateMetadata({
   };
 }
 
+// Helper to get service names from either format
+function getServiceNames(
+  services: Array<{ name: string; slug: string }> | string[],
+): string[] {
+  if (!services || services.length === 0) return [];
+  const first = services[0];
+  if (typeof first === "string") {
+    return services as string[];
+  }
+  return (services as Array<{ name: string }>).map((s) => s.name);
+}
+
 export default async function ProjectPage({ params }: PageProps) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const [project, projects] = await Promise.all([
+    getProjectBySlug(slug),
+    getProjects(),
+  ]);
 
   if (!project) {
     notFound();
@@ -53,6 +69,9 @@ export default async function ProjectPage({ params }: PageProps) {
   const currentIndex = projects.findIndex((p) => p.slug === slug);
   const prevProject = projects[currentIndex - 1];
   const nextProject = projects[currentIndex + 1];
+
+  // Get service names for display
+  const serviceNames = getServiceNames(project.services);
 
   return (
     <main className="min-h-screen">
@@ -104,20 +123,22 @@ export default async function ProjectPage({ params }: PageProps) {
               </p>
 
               {/* Services Used */}
-              <div className="mt-8">
-                <h3 className="text-lg font-semibold">Services Provided</h3>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {project.services.map((service) => (
-                    <Badge
-                      key={service}
-                      variant="secondary"
-                      className="bg-neutral-800/50"
-                    >
-                      {service}
-                    </Badge>
-                  ))}
+              {serviceNames.length > 0 && (
+                <div className="mt-8">
+                  <h3 className="text-lg font-semibold">Services Provided</h3>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {serviceNames.map((service) => (
+                      <Badge
+                        key={service}
+                        variant="secondary"
+                        className="bg-neutral-800/50"
+                      >
+                        {service}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Sidebar */}

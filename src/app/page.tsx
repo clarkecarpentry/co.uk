@@ -5,12 +5,13 @@ import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import { Phone, ArrowRight, Quote } from "lucide-react";
-import { services } from "~/lib/data/services";
-import { testimonials } from "~/lib/data/testimonials";
+import { getServices, getFeaturedTestimonials } from "~/sanity/lib/fetch";
 
-export default function Home() {
-  // Get featured testimonials (first 2)
-  const featuredTestimonials = testimonials.slice(0, 2);
+export default async function Home() {
+  const [services, featuredTestimonials] = await Promise.all([
+    getServices(),
+    getFeaturedTestimonials(),
+  ]);
 
   return (
     <main className="bg-background min-h-screen">
@@ -144,8 +145,8 @@ export default function Home() {
             Trusted by contractors and homeowners across the South West
           </p>
           <div className="mx-auto mt-8 grid max-w-4xl gap-6 md:grid-cols-2">
-            {featuredTestimonials.map((testimonial, index) => (
-              <Card key={index} className="border-border/50">
+            {featuredTestimonials.slice(0, 2).map((testimonial) => (
+              <Card key={testimonial._id} className="border-border/50">
                 <CardContent className="p-6">
                   <Quote className="h-8 w-8 text-green-500/20" />
                   <p className="text-muted-foreground mt-4 text-sm leading-relaxed">

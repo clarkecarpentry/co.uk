@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Card, CardContent } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
 import { ArrowRight } from "lucide-react";
-import { projects } from "~/lib/data/projects";
+import { getProjects } from "~/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Our Projects | Clarke Carpentry Contractors Ltd",
@@ -11,7 +11,9 @@ export const metadata: Metadata = {
     "View our portfolio of completed carpentry projects across Bristol, Bath and the South West. Commercial and domestic work including new builds, extensions, and renovations.",
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const projects = await getProjects();
+
   // Sort projects by date (most recent first)
   const sortedProjects = [...projects].sort((a, b) => {
     const dateA = new Date(a.completedDate);

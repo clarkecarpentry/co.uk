@@ -2,7 +2,7 @@ import { type Metadata } from "next";
 import Link from "next/link";
 import { Card, CardContent } from "~/components/ui/card";
 import { ArrowRight } from "lucide-react";
-import { services } from "~/lib/data/services";
+import { getServices } from "~/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Our Services | Clarke Carpentry Contractors Ltd",
@@ -10,7 +10,9 @@ export const metadata: Metadata = {
     "Comprehensive carpentry services for commercial and domestic projects across Bristol, Bath and the South West. First fix, second fix, extensions, new builds and more.",
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const services = await getServices();
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}

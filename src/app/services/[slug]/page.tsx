@@ -5,14 +5,14 @@ import { Card, CardContent } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { ArrowLeft, ArrowRight, CheckCircle, Phone } from "lucide-react";
-import { services, getServiceBySlug } from "~/lib/data/services";
-import { projects } from "~/lib/data/projects";
+import { getServices, getServiceBySlug, getProjects } from "~/sanity/lib/fetch";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
+  const services = await getServices();
   return services.map((service) => ({
     slug: service.slug,
   }));
@@ -22,7 +22,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const service = getServiceBySlug(slug);
+  const service = await getServiceBySlug(slug);
 
   if (!service) {
     return {
@@ -38,16 +38,31 @@ export async function generateMetadata({
 
 export default async function ServicePage({ params }: PageProps) {
   const { slug } = await params;
-  const service = getServiceBySlug(slug);
+  const [service, services, projects] = await Promise.all([
+    getServiceBySlug(slug),
+    getServices(),
+    getProjects(),
+  ]);
 
   if (!service) {
     notFound();
   }
 
-  // Find related projects
-  const relatedProjects = projects.filter((project) =>
-    project.services.includes(service.name),
-  );
+  // Find related projects - handle both Sanity (array of objects) and static (string[]) formats
+  const relatedProjects = projects.filter((project) => {
+    const projectServices = project.services;
+    if (!projectServices || projectServices.length === 0) return false;
+
+    // Check if services is array of objects with name property or array of strings
+    const firstService = projectServices[0];
+    if (typeof firstService === "string") {
+      return (projectServices as string[]).includes(service.name);
+    } else {
+      return (projectServices as Array<{ name: string }>).some(
+        (s) => s.name === service.name,
+      );
+    }
+  });
 
   // Find other services for navigation
   const currentIndex = services.findIndex((s) => s.slug === slug);
