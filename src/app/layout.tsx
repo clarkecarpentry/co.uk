@@ -5,6 +5,8 @@ import { Geist } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { ThemeProvider } from "~/components/theme-provider";
+import { Nav } from "~/components/nav";
+import { Footer } from "~/components/footer";
 
 export const metadata: Metadata = {
   title: "Clarke Carpentry Contractors Ltd | Bristol and Bath",
@@ -33,7 +35,11 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            <Nav />
+            {children}
+            <Footer />
+          </TRPCReactProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,60 +1,19 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Card, CardContent } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
-import { Mail, Phone, MapPin, Instagram } from "lucide-react";
-
-const services = [
-  "Project Management",
-  "First Fix Carpentry",
-  "Second Fix Carpentry",
-  "Dry Lining",
-  "Loft Conversions",
-  "Extensions",
-  "Traditional Cut Roofs",
-  "New Build",
-  "Renovations",
-  "Bespoke Joinery",
-  "Kitchen Fitting",
-  "Timber Frame Construction",
-];
+import { Phone, ArrowRight, Quote } from "lucide-react";
+import { services } from "~/lib/data/services";
+import { testimonials } from "~/lib/data/testimonials";
 
 export default function Home() {
+  // Get featured testimonials (first 2)
+  const featuredTestimonials = testimonials.slice(0, 2);
+
   return (
     <main className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border/50">
-        <div className="container mx-auto flex items-center justify-between px-4 py-4">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/logo.png"
-              alt="Clarke Carpentry Logo"
-              width={40}
-              height={40}
-              className="h-10 w-10"
-            />
-            <span className="text-lg font-semibold">Clarke Carpentry</span>
-          </div>
-          <div className="hidden items-center gap-3 sm:flex">
-            <a
-              href="tel:01225350376"
-              className="flex items-center gap-2 rounded-full bg-green-600/10 px-4 py-2 text-sm font-medium text-green-500 ring-1 ring-green-500/20 transition-all duration-200 hover:bg-green-600/20 hover:ring-green-500/40"
-            >
-              <Phone className="h-4 w-4" />
-              01225 350376
-            </a>
-            <a
-              href="mailto:info@clarkecarpentry.co.uk"
-              className="flex items-center gap-2 rounded-full bg-foreground/5 px-4 py-2 text-sm font-medium text-foreground/80 ring-1 ring-foreground/10 transition-all duration-200 hover:bg-foreground/10 hover:text-foreground hover:ring-foreground/20"
-            >
-              <Mail className="h-4 w-4" />
-              info@clarkecarpentry.co.uk
-            </a>
-          </div>
-        </div>
-      </header>
-
       {/* Hero Section */}
       <section className="relative overflow-hidden border-b border-border/50 bg-gradient-to-b from-neutral-900/50 via-background to-background py-24">
         {/* Background decoration */}
@@ -84,10 +43,16 @@ export default function Home() {
             South West
           </p>
           <div className="mt-6 flex justify-center gap-2">
-            <Badge variant="secondary" className="bg-neutral-800/50 text-neutral-300 ring-1 ring-white/10">
+            <Badge
+              variant="secondary"
+              className="bg-neutral-800/50 text-neutral-300 ring-1 ring-white/10"
+            >
               CITB Registered
             </Badge>
-            <Badge variant="secondary" className="bg-neutral-800/50 text-neutral-300 ring-1 ring-white/10">
+            <Badge
+              variant="secondary"
+              className="bg-neutral-800/50 text-neutral-300 ring-1 ring-white/10"
+            >
               CSCS Approved
             </Badge>
           </div>
@@ -120,6 +85,13 @@ export default function Home() {
               carried out by fully qualified staff, handpicked for their quality
               and professionalism.
             </p>
+            <Link
+              href="/about"
+              className="mt-6 inline-flex items-center text-sm font-medium text-green-500 hover:text-green-400"
+            >
+              Learn more about us
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -135,14 +107,58 @@ export default function Home() {
           <p className="mt-2 text-center text-muted-foreground">
             Comprehensive carpentry for commercial and domestic projects
           </p>
-          <div className="mx-auto mt-8 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+          <div className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
             {services.map((service) => (
-              <Card
-                key={service}
-                className="border-border/50 bg-card/50 text-center"
-              >
-                <CardContent className="p-3">
-                  <p className="text-sm">{service}</p>
+              <Link key={service.slug} href={`/services/${service.slug}`}>
+                <Card className="h-full border-border/50 bg-card/50 text-center transition-colors hover:border-green-500/30 hover:bg-card/80">
+                  <CardContent className="p-3">
+                    <p className="text-sm">{service.name}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/services"
+              className="inline-flex items-center text-sm font-medium text-green-500 hover:text-green-400"
+            >
+              View all services
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <div className="container mx-auto px-4">
+        <Separator />
+      </div>
+
+      {/* Testimonials Section */}
+      <section className="py-14">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center text-2xl font-semibold">
+            What Our Clients Say
+          </h2>
+          <p className="mt-2 text-center text-muted-foreground">
+            Trusted by contractors and homeowners across the South West
+          </p>
+          <div className="mx-auto mt-8 grid max-w-4xl gap-6 md:grid-cols-2">
+            {featuredTestimonials.map((testimonial, index) => (
+              <Card key={index} className="border-border/50">
+                <CardContent className="p-6">
+                  <Quote className="h-8 w-8 text-green-500/20" />
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                    &ldquo;{testimonial.quote}&rdquo;
+                  </p>
+                  <div className="mt-4">
+                    <p className="font-medium">{testimonial.clientName}</p>
+                    {testimonial.company && (
+                      <p className="text-sm text-green-500">
+                        {testimonial.company}
+                      </p>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -154,92 +170,37 @@ export default function Home() {
         <Separator />
       </div>
 
-      {/* Contact Section */}
+      {/* CTA Section */}
       <section className="py-14">
         <div className="container mx-auto px-4">
-          <h2 className="text-center text-2xl font-semibold">Contact Us</h2>
-          <p className="mt-2 text-center text-muted-foreground">
-            Get in touch for a quote or to discuss your project
-          </p>
-
-          <div className="mx-auto mt-8 max-w-sm">
-            <Card className="border-border/50">
-              <CardContent className="space-y-4 p-5">
-                <div className="flex items-start gap-3">
-                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm font-medium">Head Office</p>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                      Unit 5 Wansdyke Workshops
-                      <br />
-                      Unity Road, Keynsham
-                      <br />
-                      Bristol BS31 1NH
-                    </p>
-                  </div>
-                </div>
-
-                <Separator className="bg-border/50" />
-
-                <div className="flex items-start gap-3">
-                  <Phone className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm font-medium">Phone</p>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      <a href="tel:01225350376" className="hover:underline">
-                        01225 350376
-                      </a>
-                      <span className="mx-1.5 text-border">·</span>
-                      <a href="tel:07540150412" className="hover:underline">
-                        07540 150412
-                      </a>
-                    </p>
-                  </div>
-                </div>
-
-                <Separator className="bg-border/50" />
-
-                <div className="flex items-center gap-3">
-                  <Mail className="h-5 w-5 shrink-0 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm font-medium">Email</p>
-                    <a
-                      href="mailto:info@clarkecarpentry.co.uk"
-                      className="mt-1 text-sm text-muted-foreground hover:underline"
-                    >
-                      info@clarkecarpentry.co.uk
-                    </a>
-                  </div>
-                </div>
-
-                <Separator className="bg-border/50" />
-
-                <div className="flex items-center gap-3">
-                  <Instagram className="h-5 w-5 shrink-0 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm font-medium">Instagram</p>
-                    <a
-                      href="https://www.instagram.com/clarkecarpentrycontractorsltd/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-1 text-sm text-muted-foreground hover:underline"
-                    >
-                      @clarkecarpentrycontractorsltd
-                    </a>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          <Card className="mx-auto max-w-2xl border-green-500/20 bg-green-950/20">
+            <CardContent className="p-8 text-center">
+              <h2 className="text-2xl font-semibold">
+                Ready to Start Your Project?
+              </h2>
+              <p className="mt-2 text-muted-foreground">
+                Get in touch for a free quote or to discuss your carpentry
+                requirements.
+              </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-green-600 hover:bg-green-500"
+                >
+                  <a href="tel:01225350376">
+                    <Phone className="mr-2 h-4 w-4" />
+                    Call 01225 350376
+                  </a>
+                </Button>
+                <Button asChild variant="outline" size="lg">
+                  <Link href="/contact">Request a Quote</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t border-border/50 py-6">
-        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()} Clarke Carpentry Contractors Ltd
-        </div>
-      </footer>
     </main>
   );
 }
