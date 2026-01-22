@@ -31,7 +31,7 @@ This file contains essential context for LLM coding assistants working on this p
 | `/services/[slug]` | ✅ | 11 individual service pages (SSG) |
 | `/projects` | ✅ | Portfolio overview |
 | `/projects/[slug]` | ✅ | 12 individual project pages (SSG) |
-| `/contact` | ✅ | Form UI (backend not connected) |
+| `/contact` | ✅ | Form with Resend email (Phase 2.4 complete) |
 | `/blog` | ✅ | Placeholder list |
 | `/blog/[slug]` | ✅ | Placeholder template |
 
@@ -69,7 +69,7 @@ See `docs/roadmap.md` for full breakdown. Priority order:
 - Tailwind CSS v4 + shadcn/ui
 - tRPC for API routes
 - Sanity.io for CMS (not yet integrated)
-- Resend for email (not yet integrated)
+- Resend for email (integrated - Phase 2.4 complete)
 - Vercel for hosting
 
 ## File Locations

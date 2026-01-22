@@ -71,7 +71,7 @@ Restructure project documentation for compatibility with any LLM coding assistan
 
 #### 2.2.1 Create Content Brief Document
 
-Create `.claude/content-brief.md` with:
+Create `docs/content-brief.md` with:
 
 - [ ] Brand voice guidelines (professional, technical, expert-focused, plain English)
 - [ ] Company facts (15 years experience, Bristol/Bath/South West, accreditations list)

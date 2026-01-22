@@ -23,7 +23,7 @@ See [roadmap.md](./roadmap.md) for detailed task breakdown.
 - **Framework:** Next.js 15 (App Router)
 - **Styling:** Tailwind CSS v4 + shadcn/ui
 - **CMS:** Sanity.io (planned)
-- **Email:** Resend (planned)
+- **Email:** Resend (integrated)
 - **Hosting:** Vercel
 
 ## Project Structure
