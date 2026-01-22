@@ -93,6 +93,12 @@ git flow hotfix finish fix-name      # Merge to main and develop, tag
 3. **Use descriptive branch names** - e.g., `feature/contact-form`, `hotfix/phone-link`
 4. **Tag releases** - git flow handles this automatically on release finish
 
+### Commit Messages
+
+- Use concise, descriptive commit messages
+- Add bullet points for details when helpful
+- **Do NOT include `Co-Authored-By` trailers** - keep messages clean
+
 ## Architecture
 
 ### tRPC Setup
