@@ -10,7 +10,10 @@ export const metadata: Metadata = {
   title: "Clarke Carpentry Contractors Ltd | Bristol and Bath",
   description:
     "Specialist carpenters covering projects across Bristol, Bath and the South West. Over 10 years experience delivering high quality carpentry at a fair price.",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [
+    { rel: "icon", url: "/favicon.ico" },
+    { rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
+  ],
 };
 
 const geist = Geist({
