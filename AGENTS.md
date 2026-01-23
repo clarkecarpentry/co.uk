@@ -159,8 +159,7 @@ Keep these updated as you work:
 | File               | Purpose                            | When to Update                     |
 | ------------------ | ---------------------------------- | ---------------------------------- |
 | `docs/handoff.md`  | Current status, where we left off  | End of every session or major task |
-| `docs/progress.md` | Completed work log                 | After completing a feature/phase   |
-| `docs/roadmap.md`  | Task checklist                     | Tick items as completed            |
+| `docs/roadmap.md`  | Task checklist with completion     | Tick items as completed            |
 | `docs/state.json`  | Machine-readable project state     | When phases/integrations change    |
 
 ### Updating state.json
@@ -169,8 +168,9 @@ Keep `docs/state.json` in sync with actual project state. Key fields to update:
 
 - `lastUpdated` - Current date
 - `currentPhase` - Active phase number
-- `nextPhases` - Remaining phases only (remove completed ones)
-- `content.blogPosts` - Actual count
+- `completedPhases` - Add newly completed phases
+- `nextPhases` - Remaining phases only
+- `content.*` - Actual counts
 - `integrations.*` - "planned", "in-progress", or "complete"
 
 ---
@@ -180,7 +180,7 @@ Keep `docs/state.json` in sync with actual project state. Key fields to update:
 - One feature per branch (`feature/descriptive-name`)
 - No lockfile-only commits unless dependencies actually changed
 - Commit messages: concise, descriptive, no `Co-Authored-By`
-- If env vars changed, mention in `docs/progress.md`
+- If env vars changed, mention in `docs/handoff.md`
 - Run `pnpm check` before committing
 
 ---

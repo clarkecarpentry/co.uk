@@ -1,29 +1,100 @@
-# Create T3 App
+# Clarke Carpentry Website
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Professional website for Clarke Carpentry Contractors Ltd, a carpentry business serving Bristol, Bath and the South West.
 
-## What's next? How do I make an app with this?
+## Quick Start
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+```bash
+pnpm install
+pnpm dev
+```
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+Open [http://localhost:3000](http://localhost:3000).
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Project Status
 
-## Learn More
+**Current Phase:** 2.5 Design (blocked), 2.8 Launch next
+**Target Launch:** Wednesday, January 29, 2026
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+See [docs/roadmap.md](docs/roadmap.md) for detailed task breakdown and [docs/state.json](docs/state.json) for machine-readable status.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Tech Stack
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- **Framework:** Next.js 15 (App Router, React 19)
+- **Styling:** Tailwind CSS v4 + shadcn/ui
+- **API:** tRPC with Zod validation
+- **CMS:** Sanity.io (fully integrated)
+- **Email:** Resend
+- **Testing:** Vitest + Playwright
+- **Hosting:** Vercel
 
-## How do I deploy this?
+## Project Structure
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+```
+src/
+├── app/                  # Pages (Next.js App Router)
+│   ├── about/
+│   ├── blog/
+│   ├── contact/
+│   ├── projects/
+│   ├── services/
+│   ├── studio/          # Sanity Studio
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/           # React components
+│   └── ui/              # shadcn/ui components
+├── lib/
+│   ├── data/            # Static data (fallback)
+│   └── validations/     # Zod schemas
+├── sanity/              # Sanity schemas & client
+├── server/api/          # tRPC routers
+└── emails/              # React Email templates
+
+docs/                    # Project documentation
+legacy/content/          # Scraped content from old Wix site (read-only)
+e2e/                     # Playwright E2E tests
+scripts/                 # Migration and setup scripts
+```
+
+## Documentation
+
+| File | Description |
+|------|-------------|
+| [AGENTS.md](AGENTS.md) | LLM assistant rules and working agreement |
+| [CLAUDE.md](CLAUDE.md) | Claude Code specific architecture details |
+| [docs/roadmap.md](docs/roadmap.md) | Current phase, tasks, and checklist |
+| [docs/handoff.md](docs/handoff.md) | Session handoff notes |
+| [docs/llm.md](docs/llm.md) | Project context for LLM assistants |
+| [docs/state.json](docs/state.json) | Machine-readable project state |
+
+## Environments
+
+| Environment | Domain | Status |
+|-------------|--------|--------|
+| Production | clarkecarpentry.co.uk | Not deployed |
+| Staging | next.clarkecarpentry.co.uk | Not deployed |
+
+## Key Commands
+
+```bash
+pnpm dev          # Development server
+pnpm build        # Production build
+pnpm check        # Lint + typecheck
+pnpm format:write # Format code
+pnpm test         # Unit tests (Vitest)
+pnpm test:e2e     # E2E tests (Playwright)
+pnpm migrate      # Migrate content to Sanity
+```
+
+## Git Workflow
+
+This project uses **git flow**:
+
+```bash
+git flow feature start my-feature   # Start feature
+git flow feature finish my-feature  # Merge to develop
+git flow release start 1.0.0        # Start release
+git flow release finish 1.0.0       # Merge to main, tag
+```
+
+See [AGENTS.md](AGENTS.md) for full workflow details.

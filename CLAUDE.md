@@ -155,5 +155,5 @@ Update these as you work:
 | File | When |
 |------|------|
 | `docs/handoff.md` | End of session |
-| `docs/progress.md` | After completing features |
 | `docs/roadmap.md` | Tick completed items |
+| `docs/state.json` | When phases/integrations change |

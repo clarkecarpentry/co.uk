@@ -1,6 +1,6 @@
 ---
 name: pm-audit
-description: Audit roadmap/handoff/progress docs for consistency, output top 1-3 next tasks with assigned agents
+description: Audit roadmap/handoff/state docs for consistency, output top 1-3 next tasks with assigned agents
 metadata:
   short-description: Project audit and task planning (no code changes)
 ---
@@ -22,12 +22,11 @@ Read: AGENTS.md
 Read: docs/llm.md
 Read: docs/roadmap.md
 Read: docs/handoff.md
-Read: docs/progress.md
 Read: docs/state.json
 ```
 
 ### 2. Check Consistency
-- Does `docs/handoff.md` reflect the latest completed work in `docs/progress.md`?
+- Does `docs/handoff.md` reflect the current focus from `docs/roadmap.md`?
 - Are completed items in `docs/roadmap.md` actually marked `[x]`?
 - Does `docs/state.json` match the current phase?
 
@@ -64,7 +63,7 @@ Based on roadmap phase order (2.2 → 2.3 → 2.5 → 2.6 → 2.7 → 2.8):
 ## Suggested Doc Updates
 - [ ] `docs/roadmap.md`: [specific update]
 - [ ] `docs/handoff.md`: [specific update]
-- [ ] `docs/progress.md`: [specific update]
+- [ ] `docs/state.json`: [specific update]
 ```
 
 ## Rules from AGENTS.md
