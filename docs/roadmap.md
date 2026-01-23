@@ -319,13 +319,13 @@ pnpm test:e2e      # Run E2E tests
 - [ ] 404 page styled
 - [ ] Favicon and app icons
 
-#### Client Handoff Document
-- [ ] Create `docs/client-handoff.md` with:
-  - [ ] Environment variables reference (what each one does, where to get new keys)
-  - [ ] How the website works in plain English (pages, CMS, contact form flow)
-  - [ ] Sanity login instructions and basic content editing guide
-  - [ ] Resend login instructions and email monitoring
-  - [ ] Vercel deployment overview (auto-deploys from main branch)
+#### Client Handoff Document ✅
+- [x] Create `docs/client-handoff.md` with:
+  - [x] Environment variables reference (what each one does, where to get new keys)
+  - [x] How the website works in plain English (pages, CMS, contact form flow)
+  - [x] Sanity login instructions and basic content editing guide
+  - [x] Resend login instructions and email monitoring
+  - [x] Vercel deployment overview (auto-deploys from main branch)
 
 ---
 
