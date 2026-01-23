@@ -1,184 +1,138 @@
 # LLM Assistant Context
 
-This file contains essential context for LLM coding assistants working on this project. Read this file at the start of a session.
+Essential context for LLM coding assistants. Read this at session start alongside AGENTS.md.
 
-> **See also:** `AGENTS.md` in repo root for operational rules, agent conduct, and session workflow.
+## Quick Navigation
+
+| File | Purpose |
+|------|---------|
+| `AGENTS.md` | Operational rules, agent conduct, working agreement |
+| `docs/state.json` | Machine-readable project state (phases, integrations) |
+| `docs/roadmap.md` | Task checklist with completion status |
+| `docs/handoff.md` | Where the last session left off |
+
+---
 
 ## Project Summary
 
-**What:** Professional website for Clarke Carpentry Contractors Ltd
-**Client:** Carpentry business serving Bristol, Bath, South West England
-**Purpose:** Business card site for tender submissions to construction companies
+**Client:** Clarke Carpentry Contractors Ltd
+**What:** Professional website for tender submissions to construction companies
+**Audience:** Main contractors in construction industry (B2B)
+**Region:** Bristol, Bath, South West England
 **Launch:** Wednesday, January 29, 2026
 
-## Current State
+### Business Context
 
-### What's Done (Phase 1 + 2.1 + 2.3 partial + 2.4)
+Clarke Carpentry is an established carpentry subcontractor with 15+ years experience. The website serves as a professional presence for:
+- Tender submissions to construction companies
+- Showcasing completed projects and capabilities
+- First point of contact for potential clients
 
-- ✅ All page routes created and rendering
-- ✅ Responsive navigation and footer
-- ✅ Static data layer (services, projects, testimonials)
-- ✅ Build passes cleanly (32 static pages)
-- ✅ Git flow workflow established
-- ✅ v1.0.0 released (placeholder landing page)
-- ✅ Contact form with Resend email integration
-- ✅ Sanity Studio embedded at `/studio` route
-- ✅ Sanity schemas created (service, project, blogPost, testimonial, siteSettings)
-- ✅ Sanity client + GROQ queries ready for content fetch
+This is **not** a consumer-facing site. The audience is construction professionals who need reliable subcontractors.
 
-### Pages Built
+---
 
-| Route | Status | Notes |
-|-------|--------|-------|
-| `/` | ✅ | Homepage with hero, services, testimonials |
-| `/about` | ✅ | Company info, values, certifications |
-| `/services` | ✅ | Overview of 11 services |
-| `/services/[slug]` | ✅ | 11 individual service pages (SSG) |
-| `/projects` | ✅ | Portfolio overview |
-| `/projects/[slug]` | ✅ | 12 individual project pages (SSG) |
-| `/contact` | ✅ | Form with Resend email (Phase 2.4 complete) |
-| `/blog` | ✅ | Placeholder list |
-| `/blog/[slug]` | ✅ | Placeholder template |
+## Brand Guidelines
 
-### What's Next
+### Voice & Tone
+- Professional but approachable
+- Technical expertise without jargon
+- Straightforward, no-nonsense
+- Focus on reliability, quality, and experience
 
-See `docs/roadmap.md` for full breakdown. Priority order:
+### Visual Identity
+- **Theme:** Dark mode only (no light mode)
+- **Accent color:** Green for CTAs and highlights
+- **Logo:** Diamond shape, located at `public/logo.png`
 
-1. **2.2 Content Brief & Generation** - Being done by separate agent
-2. **2.3 Sanity CMS** - Schemas, client setup, content migration
-3. ~~**2.4 Contact Form**~~ ✅ - Complete (Resend + tRPC + React Email)
-4. **2.5 Design Beautification** - Ask user for model website reference
-5. **2.6 SEO Technical** - Schema markup, sitemap, meta tags
-6. **2.7 Testing** - Minimal: unit tests for form, E2E happy paths
-7. **2.8 Launch** - Vercel deployment, analytics
+### Key Messages
+- 15+ years of experience
+- On time, on budget delivery
+- Handpicked staff for quality
+- Long-term client relationships
+- Full H&S credentials (CSCS, CITB, SSSTS, SMSTS, PASMA)
 
-## Key Decisions Made
+---
 
-1. **Services reduced to 11** - Removed "Loft Conversions" and "Loft Extensions" (spinning off to separate brand)
+## Contact Information
 
-2. **Dark mode only** - No light mode toggle, defaultTheme="dark"
+Use this for content and testing:
 
-3. **Green accent color** - CTA buttons and highlights use green (brand color)
+| Field | Value |
+|-------|-------|
+| Company | Clarke Carpentry Contractors Ltd |
+| Address | Unit 5 Wansdyke Workshops, Unity Road, Keynsham, Bristol BS31 1NH |
+| Office | 01225 350376 |
+| Mobile | 07540 150412 |
+| Email | info@clarkecarpentry.co.uk |
+| Dev email | clarkecarpentry@proton.me (for testing) |
 
-4. **Static data for now** - Services/projects/testimonials in `src/lib/data/` until Sanity integration
+---
 
-5. **Git flow branching** - Features branch from develop, releases merge to main
+## Content Structure
 
-6. **No Co-Authored-By** - Don't include AI attribution in commit messages
+### Services (11 total)
+1. Project Management
+2. First Fix Carpentry
+3. Second Fix Carpentry
+4. Dry Lining
+5. Extensions
+6. Traditional Cut Roofs
+7. New Build
+8. Renovations
+9. Bespoke Joinery
+10. Kitchen Fitting
+11. Timber Frame Construction
 
-7. **pnpm only** - Package manager is pnpm, not npm or yarn
+*Note: "Loft Conversions" and "Loft Extensions" were removed (spinning off to separate brand)*
 
-## Working Agreement
+### Projects (12 total)
+Mix of residential and commercial work showcasing range of capabilities. See `src/lib/data/projects.ts` for full list.
 
-### Change Strategy
-- Prefer the **smallest possible diff**
-- Do **not** refactor unrelated code
-- One feature per branch
-- Search for existing patterns before creating new ones
+### Blog (4 posts)
+- Technical explainers (First Fix vs Second Fix)
+- Industry insights (Traditional Roofs, Contractor Expectations)
+- Project spotlights (Wilder House)
 
-### Component Rules
-- Default to **Server Components**
-- Add `"use client"` only when browser APIs or tRPC hooks are required
-- Use shadcn/ui components from `src/components/ui/` where applicable
+---
 
-### tRPC Rules
-- Every new router **must** be registered in `src/server/api/root.ts`
-- Use Zod for input validation
-- Use `publicProcedure` from `~/server/api/trpc`
+## Tech Stack Summary
 
-### Environment Variables
-- New env vars **must** be added to:
-  1. `src/env.js` Zod schema (server or client section)
-  2. `runtimeEnv` object in same file
-  3. `.env.example` with placeholder value
+- **Framework:** Next.js 15 (App Router, React 19)
+- **Styling:** Tailwind CSS v4 + shadcn/ui
+- **API:** tRPC with Zod validation
+- **CMS:** Sanity.io (project: `07w52gq6`)
+- **Email:** Resend
+- **Testing:** Vitest (unit) + Playwright (E2E)
+- **Hosting:** Vercel
 
-### Data Rules
-- Service/project slugs are source of truth
-- Slugs must stay in sync with routes and data files
-- Update `generateStaticParams` when adding/removing items
+For detailed tech setup, see `CLAUDE.md` (tRPC architecture) and `AGENTS.md` (file locations, commands).
 
-## Do Not Assume
+---
 
-These are **NOT** fully integrated yet. Do not write code that depends on them:
+## Sanity CMS
 
-| What | Status | Phase |
-|------|--------|-------|
-| Sanity CMS | Studio + schemas ready, **no content yet** | 2.3 |
-| Blog content | Placeholders only | 2.3 |
-| Database | None exists | - |
-| Light mode | Does not exist | - |
-| Image CDN | Not configured | 2.5 |
-| Analytics | Not integrated | 2.8 |
-
-**Static data in `src/lib/data/` is the source of truth until content migration is complete.**
-
-### Sanity Integration Status
-
-| Component | Status |
-|-----------|--------|
-| Studio | ✅ Embedded at `/studio` |
-| Schemas | ✅ service, project, blogPost, testimonial, siteSettings |
-| Client | ✅ Configured in `src/sanity/lib/client.ts` |
-| Queries | ✅ Ready in `src/sanity/lib/queries.ts` |
-| Content | ❌ Not migrated yet (use static data) |
-
-## Tech Stack
-
-- Next.js 15 (App Router, React 19)
-- Tailwind CSS v4 + shadcn/ui
-- tRPC for API routes
-- Sanity.io for CMS (Studio + schemas ready, content pending)
-- Resend for email (integrated - Phase 2.4 complete)
-- Vercel for hosting
-
-## File Locations
-
-| What | Where |
+| Item | Value |
 |------|-------|
-| Pages | `src/app/` |
-| Components | `src/components/` |
-| UI components | `src/components/ui/` |
-| Static data | `src/lib/data/` |
-| tRPC routers | `src/server/api/routers/` |
-| Legacy content | `legacy/content/` |
-| Project docs | `docs/` |
+| Project ID | `07w52gq6` |
+| Production dataset | `production` |
+| Development dataset | `development` (for testing) |
+| Studio URL | `http://localhost:3000/studio` |
+| Schemas | `src/sanity/schemaTypes/` |
 
-## Commands
+Content is fully migrated. Sanity is the source of truth. Static data in `src/lib/data/` is fallback only.
 
-```bash
-pnpm dev          # Dev server
-pnpm build        # Production build
-pnpm check        # Lint + typecheck
-pnpm format:write # Format code
+---
 
-# Git flow
-git flow feature start <name>
-git flow feature finish <name>
-```
+## Phase Reminders
 
-## Reminders for Specific Phases
-
-### Phase 2.3 (Sanity CMS) - Partial Complete
-Sanity is set up:
-- **Project ID**: `07w52gq6`
-- **Dataset**: `production`
-- **Studio URL**: `http://localhost:3000/studio`
-
-**Next steps for 2.3:**
-1. Migrate static content from `src/lib/data/` to Sanity
-2. Create migration script in `scripts/` folder
-3. Switch pages to fetch from Sanity instead of static data
-
-### When starting 2.5 (Design Beautification)
-Ask user for:
+### Phase 2.5 (Design Beautification) - BLOCKED
+Before starting, ask user for:
 - Model website URL(s) for design reference
-- Any specific design preferences or brand guidelines
+- Any specific design preferences
 
-## Contact Info (for content)
-
-- **Company:** Clarke Carpentry Contractors Ltd
-- **Address:** Unit 5 Wansdyke Workshops, Unity Road, Keynsham, Bristol BS31 1NH
-- **Office:** 01225 350376
-- **Mobile:** 07540 150412
-- **Email:** info@clarkecarpentry.co.uk
-- **Dev email:** clarkecarpentry@proton.me (for testing contact form)
+### Phase 2.8 (Launch)
+- Deploy to Vercel
+- Configure production domain
+- Enable Vercel Analytics
+- Verify contact form with production email
