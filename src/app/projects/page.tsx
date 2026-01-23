@@ -37,15 +37,15 @@ function ProjectCard({ project }: { project: SanityProject }) {
       : "bg-amber-950/50 text-amber-400 ring-1 ring-amber-500/20";
 
   return (
-    <Link href={`/projects/${project.slug}`}>
-      <Card className="group border-border/50 hover:bg-card/80 h-full overflow-hidden transition-all duration-200 hover:border-green-500/30">
+    <Link href={`/projects/${project.slug}`} className="group block h-full">
+      <Card className="h-full overflow-hidden border-border/50 bg-card p-0 gap-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-500/50">
         {project.featuredImage && (
-          <div className="relative aspect-video overflow-hidden">
+          <div className="relative aspect-video w-full overflow-hidden">
             <Image
               src={urlFor(project.featuredImage).width(600).height(340).url()}
               alt={project.featuredImage.alt ?? project.name}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           </div>
@@ -59,16 +59,16 @@ function ProjectCard({ project }: { project: SanityProject }) {
               {project.completedDate}
             </span>
           </div>
-          <h3 className="mt-3 text-xl font-semibold">{project.name}</h3>
+          <h3 className="mt-3 text-xl font-semibold transition-colors group-hover:text-green-600">{project.name}</h3>
           {project.client && (
             <p className="mt-1 text-sm text-green-500">{project.client}</p>
           )}
-          <p className="text-muted-foreground mt-2 line-clamp-3 flex-1 text-sm">
+          <p className="text-muted-foreground mt-2 line-clamp-3 flex-1 text-sm leading-relaxed">
             {project.description}
           </p>
-          <div className="mt-4 flex items-center text-sm font-medium text-green-500">
+          <div className="mt-4 flex items-center text-sm font-semibold text-green-600 group-hover:text-green-500">
             View project
-            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </div>
         </CardContent>
       </Card>
@@ -115,7 +115,7 @@ export default async function ProjectsPage() {
           <p className="text-muted-foreground mt-2">
             Large-scale developments and commercial refurbishments
           </p>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {commercialProjects.map((project) => (
               <ProjectCard key={project.slug} project={project} />
             ))}
@@ -130,7 +130,7 @@ export default async function ProjectsPage() {
           <p className="text-muted-foreground mt-2">
             Home improvements, extensions, and bespoke carpentry
           </p>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {domesticProjects.map((project) => (
               <ProjectCard key={project.slug} project={project} />
             ))}

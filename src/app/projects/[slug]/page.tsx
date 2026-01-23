@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { getProjects, getProjectBySlug } from "~/sanity/lib/fetch";
 import { urlFor } from "~/sanity/lib/image";
+import { GalleryLightbox } from "~/components/gallery-lightbox";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -179,26 +180,20 @@ export default async function ProjectPage({ params }: PageProps) {
                 </div>
               )}
 
-              {/* Image Gallery */}
+              {/* Image Gallery with Lightbox */}
               {project.images && project.images.length > 1 && (
                 <div className="mt-8">
                   <h3 className="text-lg font-semibold">Project Gallery</h3>
-                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                    {project.images.slice(1).map((image, index) => (
-                      <div
-                        key={image.asset?._ref ?? index}
-                        className="relative aspect-video overflow-hidden rounded-lg"
-                      >
-                        <Image
-                          src={urlFor(image).width(600).height(340).url()}
-                          alt={image.alt ?? `${project.name} - Image ${index + 2}`}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 640px) 100vw, 50vw"
-                        />
-                      </div>
-                    ))}
-                  </div>
+                  <p className="text-muted-foreground mt-1 text-sm">
+                    Click any image to view full size
+                  </p>
+                  <GalleryLightbox
+                    projectName={project.name}
+                    images={project.images.slice(1).map((image, index) => ({
+                      src: urlFor(image).width(1200).height(800).url(),
+                      alt: image.alt ?? `${project.name} - Image ${index + 2}`,
+                    }))}
+                  />
                 </div>
               )}
             </div>
