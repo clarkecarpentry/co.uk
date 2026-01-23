@@ -6,21 +6,29 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Last Updated
 
-2026-01-22
+2026-01-23
 
 ---
 
 ## Current Focus
 
-**Phase 2.6 SEO Technical** - COMPLETE
+**Phase 2.7 Testing** - COMPLETE
 
-All SEO technical implementation complete: meta tags, OG/Twitter cards, JSON-LD structured data, sitemap, and robots.txt.
+Testing infrastructure set up with Vitest for unit tests and Playwright for E2E tests. All tests passing.
 
 ---
 
 ## Recent Work
 
-1. **SEO Technical (Phase 2.6)**
+1. **Testing (Phase 2.7)**
+   - Configured Vitest for unit testing
+   - Configured Playwright for E2E testing
+   - Added unit tests for contact form validation (9 tests)
+   - Added unit tests for utility functions (6 tests)
+   - Added E2E tests for homepage, navigation, contact form, services, and projects (8 tests)
+   - All 15 unit tests and 8 E2E tests passing
+
+2. **SEO Technical (Phase 2.6)**
    - Added comprehensive metadata to root layout (title template, description, keywords)
    - Added Open Graph and Twitter card tags to all pages
    - Created JSON-LD components for LocalBusiness, Service, and Article schemas
@@ -28,15 +36,11 @@ All SEO technical implementation complete: meta tags, OG/Twitter cards, JSON-LD 
    - Generated `robots.txt` with proper disallow rules for `/studio` and `/api/`
    - Sitemap includes all 32 public URLs with appropriate priorities
 
-2. **Blog Functionality (Previous Session)**
+3. **Blog Functionality (Previous Session)**
    - Wired up `/blog` and `/blog/[slug]` pages to fetch from Sanity
    - Created `src/components/portable-text.tsx` for rich content rendering
    - Created `src/lib/data/blog-posts.ts` with 4 launch posts
    - Migrated all blog posts to Sanity
-
-3. **Content Rewrite (Phase 2.2.3)**
-   - Improved services and projects descriptions following content brief
-   - Applied brand voice guidelines (professional, technical, expert-focused)
 
 ---
 
@@ -45,8 +49,33 @@ All SEO technical implementation complete: meta tags, OG/Twitter cards, JSON-LD 
 ### Immediate
 
 - **2.5 Design Beautification** - Need model website URL from user
-- **2.7 Testing** - Cross-browser, mobile, accessibility
 - **2.8 Launch** - Deploy to production
+
+---
+
+## Testing Quick Reference
+
+### Commands
+```bash
+pnpm test          # Run unit tests with Vitest
+pnpm test:watch    # Run unit tests in watch mode
+pnpm test:e2e      # Run E2E tests with Playwright
+```
+
+### Test Files
+| File | Type | Tests |
+|------|------|-------|
+| `src/lib/validations/contact.test.ts` | Unit | 9 tests - Contact form validation |
+| `src/lib/utils.test.ts` | Unit | 6 tests - cn() utility function |
+| `e2e/homepage.spec.ts` | E2E | Homepage loads correctly |
+| `e2e/navigation.spec.ts` | E2E | Navigation between pages |
+| `e2e/contact-form.spec.ts` | E2E | Contact form UI and validation |
+| `e2e/services.spec.ts` | E2E | Services page and navigation |
+| `e2e/projects.spec.ts` | E2E | Projects page and navigation |
+
+### Configuration
+- `vitest.config.ts` - Vitest configuration with path aliases
+- `playwright.config.ts` - Playwright configuration with Chromium only
 
 ---
 
@@ -121,34 +150,30 @@ export $(grep -v '^#' .env | xargs) && pnpm migrate   # Migrate content to Sanit
 - Build passes with `pnpm build`
 - Sitemap generated automatically via `postbuild` script
 - All pages statically generated at build time
+- Tests pass: 15 unit tests, 8 E2E tests
 
 ---
 
 ## File Changes This Session
 
 **Created:**
-- `src/components/json-ld.tsx` - JSON-LD components (LocalBusiness, Service, Article, Breadcrumb)
-- `next-sitemap.config.cjs` - Sitemap generation config
-- `public/sitemap.xml` - Generated sitemap (32 URLs)
-- `public/robots.txt` - Generated robots.txt
+- `vitest.config.ts` - Vitest configuration
+- `playwright.config.ts` - Playwright configuration
+- `src/lib/validations/contact.test.ts` - Contact form validation unit tests
+- `src/lib/utils.test.ts` - Utility function unit tests
+- `e2e/homepage.spec.ts` - Homepage E2E test
+- `e2e/navigation.spec.ts` - Navigation E2E test
+- `e2e/contact-form.spec.ts` - Contact form E2E tests
+- `e2e/services.spec.ts` - Services page E2E tests
+- `e2e/projects.spec.ts` - Projects page E2E tests
 
 **Modified:**
-- `src/app/layout.tsx` - Added comprehensive metadata, OG/Twitter tags, LocalBusiness JSON-LD
-- `src/app/about/page.tsx` - Added OG/Twitter metadata
-- `src/app/services/page.tsx` - Added OG/Twitter metadata
-- `src/app/services/[slug]/page.tsx` - Added OG/Twitter metadata, Service JSON-LD
-- `src/app/projects/page.tsx` - Added OG/Twitter metadata
-- `src/app/projects/[slug]/page.tsx` - Added OG/Twitter metadata
-- `src/app/contact/page.tsx` - Added OG/Twitter metadata
-- `src/app/blog/page.tsx` - Added OG/Twitter metadata
-- `src/app/blog/[slug]/page.tsx` - Added OG/Twitter metadata, Article JSON-LD
-- `package.json` - Added `next-sitemap` dependency and `postbuild` script
-- `.gitignore` - Added generated sitemap/robots files
-- `docs/roadmap.md` - Marked Phase 2.6 complete
+- `package.json` - Added Vitest, Playwright, and test scripts
+- `docs/roadmap.md` - Marked Phase 2.7 complete
 
 ---
 
 ## Git Status
 
 - Branch: `develop`
-- Changes: Phase 2.6 SEO Technical implementation (uncommitted)
+- Changes: Phase 2.7 Testing implementation (uncommitted)

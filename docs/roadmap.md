@@ -251,20 +251,29 @@ CONTACT_EMAIL=clarkecarpentry@proton.me
 
 ### 2.7 Testing
 
+**Status:** Complete
+
 #### Unit Tests (Minimal Scope)
-- [ ] Contact form validation logic
-- [ ] Any utility functions
+- [x] Contact form validation logic (`src/lib/validations/contact.test.ts`)
+- [x] Utility functions (`src/lib/utils.test.ts`)
 
 #### E2E Tests (Happy Path Only)
-- [ ] Homepage loads correctly
-- [ ] Navigation between pages works
-- [ ] Contact form submission flow
-- [ ] Services page displays all services
-- [ ] Projects page displays all projects
+- [x] Homepage loads correctly (`e2e/homepage.spec.ts`)
+- [x] Navigation between pages works (`e2e/navigation.spec.ts`)
+- [x] Contact form submission flow (`e2e/contact-form.spec.ts`)
+- [x] Services page displays all services (`e2e/services.spec.ts`)
+- [x] Projects page displays all projects (`e2e/projects.spec.ts`)
 
 #### Testing Setup
-- [ ] Configure Vitest for unit tests
-- [ ] Configure Playwright for E2E tests
+- [x] Configure Vitest for unit tests (`vitest.config.ts`)
+- [x] Configure Playwright for E2E tests (`playwright.config.ts`)
+
+#### Test Commands
+```bash
+pnpm test          # Run unit tests
+pnpm test:watch    # Run unit tests in watch mode
+pnpm test:e2e      # Run E2E tests
+```
 
 ---
 
