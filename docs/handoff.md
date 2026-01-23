@@ -12,15 +12,24 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Current Focus
 
-**Phase 2.7 Testing** - COMPLETE
+**Phase 2.5 Design Beautification** - READY TO START
 
-Testing infrastructure set up with Vitest for unit tests and Playwright for E2E tests. All tests passing.
+Next step is **2.5.1 Image Integration** - add images to Sanity schemas and display on pages. User will provide design reference images for 2.5.2 design overhaul.
+
+**Vercel hosting is live** at dev.clarkecarpentry.co.uk.
 
 ---
 
 ## Recent Work
 
-1. **Documentation Cleanup**
+1. **Roadmap Updates**
+   - Marked Vercel setup complete (dev.clarkecarpentry.co.uk active)
+   - Split Phase 2.5 into 2.5.1 (Image Integration) and 2.5.2 (Design Overhaul)
+   - Changed design approach from model URL to reference images
+   - Added client handoff document task to Phase 2.8
+   - Added Phase 2.9 for automated content generation (post-launch)
+
+2. **Documentation Cleanup**
    - Deleted `docs/progress.md` (redundant with `docs/roadmap.md`)
    - Deleted `docs/portability.md` (already implemented)
    - Moved `docs/README.md` content to root `README.md`
@@ -232,5 +241,5 @@ export $(grep -v '^#' .env.local | xargs) && NEXT_PUBLIC_SANITY_DATASET=developm
 ## Git Status
 
 - Branch: `develop`
-- Ahead of origin by 8 commits (ready to push)
-- Last commit: `e9c95c1` - Documentation cleanup
+- Ahead of origin by 10 commits (ready to push)
+- Last commit: `5eb2565` - Roadmap updates
