@@ -25,7 +25,7 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
           <div>
-            <h3 className="text-lg font-semibold">Clarke Carpentry</h3>
+            <h3 className="font-sans text-lg font-semibold">Clarke Carpentry</h3>
             <p className="text-muted-foreground mt-2 text-sm">
               Specialist carpenters covering projects across Bristol, Bath and
               the South West. Over 10 years experience delivering high quality

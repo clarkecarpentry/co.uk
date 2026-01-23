@@ -33,7 +33,7 @@ export default async function Home() {
               className="h-24 w-24"
             />
           </div>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="font-sans text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
             Clarke Carpentry
             <span className="text-foreground/80 mt-2 block">
               Contractors Ltd
