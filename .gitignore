@@ -51,3 +51,7 @@ yarn-error.log*
 public/sitemap*.xml
 public/robots.txt
 test-results/
+
+# Downloaded/generated images (uploaded to Sanity)
+legacy/content/images/projects/
+legacy/generated/

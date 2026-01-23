@@ -14,7 +14,12 @@ Current status for context continuity between sessions. Update this at the end o
 
 **Phase 2.5.1 Image Integration** - COMPLETE
 
-Images now display on service, project, and blog pages. Ready for **2.5.2 Design Overhaul** when user provides design reference images.
+**Phase 2.5.1 Image Integration is fully complete:**
+- 11 service images (upscaled webp)
+- 37 project images (1-4 per project)
+- 4 blog post featured images (upscaled webp)
+
+Ready for **2.5.2 Design Overhaul** when user provides design reference images.
 
 **Vercel hosting is live** at dev.clarkecarpentry.co.uk.
 
@@ -28,7 +33,13 @@ Images now display on service, project, and blog pages. Ready for **2.5.2 Design
    - Added image display to service pages (list + detail)
    - Added image display to project pages (featured + gallery)
    - Added image display to blog pages (list + post)
-   - Uploaded 10 service images, 3 project images to Sanity
+   - Uploaded 10 service images to Sanity
+   - Downloaded 37 project images from Wix URLs in legacy markdown
+   - Uploaded all 37 project images to Sanity (all 12 projects now have 1-4 images)
+   - Created `scripts/download-project-images.ts` for Wix image extraction
+   - User upscaled and converted images to webp format
+   - Updated migration to use new webp images for all 11 services and 4 blog posts
+   - All content now has high-quality images in Sanity
 
 2. **Roadmap Updates**
    - Marked Vercel setup complete (dev.clarkecarpentry.co.uk active)

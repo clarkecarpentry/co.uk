@@ -219,9 +219,9 @@ CONTACT_EMAIL=clarkecarpentry@proton.me
 **Status:** Complete
 
 - [x] Add image fields to Sanity schemas (service, project, blogPost) - already existed
-- [x] Upload images to Sanity for services (10/11 have images, dry-lining missing)
-- [x] Upload images to Sanity for projects (3/12: Wilder House, Walcot House, Box Hill)
-- [ ] Upload featured images for blog posts (schema ready, no images yet)
+- [x] Upload images to Sanity for services (all 11 services have upscaled webp images)
+- [x] Upload images to Sanity for projects (all 12 projects have 1-4 images, 37 total)
+- [x] Upload featured images for blog posts (all 4 posts have upscaled webp images)
 - [x] Update service pages to display images
 - [x] Update project pages to display images (gallery support)
 - [x] Update blog listing and post pages to display featured images
