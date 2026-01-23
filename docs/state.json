@@ -1,10 +1,12 @@
 {
   "project": "Clarke Carpentry Website",
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-01-23",
   "launchDate": "2026-01-29",
-  "currentPhase": "2.4",
-  "phaseStatus": "complete",
-  "nextPhases": ["2.2", "2.3", "2.5", "2.6", "2.7", "2.8"],
+  "currentPhase": "2.5",
+  "phaseStatus": "blocked",
+  "phaseBlocker": "Awaiting model website URL for design reference",
+  "completedPhases": ["2.1", "2.2", "2.3", "2.4", "2.6", "2.7"],
+  "nextPhases": ["2.5", "2.8"],
   "techStack": {
     "framework": "Next.js 15",
     "react": "19",
@@ -13,24 +15,36 @@
     "api": "tRPC",
     "cms": "Sanity.io",
     "email": "Resend",
-    "hosting": "Vercel"
+    "hosting": "Vercel",
+    "testing": "Vitest + Playwright"
   },
   "domains": {
     "production": "clarkecarpentry.co.uk",
     "staging": "next.clarkecarpentry.co.uk"
   },
+  "sanity": {
+    "projectId": "07w52gq6",
+    "productionDataset": "production",
+    "developmentDataset": "development",
+    "studioPath": "/studio"
+  },
   "content": {
     "services": 11,
     "projects": 12,
     "testimonials": 6,
-    "blogPosts": 0
+    "blogPosts": 4
   },
   "integrations": {
-    "cms": "planned",
+    "cms": "complete",
     "contactForm": "complete",
     "email": "configured",
     "analytics": "planned",
-    "seo": "planned"
+    "seo": "complete"
+  },
+  "testing": {
+    "unit": "15 tests (Vitest)",
+    "e2e": "14 tests (Playwright)",
+    "sanityDataset": "development"
   },
   "build": {
     "status": "passing",

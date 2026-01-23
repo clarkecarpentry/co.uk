@@ -131,14 +131,13 @@ Break work into small steps. Confirm each with the smallest relevant check befor
 
 These are **NOT** fully integrated yet:
 
-- **Sanity CMS** - Studio + schemas ready, **no content migrated yet** (Phase 2.3)
-- **Blog content** - pages are placeholders only
-- **Database** - none exists, using static data
+- **Database** - none exists (Sanity CMS is the data layer)
 - **Light mode** - does not exist, dark only
 - **Image CDN** - not configured yet
 - **Analytics** - not integrated yet
+- **Design polish** - Phase 2.5 blocked pending model website URL
 
-**Static data in `src/lib/data/` is the source of truth until content migration is complete.**
+**Sanity CMS is now the source of truth for content.** Static data in `src/lib/data/` serves as fallback only.
 
 ---
 
@@ -157,11 +156,22 @@ These are **NOT** fully integrated yet:
 
 Keep these updated as you work:
 
-| File               | Purpose                           | When to Update                     |
-| ------------------ | --------------------------------- | ---------------------------------- |
-| `docs/handoff.md`  | Current status, where we left off | End of every session or major task |
-| `docs/progress.md` | Completed work log                | After completing a feature/phase   |
-| `docs/roadmap.md`  | Task checklist                    | Tick items as completed            |
+| File               | Purpose                            | When to Update                     |
+| ------------------ | ---------------------------------- | ---------------------------------- |
+| `docs/handoff.md`  | Current status, where we left off  | End of every session or major task |
+| `docs/progress.md` | Completed work log                 | After completing a feature/phase   |
+| `docs/roadmap.md`  | Task checklist                     | Tick items as completed            |
+| `docs/state.json`  | Machine-readable project state     | When phases/integrations change    |
+
+### Updating state.json
+
+Keep `docs/state.json` in sync with actual project state. Key fields to update:
+
+- `lastUpdated` - Current date
+- `currentPhase` - Active phase number
+- `nextPhases` - Remaining phases only (remove completed ones)
+- `content.blogPosts` - Actual count
+- `integrations.*` - "planned", "in-progress", or "complete"
 
 ---
 
@@ -199,14 +209,18 @@ git flow feature finish <name>
 
 ## Quick State Reference
 
-See `docs/state.json` for machine-readable project state.
+See `docs/state.json` for machine-readable project state. **Keep this section in sync with state.json.**
 
-- **Current Phase**: 2.3 partial + 2.4 complete
+- **Current Phase**: 2.5 (Design) blocked, 2.8 (Launch) next
+- **Completed**: 2.1, 2.2, 2.3, 2.4, 2.6, 2.7
 - **Launch Date**: 2026-01-29
-- **Services**: 11
-- **Projects**: 12
-- **CMS**: Sanity Studio ready at `/studio`, content pending
+- **Services**: 11 (in Sanity)
+- **Projects**: 12 (in Sanity)
+- **Blog Posts**: 4 (in Sanity)
+- **CMS**: Sanity fully integrated, content migrated
 - **Contact Form**: Complete
+- **SEO**: Complete (meta tags, JSON-LD, sitemap)
+- **Testing**: Complete (Vitest + Playwright)
 
 ---
 
