@@ -14,12 +14,12 @@ Current status for context continuity between sessions. Update this at the end o
 
 **Phase 2.5.1 Image Integration** - COMPLETE
 
-**Phase 2.5.1 Image Integration is fully complete:**
-- 11 service images (upscaled webp)
-- 37 project images (1-4 per project)
-- 4 blog post featured images (upscaled webp)
+**Phase 2.5.2 Design Overhaul** - In Progress
 
-Ready for **2.5.2 Design Overhaul** when user provides design reference images.
+- ✅ Image integration complete (11 services, 37 projects, 4 blog posts)
+- ✅ Services page beautified
+- ✅ Projects page beautified
+- Remaining: hero sections, OG image, responsive verification, other pages
 
 **Vercel hosting is live** at dev.clarkecarpentry.co.uk.
 
@@ -27,7 +27,11 @@ Ready for **2.5.2 Design Overhaul** when user provides design reference images.
 
 ## Recent Work
 
-1. **Image Integration (Phase 2.5.1)**
+1. **Design Beautification (Phase 2.5.2)**
+   - Services page layout and styling improvements
+   - Projects page layout and styling improvements
+
+2. **Image Integration (Phase 2.5.1)**
    - Updated migration script to upload images from `legacy/content/images`
    - Configured next/image for Sanity CDN
    - Added image display to service pages (list + detail)

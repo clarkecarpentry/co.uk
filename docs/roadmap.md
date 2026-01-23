@@ -228,6 +228,11 @@ CONTACT_EMAIL=clarkecarpentry@proton.me
 - [x] Configure next/image for Sanity CDN optimization
 
 #### 2.5.2 Design Overhaul
+
+**Status:** In Progress
+
+- [x] Beautify services page layout and styling
+- [x] Beautify projects page layout and styling
 - [ ] Review provided design reference screenshots for inspiration
 - [ ] Create consistent component library
 - [ ] Design hero sections for each page
