@@ -1,8 +1,8 @@
+import { ArrowRight } from "lucide-react";
 import { type Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "~/components/ui/card";
-import { ArrowRight } from "lucide-react";
 import { getServices } from "~/sanity/lib/fetch";
 import { urlFor } from "~/sanity/lib/image";
 
@@ -51,29 +51,31 @@ export default async function ServicesPage() {
       {/* Services Grid */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
-              <Link key={service.slug} href={`/services/${service.slug}`}>
-                <Card className="group border-border/50 hover:bg-card/80 h-full overflow-hidden transition-all duration-200 hover:border-green-500/30">
+              <Link key={service.slug} href={`/services/${service.slug}`} className="group block h-full">
+                <Card className="h-full overflow-hidden border-border/50 bg-card p-0 gap-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-500/50">
                   {service.image && (
-                    <div className="relative aspect-video overflow-hidden">
+                    <div className="relative aspect-video w-full overflow-hidden">
                       <Image
                         src={urlFor(service.image).width(600).height(340).url()}
                         alt={service.image.alt ?? service.name}
                         fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     </div>
                   )}
                   <CardContent className="flex h-full flex-col p-6">
-                    <h2 className="text-xl font-semibold">{service.name}</h2>
-                    <p className="text-muted-foreground mt-2 flex-1 text-sm line-clamp-3">
+                    <h2 className="text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-green-600">
+                      {service.name}
+                    </h2>
+                    <p className="text-muted-foreground mt-3 flex-1 text-base leading-relaxed line-clamp-3">
                       {service.description}
                     </p>
-                    <div className="mt-4 flex items-center text-sm font-medium text-green-500">
+                    <div className="mt-6 flex items-center text-sm font-semibold text-green-600 group-hover:text-green-500">
                       Learn more
-                      <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </div>
                   </CardContent>
                 </Card>
