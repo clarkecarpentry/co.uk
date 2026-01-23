@@ -60,7 +60,7 @@ export default async function Home() {
           <Button
             asChild
             size="lg"
-            className="mt-10 bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-6 text-lg font-semibold shadow-lg shadow-green-900/30 transition-all duration-300 hover:scale-105 hover:from-green-500 hover:to-emerald-500 hover:shadow-xl hover:shadow-green-900/40"
+            className="animate-glow-pulse mt-10 bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-6 text-lg font-semibold text-white transition-all duration-300 hover:scale-105 hover:from-green-500 hover:to-emerald-500"
           >
             <a href="tel:01225350376">
               <Phone className="mr-2.5 h-5 w-5" />
