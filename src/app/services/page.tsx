@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Hammer } from "lucide-react";
 import { type Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,6 +37,11 @@ export default async function ServicesPage() {
       <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
+            <div className="mb-6 flex justify-center">
+              <div className="rounded-full bg-green-500/10 p-3 ring-1 ring-green-500/20">
+                <Hammer className="h-8 w-8 text-green-500" />
+              </div>
+            </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Our Services
             </h1>

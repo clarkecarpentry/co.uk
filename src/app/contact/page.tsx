@@ -1,7 +1,7 @@
 import { type Metadata } from "next";
 import { Card, CardContent } from "~/components/ui/card";
 import { ContactForm } from "~/components/contact-form";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -32,6 +32,11 @@ export default function ContactPage() {
       <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
+            <div className="mb-6 flex justify-center">
+              <div className="rounded-full bg-green-500/10 p-3 ring-1 ring-green-500/20">
+                <Send className="h-8 w-8 text-green-500" />
+              </div>
+            </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Contact Us
             </h1>

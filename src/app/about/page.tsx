@@ -2,7 +2,7 @@ import { type Metadata } from "next";
 import Link from "next/link";
 import { Badge } from "~/components/ui/badge";
 import { Card, CardContent } from "~/components/ui/card";
-import { CheckCircle, Quote, ArrowRight } from "lucide-react";
+import { CheckCircle, Quote, ArrowRight, Users } from "lucide-react";
 import { getFeaturedTestimonials } from "~/sanity/lib/fetch";
 
 export const metadata: Metadata = {
@@ -87,6 +87,11 @@ export default async function AboutPage() {
       <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
+            <div className="mb-6 flex justify-center">
+              <div className="rounded-full bg-green-500/10 p-3 ring-1 ring-green-500/20">
+                <Users className="h-8 w-8 text-green-500" />
+              </div>
+            </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               About Us
             </h1>

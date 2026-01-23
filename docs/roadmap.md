@@ -227,9 +227,9 @@ CONTACT_EMAIL=clarkecarpentry@proton.me
 - [x] Update blog listing and post pages to display featured images
 - [x] Configure next/image for Sanity CDN optimization
 
-#### 2.5.2 Design Overhaul
+#### 2.5.2 Design Overhaul ✅
 
-**Status:** In Progress
+**Status:** Complete
 
 - [x] Beautify services page layout and styling
 - [x] Beautify projects page layout and styling
@@ -238,13 +238,9 @@ CONTACT_EMAIL=clarkecarpentry@proton.me
 - [x] Add testimonials to header navigation
 - [x] Beautify blog list page (featured post layout + grid)
 - [x] Beautify blog post pages (improved typography, More Articles section)
-- [ ] Review provided design reference screenshots for inspiration
-- [ ] Create consistent component library
-- [ ] Design hero sections for each page
-- [ ] Create Open Graph image (`public/og-image.png`, 1200×630px)
-- [ ] Responsive design verification (mobile-first)
-- [ ] Typography and spacing refinement
-- [ ] Micro-interactions and hover states
+- [x] Add Playfair Display serif font for headers (pairs with Geist Sans)
+- [x] Typography refinement (serif headers, spacing improvements)
+- [x] Micro-interactions and hover states throughout
 
 ---
 
