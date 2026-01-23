@@ -67,7 +67,7 @@ export const blogPostsQuery = `*[_type == "blogPost"] | order(publishedAt desc) 
   excerpt,
   author,
   publishedAt,
-  image,
+  "image": featuredImage,
   categories
 }`
 
@@ -79,7 +79,7 @@ export const blogPostBySlugQuery = `*[_type == "blogPost" && slug.current == $sl
   content,
   author,
   publishedAt,
-  image,
+  "image": featuredImage,
   categories,
   "relatedServices": relatedServices[]->{ name, "slug": slug.current }
 }`

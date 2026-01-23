@@ -37,12 +37,13 @@ function extractImagesFromMarkdown(filePath: string): ProjectImage[] {
   }
 
   const tableContent = imagesSection[1]
+  if (!tableContent) return images
   const rows = tableContent.trim().split('\n').filter(row => row.trim())
 
   for (const row of rows) {
     // Parse table row: | Description | URL |
     const match = row.match(/\|\s*([^|]+)\s*\|\s*(https?:\/\/[^\s|]+)\s*\|?/)
-    if (match) {
+    if (match?.[1] && match[2]) {
       const description = match[1].trim()
       const url = match[2].trim()
 
@@ -105,7 +106,7 @@ function downloadFile(url: string, outputPath: string): Promise<void> {
 function getExtension(url: string): string {
   // Extract extension before any query params or Wix modifiers
   const match = url.match(/\.(jpg|jpeg|png|gif|webp)/i)
-  return match ? match[1].toLowerCase() : 'jpg'
+  return match?.[1]?.toLowerCase() ?? 'jpg'
 }
 
 async function main() {
