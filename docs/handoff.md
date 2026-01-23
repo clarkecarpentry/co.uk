@@ -6,13 +6,13 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Last Updated
 
-2026-01-23 (Session 2)
+2026-01-23 (Session 3)
 
 ---
 
 ## Current Focus
 
-**Phase 2.5.2 Design Overhaul** - In Progress
+**Phase 2.5.2 Design Overhaul** - COMPLETE
 
 - ✅ Image integration complete (11 services, 37 projects, 4 blog posts)
 - ✅ Services page beautified
@@ -20,7 +20,13 @@ Current status for context continuity between sessions. Update this at the end o
 - ✅ Testimonials page created and linked to navigation
 - ✅ Blog list page beautified (featured post layout)
 - ✅ Blog post pages beautified (typography, More Articles section)
-- Remaining: hero sections, OG image, responsive verification
+- ✅ Unbounded display font for headers (Geist Sans kept for brand elements)
+- ✅ Hero icons added to all pages for consistency
+- ✅ Word-based truncation for card descriptions
+- ✅ Animated glow effect on homepage CTA button
+- ✅ Client handoff document created
+
+**Next:** Pre-launch checklist and go-live
 
 **Vercel hosting is live** at dev.clarkecarpentry.co.uk.
 
@@ -28,7 +34,7 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Recent Work
 
-1. **Design Beautification (Phase 2.5.2)** - Ongoing
+1. **Design Beautification (Phase 2.5.2)** - COMPLETE
    - Services page layout and styling improvements
    - Projects page layout and styling improvements
    - Created `GalleryLightbox` component for project image galleries (click to view full-size, keyboard navigation)
@@ -37,6 +43,12 @@ Current status for context continuity between sessions. Update this at the end o
    - Beautified blog list page with featured post layout and 3-column grid for remaining posts
    - Beautified blog post pages with enhanced header, larger featured image, "More Articles" section
    - Fixed card gaps on projects and blog pages
+   - Added Unbounded display font for headers (h1, h2, h3)
+   - Kept Geist Sans for homepage hero and footer brand name
+   - Added hero icons to about, services, projects, and contact pages
+   - Added word-based truncation (`truncateWords()`) for project and service card descriptions
+   - Added animated breathing glow effect to homepage CTA button
+   - Created client handoff document (`docs/client-handoff.md`)
 
 2. **Image Integration (Phase 2.5.1)** - COMPLETE
    - Updated migration script to upload images from `legacy/content/images`
@@ -100,10 +112,15 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## What's Next
 
-### Immediate
+### Immediate (Pre-Launch Checklist)
 
-- **2.5 Design Beautification** - Need model website URL from user
-- **2.8 Launch** - Deploy to production
+- [ ] Enable Vercel Web Analytics
+- [ ] Verify all pages rendering correctly
+- [ ] Verify contact form sending emails
+- [ ] Mobile responsive verification on real devices
+- [ ] Style 404 page
+- [ ] Verify favicon and app icons
+- [ ] Go live (merge develop → main)
 
 ---
 
@@ -217,7 +234,6 @@ export $(grep -v '^#' .env.local | xargs) && NEXT_PUBLIC_SANITY_DATASET=developm
 
 ## Blockers / Pending Decisions
 
-- **Design**: Need model website reference before starting 2.5
 - **Resend API**: Placeholder key in `.env` - user needs to add real key for contact form
 - **OG Image**: `public/og-image.png` referenced but not created - need to create or update to use existing logo
 
@@ -236,19 +252,19 @@ export $(grep -v '^#' .env.local | xargs) && NEXT_PUBLIC_SANITY_DATASET=developm
 ## File Changes This Session
 
 **Created:**
-- `src/components/gallery-lightbox.tsx` - Lightbox component for project image galleries
-- `src/app/testimonials/page.tsx` - Testimonials page showing all testimonials
+- `docs/client-handoff.md` - Client handoff document for non-technical users
 
 **Modified:**
-- `src/components/nav.tsx` - Added testimonials to navigation
-- `src/app/page.tsx` - Added link to testimonials page
-- `src/app/about/page.tsx` - Added testimonials section with link
-- `src/app/blog/page.tsx` - Beautified with featured post layout
-- `src/app/blog/[slug]/page.tsx` - Beautified with improved typography, More Articles section
-- `src/app/projects/page.tsx` - Fixed card gaps, improved hover effects
-- `src/app/projects/[slug]/page.tsx` - Integrated gallery lightbox component
-- `src/sanity/lib/queries.ts` - Fixed blog image field alias (featuredImage → image)
-- `docs/roadmap.md` - Updated Phase 2.5.2 progress
+- `src/app/layout.tsx` - Added Unbounded font
+- `src/styles/globals.css` - Added display font theme, glow-pulse animation
+- `src/app/page.tsx` - Geist Sans for hero, animated CTA glow, white button text
+- `src/components/footer.tsx` - Geist Sans for brand name
+- `src/app/about/page.tsx` - Added Users hero icon
+- `src/app/services/page.tsx` - Added Hammer hero icon, truncateWords
+- `src/app/projects/page.tsx` - Added FolderKanban hero icon, truncateWords
+- `src/app/contact/page.tsx` - Added Send hero icon
+- `src/lib/utils.ts` - Added truncateWords() utility
+- `docs/roadmap.md` - Marked Phase 2.5.2 and client handoff complete
 - `docs/handoff.md` - This file
 
 ---
@@ -257,4 +273,4 @@ export $(grep -v '^#' .env.local | xargs) && NEXT_PUBLIC_SANITY_DATASET=developm
 
 - Branch: `develop`
 - Up to date with origin
-- Last commit: `1c66b40` - Fix card gaps and improve blog post spacing
+- Last commit: `6081be5` - Add animated glow effect to homepage CTA button
