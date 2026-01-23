@@ -6,20 +6,21 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Last Updated
 
-2026-01-23
+2026-01-23 (Session 2)
 
 ---
 
 ## Current Focus
 
-**Phase 2.5.1 Image Integration** - COMPLETE
-
 **Phase 2.5.2 Design Overhaul** - In Progress
 
 - ✅ Image integration complete (11 services, 37 projects, 4 blog posts)
 - ✅ Services page beautified
-- ✅ Projects page beautified
-- Remaining: hero sections, OG image, responsive verification, other pages
+- ✅ Projects page beautified with lightbox gallery
+- ✅ Testimonials page created and linked to navigation
+- ✅ Blog list page beautified (featured post layout)
+- ✅ Blog post pages beautified (typography, More Articles section)
+- Remaining: hero sections, OG image, responsive verification
 
 **Vercel hosting is live** at dev.clarkecarpentry.co.uk.
 
@@ -27,11 +28,17 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Recent Work
 
-1. **Design Beautification (Phase 2.5.2)**
+1. **Design Beautification (Phase 2.5.2)** - Ongoing
    - Services page layout and styling improvements
    - Projects page layout and styling improvements
+   - Created `GalleryLightbox` component for project image galleries (click to view full-size, keyboard navigation)
+   - Created testimonials page (`/testimonials`) showing all testimonials from Sanity
+   - Added testimonials to header navigation
+   - Beautified blog list page with featured post layout and 3-column grid for remaining posts
+   - Beautified blog post pages with enhanced header, larger featured image, "More Articles" section
+   - Fixed card gaps on projects and blog pages
 
-2. **Image Integration (Phase 2.5.1)**
+2. **Image Integration (Phase 2.5.1)** - COMPLETE
    - Updated migration script to upload images from `legacy/content/images`
    - Configured next/image for Sanity CDN
    - Added image display to service pages (list + detail)
@@ -229,40 +236,25 @@ export $(grep -v '^#' .env.local | xargs) && NEXT_PUBLIC_SANITY_DATASET=developm
 ## File Changes This Session
 
 **Created:**
-- `vitest.config.ts` - Vitest configuration
-- `playwright.config.ts` - Playwright configuration (with .env.test loading)
-- `src/lib/validations/contact.test.ts` - Contact form validation unit tests
-- `src/lib/utils.test.ts` - Utility function unit tests
-- `e2e/homepage.spec.ts` - Homepage E2E test
-- `e2e/navigation.spec.ts` - Navigation E2E test
-- `e2e/contact-form.spec.ts` - Contact form E2E tests
-- `e2e/services.spec.ts` - Services page E2E tests
-- `e2e/projects.spec.ts` - Projects page E2E tests
-- `e2e/sanity-content.spec.ts` - Sanity content verification tests
-- `e2e/global-setup.ts` - Playwright global setup for test data migration
-- `.env.test` - Test environment variables (development dataset)
-- `scripts/setup-test-data.ts` - Test data migration with [TEST] marker
-
-**Deleted:**
-- `docs/progress.md` - Redundant with roadmap.md
-- `docs/portability.md` - Feature already implemented
-- `docs/README.md` - Moved content to root README.md
+- `src/components/gallery-lightbox.tsx` - Lightbox component for project image galleries
+- `src/app/testimonials/page.tsx` - Testimonials page showing all testimonials
 
 **Modified:**
-- `package.json` - Added Vitest, Playwright, and test scripts (test:setup)
-- `scripts/migrate-to-sanity.ts` - Now reads dataset from env var
-- `docs/roadmap.md` - Marked Phase 2.7 complete
-- `README.md` - Replaced T3 boilerplate with proper project README
-- `AGENTS.md` - Updated Living Documentation table, removed progress.md refs
-- `CLAUDE.md` - Updated Living Documentation table
-- `docs/GUIDE.md` - Updated file structure, removed obsolete files
-- `.claude/agents/project-manager.md` - Removed progress.md reference
-- `.codex/skills/pm-audit/SKILL.md` - Updated for state.json instead of progress.md
+- `src/components/nav.tsx` - Added testimonials to navigation
+- `src/app/page.tsx` - Added link to testimonials page
+- `src/app/about/page.tsx` - Added testimonials section with link
+- `src/app/blog/page.tsx` - Beautified with featured post layout
+- `src/app/blog/[slug]/page.tsx` - Beautified with improved typography, More Articles section
+- `src/app/projects/page.tsx` - Fixed card gaps, improved hover effects
+- `src/app/projects/[slug]/page.tsx` - Integrated gallery lightbox component
+- `src/sanity/lib/queries.ts` - Fixed blog image field alias (featuredImage → image)
+- `docs/roadmap.md` - Updated Phase 2.5.2 progress
+- `docs/handoff.md` - This file
 
 ---
 
 ## Git Status
 
 - Branch: `develop`
-- Ahead of origin by 1 commit (ready to push)
-- Last commit: `c102be2` - Image integration
+- Up to date with origin
+- Last commit: `1c66b40` - Fix card gaps and improve blog post spacing

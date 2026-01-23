@@ -233,6 +233,11 @@ CONTACT_EMAIL=clarkecarpentry@proton.me
 
 - [x] Beautify services page layout and styling
 - [x] Beautify projects page layout and styling
+- [x] Add project gallery lightbox (click to view full-size, navigate with arrows/keyboard)
+- [x] Create testimonials page with all testimonials from Sanity
+- [x] Add testimonials to header navigation
+- [x] Beautify blog list page (featured post layout + grid)
+- [x] Beautify blog post pages (improved typography, More Articles section)
 - [ ] Review provided design reference screenshots for inspiration
 - [ ] Create consistent component library
 - [ ] Design hero sections for each page
