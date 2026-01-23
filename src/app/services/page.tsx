@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Card, CardContent } from "~/components/ui/card";
 import { getServices } from "~/sanity/lib/fetch";
 import { urlFor } from "~/sanity/lib/image";
+import { truncateWords } from "~/lib/utils";
 
 export const metadata: Metadata = {
   title: "Our Services",
@@ -75,8 +76,8 @@ export default async function ServicesPage() {
                     <h2 className="text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-green-600">
                       {service.name}
                     </h2>
-                    <p className="text-muted-foreground mt-3 flex-1 text-base leading-relaxed line-clamp-3">
-                      {service.description}
+                    <p className="text-muted-foreground mt-3 flex-1 text-base leading-relaxed">
+                      {truncateWords(service.description, 25)}
                     </p>
                     <div className="mt-6 flex items-center text-sm font-semibold text-green-600 group-hover:text-green-500">
                       Learn more

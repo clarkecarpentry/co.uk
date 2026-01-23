@@ -7,6 +7,7 @@ import { ArrowRight, FolderKanban } from "lucide-react";
 import { getProjects } from "~/sanity/lib/fetch";
 import { urlFor } from "~/sanity/lib/image";
 import type { SanityProject } from "~/sanity/lib/types";
+import { truncateWords } from "~/lib/utils";
 
 export const metadata: Metadata = {
   title: "Our Projects",
@@ -63,8 +64,8 @@ function ProjectCard({ project }: { project: SanityProject }) {
           {project.client && (
             <p className="mt-1 text-sm text-green-500">{project.client}</p>
           )}
-          <p className="text-muted-foreground mt-2 line-clamp-3 flex-1 text-sm leading-relaxed">
-            {project.description}
+          <p className="text-muted-foreground mt-2 flex-1 text-sm leading-relaxed">
+            {truncateWords(project.description, 25)}
           </p>
           <div className="mt-4 flex items-center text-sm font-semibold text-green-600 group-hover:text-green-500">
             View project
