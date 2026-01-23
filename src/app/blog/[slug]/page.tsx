@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Card, CardContent } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
-import { ArrowLeft, Calendar, User, Phone } from "lucide-react";
+import { ArrowLeft, Calendar, User, Phone, ArrowRight, BookOpen } from "lucide-react";
 import { getBlogPosts, getBlogPostBySlug } from "~/sanity/lib/fetch";
 import { PortableText } from "~/components/portable-text";
 import type { PortableTextBlock } from "next-sanity";
@@ -59,13 +59,19 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const postData = await getBlogPostBySlug(slug);
+  const [postData, allPosts] = await Promise.all([
+    getBlogPostBySlug(slug),
+    getBlogPosts(),
+  ]);
 
   if (!postData) {
     notFound();
   }
 
   const { excerpt, title, publishedAt, author, categories, content, relatedServices, image } = postData;
+
+  // Get other posts for "More Articles" section (exclude current post)
+  const otherPosts = allPosts.filter(p => p.slug !== slug).slice(0, 2);
 
   return (
     <main className="min-h-screen">
@@ -76,115 +82,100 @@ export default async function BlogPostPage({ params }: PageProps) {
         publishedAt={publishedAt}
         author={author}
       />
-      {/* Hero Section */}
-      <section className="border-border/50 via-background to-background border-b bg-gradient-to-b from-neutral-900/50 py-16">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-3xl">
-            <Link
-              href="/blog"
-              className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm"
-            >
-              <ArrowLeft className="mr-1 h-4 w-4" />
-              Back to Blog
-            </Link>
-            <div className="mt-4 flex flex-wrap items-center gap-3">
-              {categories && categories.length > 0 && (
-                <Badge
-                  variant="secondary"
-                  className="bg-neutral-800/50 text-neutral-300"
-                >
-                  {categories[0]}
-                </Badge>
-              )}
-            </div>
-            <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              {title}
-            </h1>
-            <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-              <div className="flex items-center gap-1.5">
-                <Calendar className="h-4 w-4" />
-                {new Date(publishedAt).toLocaleDateString("en-GB", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </div>
-              {author && (
-                <div className="flex items-center gap-1.5">
-                  <User className="h-4 w-4" />
-                  {author}
+
+      {/* Article Header */}
+      <article>
+        {/* Hero Section */}
+        <header className="border-border/50 relative overflow-hidden border-b bg-gradient-to-b from-neutral-900/50 via-background to-background">
+          {/* Background decoration */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-1/4 -right-1/4 h-96 w-96 rounded-full bg-green-500/[0.03] blur-3xl" />
+            <div className="absolute -bottom-1/4 -left-1/4 h-80 w-80 rounded-full bg-green-500/[0.03] blur-3xl" />
+          </div>
+
+          <div className="relative container mx-auto px-4 py-12 lg:py-16">
+            <div className="mx-auto max-w-3xl">
+              {/* Back Link */}
+              <Link
+                href="/blog"
+                className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm transition-colors"
+              >
+                <ArrowLeft className="mr-1.5 h-4 w-4" />
+                Back to Blog
+              </Link>
+
+              {/* Meta */}
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                {categories && categories.length > 0 && (
+                  <Badge className="bg-green-500/10 text-green-400 ring-1 ring-green-500/20">
+                    {categories[0]}
+                  </Badge>
+                )}
+                <div className="text-muted-foreground flex items-center gap-1.5 text-sm">
+                  <Calendar className="h-4 w-4" />
+                  {new Date(publishedAt).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
                 </div>
-              )}
+                {author && (
+                  <div className="text-muted-foreground flex items-center gap-1.5 text-sm">
+                    <User className="h-4 w-4" />
+                    {author}
+                  </div>
+                )}
+              </div>
+
+              {/* Title */}
+              <h1 className="mt-6 text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+                {title}
+              </h1>
+
+              {/* Excerpt/Lead */}
+              <p className="text-muted-foreground mt-6 text-xl leading-relaxed">
+                {excerpt}
+              </p>
             </div>
           </div>
-        </div>
-      </section>
+        </header>
 
-      {/* Featured Image */}
-      {image && (
-        <section className="border-border/50 border-b">
-          <div className="container mx-auto px-4 py-8">
-            <div className="mx-auto max-w-3xl">
-              <div className="relative aspect-[2/1] overflow-hidden rounded-lg">
+        {/* Featured Image */}
+        {image && (
+          <div className="container mx-auto px-4 py-8 lg:py-12">
+            <div className="mx-auto max-w-4xl">
+              <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-neutral-800/50 ring-1 ring-white/10">
                 <Image
-                  src={urlFor(image).width(1000).height(500).url()}
+                  src={urlFor(image).width(1200).height(675).url()}
                   alt={image.alt ?? title}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 800px"
+                  sizes="(max-width: 768px) 100vw, 1000px"
                   priority
                 />
               </div>
             </div>
           </div>
-        </section>
-      )}
+        )}
 
-      {/* Content */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
+        {/* Content */}
+        <div className="container mx-auto px-4 pb-16">
           <div className="mx-auto max-w-3xl">
-            {/* Excerpt/Lead */}
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              {excerpt}
-            </p>
-
             {/* Main Content */}
             {content ? (
-              <div className="prose prose-invert max-w-none">
+              <div className="prose-article">
                 <PortableText value={content as PortableTextBlock[]} />
               </div>
             ) : null}
 
-            {/* CTA Section */}
-            <Card className="mt-12 border-green-500/20 bg-green-950/20">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold">
-                  Ready to Discuss Your Project?
-                </h3>
-                <p className="text-muted-foreground mt-2">
-                  Get in touch to discuss your carpentry requirements. We
-                  provide free quotes for all work.
-                </p>
-                <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-                  <Button asChild className="bg-green-600 hover:bg-green-500">
-                    <a href="tel:01225350376">
-                      <Phone className="mr-2 h-4 w-4" />
-                      Call Us
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline">
-                    <Link href="/contact">Request a Quote</Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
             {/* Related Services */}
             {relatedServices && relatedServices.length > 0 && (
-              <div className="mt-8">
+              <div className="mt-12 rounded-xl border border-border/50 bg-card/30 p-6">
                 <h3 className="text-lg font-semibold">Related Services</h3>
-                <div className="mt-3 flex flex-wrap gap-2">
+                <p className="text-muted-foreground mt-1 text-sm">
+                  Explore our services mentioned in this article
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
                   {relatedServices.map((service) => (
                     <Link
                       key={service.slug}
@@ -192,7 +183,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     >
                       <Badge
                         variant="secondary"
-                        className="bg-neutral-800/50 hover:bg-neutral-700/50 transition-colors"
+                        className="bg-neutral-800/50 px-3 py-1.5 text-sm hover:bg-neutral-700/50 transition-colors"
                       >
                         {service.name}
                       </Badge>
@@ -201,9 +192,116 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </div>
               </div>
             )}
+
+            {/* CTA Section */}
+            <Card className="mt-12 border-green-500/20 bg-gradient-to-br from-green-950/30 to-green-900/20">
+              <CardContent className="p-8">
+                <h3 className="text-2xl font-semibold">
+                  Ready to Discuss Your Project?
+                </h3>
+                <p className="text-muted-foreground mt-3 text-lg">
+                  Get in touch to discuss your carpentry requirements. We
+                  provide free quotes for all work.
+                </p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <Button asChild size="lg" className="bg-green-600 hover:bg-green-500">
+                    <a href="tel:01225350376">
+                      <Phone className="mr-2 h-4 w-4" />
+                      Call 01225 350376
+                    </a>
+                  </Button>
+                  <Button asChild variant="outline" size="lg">
+                    <Link href="/contact">Request a Quote</Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
-      </section>
+      </article>
+
+      {/* More Articles Section */}
+      {otherPosts.length > 0 && (
+        <section className="border-border/50 bg-card/30 border-t py-16">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-4xl">
+              <h2 className="text-2xl font-semibold">More Articles</h2>
+              <p className="text-muted-foreground mt-2">
+                Continue reading from our blog
+              </p>
+
+              <div className="mt-8 grid gap-6 sm:grid-cols-2">
+                {otherPosts.map((post) => (
+                  <Link key={post._id} href={`/blog/${post.slug}`} className="group block">
+                    <article className="flex h-full flex-col">
+                      {/* Image */}
+                      <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-neutral-800/50 ring-1 ring-white/5">
+                        {post.image ? (
+                          <Image
+                            src={urlFor(post.image).width(500).height(313).url()}
+                            alt={post.image.alt ?? post.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            sizes="(max-width: 640px) 100vw, 50vw"
+                          />
+                        ) : (
+                          <div className="flex h-full items-center justify-center">
+                            <BookOpen className="h-10 w-10 text-neutral-700" />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Content */}
+                      <div className="mt-4 flex flex-1 flex-col">
+                        <div className="flex flex-wrap items-center gap-2">
+                          {post.categories && post.categories.length > 0 && (
+                            <Badge
+                              variant="secondary"
+                              className="bg-neutral-800/50 text-neutral-400 text-xs"
+                            >
+                              {post.categories[0]}
+                            </Badge>
+                          )}
+                          <span className="text-muted-foreground text-xs">
+                            {new Date(post.publishedAt).toLocaleDateString("en-GB", {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                            })}
+                          </span>
+                        </div>
+
+                        <h3 className="mt-3 text-lg font-semibold leading-snug transition-colors group-hover:text-green-500">
+                          {post.title}
+                        </h3>
+
+                        <p className="text-muted-foreground mt-2 line-clamp-2 flex-1 text-sm">
+                          {post.excerpt}
+                        </p>
+
+                        <div className="mt-4 flex items-center gap-1.5 text-sm font-medium text-green-500">
+                          <span>Read more</span>
+                          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                        </div>
+                      </div>
+                    </article>
+                  </Link>
+                ))}
+              </div>
+
+              <div className="mt-10 text-center">
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-green-500 hover:text-green-400"
+                >
+                  View all articles
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
     </main>
   );
 }
