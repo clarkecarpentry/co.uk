@@ -164,6 +164,15 @@ export default async function Home() {
               </Card>
             ))}
           </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/testimonials"
+              className="inline-flex items-center text-sm font-medium text-green-500 hover:text-green-400"
+            >
+              Read all testimonials
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </section>
 

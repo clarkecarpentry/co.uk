@@ -1,7 +1,9 @@
 import { type Metadata } from "next";
+import Link from "next/link";
 import { Badge } from "~/components/ui/badge";
 import { Card, CardContent } from "~/components/ui/card";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Quote, ArrowRight } from "lucide-react";
+import { getFeaturedTestimonials } from "~/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -76,7 +78,9 @@ const values = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const testimonials = await getFeaturedTestimonials();
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -157,8 +161,49 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Certifications Section */}
+      {/* Testimonials Section */}
       <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center text-2xl font-semibold">
+            What Our Clients Say
+          </h2>
+          <p className="text-muted-foreground mt-2 text-center">
+            Don&apos;t just take our word for it
+          </p>
+          <div className="mx-auto mt-10 grid max-w-4xl gap-6 md:grid-cols-2">
+            {testimonials.slice(0, 2).map((testimonial) => (
+              <Card key={testimonial._id} className="border-border/50">
+                <CardContent className="p-6">
+                  <Quote className="h-8 w-8 text-green-500/20" />
+                  <p className="text-muted-foreground mt-4 text-sm leading-relaxed">
+                    &ldquo;{testimonial.quote}&rdquo;
+                  </p>
+                  <div className="mt-4">
+                    <p className="font-medium">{testimonial.clientName}</p>
+                    {testimonial.company && (
+                      <p className="text-sm text-green-500">
+                        {testimonial.company}
+                      </p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/testimonials"
+              className="inline-flex items-center text-sm font-medium text-green-500 hover:text-green-400"
+            >
+              Read all testimonials
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section className="border-border/50 bg-card/30 border-t py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-center text-2xl font-semibold">
             Certifications & Accreditations
