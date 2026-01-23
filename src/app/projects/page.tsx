@@ -38,7 +38,7 @@ function ProjectCard({ project }: { project: SanityProject }) {
 
   return (
     <Link href={`/projects/${project.slug}`} className="group block h-full">
-      <Card className="h-full overflow-hidden border-border/50 bg-card p-0 gap-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-500/50">
+      <Card className="h-full overflow-hidden border-border/50 bg-card p-0 py-0 gap-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-500/50">
         {project.featuredImage && (
           <div className="relative aspect-video w-full overflow-hidden">
             <Image

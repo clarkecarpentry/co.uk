@@ -182,7 +182,7 @@ export default async function BlogPage() {
             <div className="mx-auto max-w-5xl">
               <h2 className="mb-10 text-xl font-semibold">More Articles</h2>
 
-              <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
                 {remainingPosts.map((post) => (
                   <Link key={post._id} href={`/blog/${post.slug}`} className="group block">
                     <article className="flex h-full flex-col">
