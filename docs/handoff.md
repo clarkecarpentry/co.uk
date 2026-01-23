@@ -20,7 +20,14 @@ Testing infrastructure set up with Vitest for unit tests and Playwright for E2E 
 
 ## Recent Work
 
-1. **Testing with Sanity Development Dataset**
+1. **Documentation Cleanup**
+   - Deleted `docs/progress.md` (redundant with `docs/roadmap.md`)
+   - Deleted `docs/portability.md` (already implemented)
+   - Moved `docs/README.md` content to root `README.md`
+   - Updated all references in AGENTS.md, CLAUDE.md, docs/GUIDE.md
+   - Updated pm-audit skill and project-manager agent configs
+
+2. **Testing with Sanity Development Dataset**
    - Created development Sanity dataset for safe E2E testing
    - Added `.env.test` for test environment configuration
    - Created `scripts/setup-test-data.ts` to populate dev dataset with test marker
@@ -204,16 +211,26 @@ export $(grep -v '^#' .env.local | xargs) && NEXT_PUBLIC_SANITY_DATASET=developm
 - `.env.test` - Test environment variables (development dataset)
 - `scripts/setup-test-data.ts` - Test data migration with [TEST] marker
 
+**Deleted:**
+- `docs/progress.md` - Redundant with roadmap.md
+- `docs/portability.md` - Feature already implemented
+- `docs/README.md` - Moved content to root README.md
+
 **Modified:**
 - `package.json` - Added Vitest, Playwright, and test scripts (test:setup)
 - `scripts/migrate-to-sanity.ts` - Now reads dataset from env var
 - `docs/roadmap.md` - Marked Phase 2.7 complete
-- `docs/handoff.md` - Updated with Sanity testing documentation
+- `README.md` - Replaced T3 boilerplate with proper project README
+- `AGENTS.md` - Updated Living Documentation table, removed progress.md refs
+- `CLAUDE.md` - Updated Living Documentation table
+- `docs/GUIDE.md` - Updated file structure, removed obsolete files
+- `.claude/agents/project-manager.md` - Removed progress.md reference
+- `.codex/skills/pm-audit/SKILL.md` - Updated for state.json instead of progress.md
 
 ---
 
 ## Git Status
 
 - Branch: `develop`
-- Previous commits: Phase 2.6 SEO, Phase 2.7 Testing
-- Uncommitted: Sanity development dataset testing setup
+- Ahead of origin by 8 commits (ready to push)
+- Last commit: `e9c95c1` - Documentation cleanup
