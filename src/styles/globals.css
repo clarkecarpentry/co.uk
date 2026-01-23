@@ -6,8 +6,7 @@
 @theme {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman",
-    Times, serif;
+  --font-display: var(--font-unbounded), ui-sans-serif, system-ui, sans-serif;
 }
 
 @theme inline {
@@ -130,6 +129,6 @@
   h1,
   h2,
   h3 {
-    @apply font-serif;
+    @apply font-display;
   }
 }

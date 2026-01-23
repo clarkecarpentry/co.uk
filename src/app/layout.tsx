@@ -1,7 +1,7 @@
 import "~/styles/globals.css";
 
 import { type Metadata } from "next";
-import { Geist, Playfair_Display } from "next/font/google";
+import { Geist, Unbounded } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { ThemeProvider } from "~/components/theme-provider";
@@ -89,16 +89,16 @@ const geist = Geist({
   variable: "--font-geist-sans",
 });
 
-const playfair = Playfair_Display({
+const unbounded = Unbounded({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-unbounded",
 });
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable} ${playfair.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${geist.variable} ${unbounded.variable}`} suppressHydrationWarning>
       <head>
         <LocalBusinessJsonLd />
       </head>
