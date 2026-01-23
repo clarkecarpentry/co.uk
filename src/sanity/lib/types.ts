@@ -6,6 +6,32 @@
  */
 
 // ============================================================================
+// Common Types
+// ============================================================================
+
+export interface SanityImage {
+  _type: 'image'
+  asset: {
+    _ref: string
+    _type: 'reference'
+  }
+  alt?: string
+  caption?: string
+  hotspot?: {
+    x: number
+    y: number
+    height: number
+    width: number
+  }
+  crop?: {
+    top: number
+    bottom: number
+    left: number
+    right: number
+  }
+}
+
+// ============================================================================
 // Services
 // ============================================================================
 
@@ -15,6 +41,7 @@ export interface SanityService {
   slug: string
   description: string
   features: string[]
+  image?: SanityImage
   order?: number
 }
 
@@ -31,6 +58,8 @@ export interface SanityProject {
   description: string
   completedDate: string
   services: Array<{name: string; slug: string}> | string[]
+  featuredImage?: SanityImage
+  images?: SanityImage[]
 }
 
 // ============================================================================
@@ -59,6 +88,7 @@ export interface SanityBlogPost {
   content?: unknown // Portable Text blocks
   author?: string
   publishedAt: string
+  image?: SanityImage
   categories?: string[]
   relatedServices?: Array<{name: string; slug: string}>
 }

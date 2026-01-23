@@ -1,9 +1,11 @@
 import { type Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import { getBlogPosts } from "~/sanity/lib/fetch";
+import { urlFor } from "~/sanity/lib/image";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -97,7 +99,18 @@ export default async function BlogPage() {
           <div className="mx-auto max-w-3xl space-y-6">
             {posts.map((post) => (
               <Link key={post._id} href={`/blog/${post.slug}`}>
-                <Card className="group border-border/50 hover:bg-card/80 transition-all duration-200 hover:border-green-500/30">
+                <Card className="group border-border/50 hover:bg-card/80 overflow-hidden transition-all duration-200 hover:border-green-500/30">
+                  {post.image && (
+                    <div className="relative aspect-[2/1] overflow-hidden">
+                      <Image
+                        src={urlFor(post.image).width(800).height(400).url()}
+                        alt={post.image.alt ?? post.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 800px"
+                      />
+                    </div>
+                  )}
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3">
                       {post.categories && post.categories.length > 0 && (

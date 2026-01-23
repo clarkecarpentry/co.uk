@@ -1,9 +1,12 @@
 import { type Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import { getProjects } from "~/sanity/lib/fetch";
+import { urlFor } from "~/sanity/lib/image";
+import type { SanityProject } from "~/sanity/lib/types";
 
 export const metadata: Metadata = {
   title: "Our Projects",
@@ -26,6 +29,52 @@ export const metadata: Metadata = {
     canonical: "/projects",
   },
 };
+
+function ProjectCard({ project }: { project: SanityProject }) {
+  const badgeStyles =
+    project.type === "Commercial"
+      ? "bg-blue-950/50 text-blue-400 ring-1 ring-blue-500/20"
+      : "bg-amber-950/50 text-amber-400 ring-1 ring-amber-500/20";
+
+  return (
+    <Link href={`/projects/${project.slug}`}>
+      <Card className="group border-border/50 hover:bg-card/80 h-full overflow-hidden transition-all duration-200 hover:border-green-500/30">
+        {project.featuredImage && (
+          <div className="relative aspect-video overflow-hidden">
+            <Image
+              src={urlFor(project.featuredImage).width(600).height(340).url()}
+              alt={project.featuredImage.alt ?? project.name}
+              fill
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          </div>
+        )}
+        <CardContent className="flex h-full flex-col p-6">
+          <div className="flex items-center justify-between">
+            <Badge variant="secondary" className={badgeStyles}>
+              {project.type}
+            </Badge>
+            <span className="text-muted-foreground text-xs">
+              {project.completedDate}
+            </span>
+          </div>
+          <h3 className="mt-3 text-xl font-semibold">{project.name}</h3>
+          {project.client && (
+            <p className="mt-1 text-sm text-green-500">{project.client}</p>
+          )}
+          <p className="text-muted-foreground mt-2 line-clamp-3 flex-1 text-sm">
+            {project.description}
+          </p>
+          <div className="mt-4 flex items-center text-sm font-medium text-green-500">
+            View project
+            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
+  );
+}
 
 export default async function ProjectsPage() {
   const projects = await getProjects();
@@ -68,38 +117,7 @@ export default async function ProjectsPage() {
           </p>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {commercialProjects.map((project) => (
-              <Link key={project.slug} href={`/projects/${project.slug}`}>
-                <Card className="group border-border/50 hover:bg-card/80 h-full transition-all duration-200 hover:border-green-500/30">
-                  <CardContent className="flex h-full flex-col p-6">
-                    <div className="flex items-center justify-between">
-                      <Badge
-                        variant="secondary"
-                        className="bg-blue-950/50 text-blue-400 ring-1 ring-blue-500/20"
-                      >
-                        Commercial
-                      </Badge>
-                      <span className="text-muted-foreground text-xs">
-                        {project.completedDate}
-                      </span>
-                    </div>
-                    <h3 className="mt-3 text-xl font-semibold">
-                      {project.name}
-                    </h3>
-                    {project.client && (
-                      <p className="mt-1 text-sm text-green-500">
-                        {project.client}
-                      </p>
-                    )}
-                    <p className="text-muted-foreground mt-2 line-clamp-3 flex-1 text-sm">
-                      {project.description}
-                    </p>
-                    <div className="mt-4 flex items-center text-sm font-medium text-green-500">
-                      View project
-                      <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
         </div>
@@ -114,38 +132,7 @@ export default async function ProjectsPage() {
           </p>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {domesticProjects.map((project) => (
-              <Link key={project.slug} href={`/projects/${project.slug}`}>
-                <Card className="group border-border/50 hover:bg-card/80 h-full transition-all duration-200 hover:border-green-500/30">
-                  <CardContent className="flex h-full flex-col p-6">
-                    <div className="flex items-center justify-between">
-                      <Badge
-                        variant="secondary"
-                        className="bg-amber-950/50 text-amber-400 ring-1 ring-amber-500/20"
-                      >
-                        Domestic
-                      </Badge>
-                      <span className="text-muted-foreground text-xs">
-                        {project.completedDate}
-                      </span>
-                    </div>
-                    <h3 className="mt-3 text-xl font-semibold">
-                      {project.name}
-                    </h3>
-                    {project.client && (
-                      <p className="mt-1 text-sm text-green-500">
-                        {project.client}
-                      </p>
-                    )}
-                    <p className="text-muted-foreground mt-2 line-clamp-3 flex-1 text-sm">
-                      {project.description}
-                    </p>
-                    <div className="mt-4 flex items-center text-sm font-medium text-green-500">
-                      View project
-                      <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
         </div>

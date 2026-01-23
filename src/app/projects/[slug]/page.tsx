@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Card, CardContent } from "~/components/ui/card";
@@ -12,6 +13,7 @@ import {
   Phone,
 } from "lucide-react";
 import { getProjects, getProjectBySlug } from "~/sanity/lib/fetch";
+import { urlFor } from "~/sanity/lib/image";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -130,6 +132,24 @@ export default async function ProjectPage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* Featured Image */}
+      {project.featuredImage && (
+        <section className="border-border/50 border-b">
+          <div className="container mx-auto px-4 py-8">
+            <div className="relative aspect-video overflow-hidden rounded-lg">
+              <Image
+                src={urlFor(project.featuredImage).width(1200).height(675).url()}
+                alt={project.featuredImage.alt ?? project.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1200px"
+                priority
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Project Details */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -154,6 +174,29 @@ export default async function ProjectPage({ params }: PageProps) {
                       >
                         {service}
                       </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Image Gallery */}
+              {project.images && project.images.length > 1 && (
+                <div className="mt-8">
+                  <h3 className="text-lg font-semibold">Project Gallery</h3>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    {project.images.slice(1).map((image, index) => (
+                      <div
+                        key={image.asset?._ref ?? index}
+                        className="relative aspect-video overflow-hidden rounded-lg"
+                      >
+                        <Image
+                          src={urlFor(image).width(600).height(340).url()}
+                          alt={image.alt ?? `${project.name} - Image ${index + 2}`}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 100vw, 50vw"
+                        />
+                      </div>
                     ))}
                   </div>
                 </div>

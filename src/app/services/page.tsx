@@ -1,8 +1,10 @@
 import { type Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "~/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import { getServices } from "~/sanity/lib/fetch";
+import { urlFor } from "~/sanity/lib/image";
 
 export const metadata: Metadata = {
   title: "Our Services",
@@ -52,10 +54,21 @@ export default async function ServicesPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
               <Link key={service.slug} href={`/services/${service.slug}`}>
-                <Card className="group border-border/50 hover:bg-card/80 h-full transition-all duration-200 hover:border-green-500/30">
+                <Card className="group border-border/50 hover:bg-card/80 h-full overflow-hidden transition-all duration-200 hover:border-green-500/30">
+                  {service.image && (
+                    <div className="relative aspect-video overflow-hidden">
+                      <Image
+                        src={urlFor(service.image).width(600).height(340).url()}
+                        alt={service.image.alt ?? service.name}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
+                  )}
                   <CardContent className="flex h-full flex-col p-6">
                     <h2 className="text-xl font-semibold">{service.name}</h2>
-                    <p className="text-muted-foreground mt-2 flex-1 text-sm">
+                    <p className="text-muted-foreground mt-2 flex-1 text-sm line-clamp-3">
                       {service.description}
                     </p>
                     <div className="mt-4 flex items-center text-sm font-medium text-green-500">

@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Card, CardContent } from "~/components/ui/card";
@@ -9,6 +10,7 @@ import { getBlogPosts, getBlogPostBySlug } from "~/sanity/lib/fetch";
 import { PortableText } from "~/components/portable-text";
 import type { PortableTextBlock } from "next-sanity";
 import { ArticleJsonLd } from "~/components/json-ld";
+import { urlFor } from "~/sanity/lib/image";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -63,7 +65,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
-  const { excerpt, title, publishedAt, author, categories, content, relatedServices } = postData;
+  const { excerpt, title, publishedAt, author, categories, content, relatedServices, image } = postData;
 
   return (
     <main className="min-h-screen">
@@ -117,6 +119,26 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {/* Featured Image */}
+      {image && (
+        <section className="border-border/50 border-b">
+          <div className="container mx-auto px-4 py-8">
+            <div className="mx-auto max-w-3xl">
+              <div className="relative aspect-[2/1] overflow-hidden rounded-lg">
+                <Image
+                  src={urlFor(image).width(1000).height(500).url()}
+                  alt={image.alt ?? title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  priority
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Content */}
       <section className="py-16">

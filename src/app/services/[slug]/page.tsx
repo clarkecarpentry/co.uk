@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Card, CardContent } from "~/components/ui/card";
@@ -7,6 +8,7 @@ import { Button } from "~/components/ui/button";
 import { ArrowLeft, ArrowRight, CheckCircle, Phone } from "lucide-react";
 import { getServices, getServiceBySlug, getProjects } from "~/sanity/lib/fetch";
 import { ServiceJsonLd } from "~/components/json-ld";
+import { urlFor } from "~/sanity/lib/image";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -134,18 +136,60 @@ export default async function ServicePage({ params }: PageProps) {
               </p>
             </div>
 
-            {/* CTA Card */}
+            {/* Service Image or CTA Card */}
             <div>
-              <Card className="border-border/50 bg-card/50">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold">
-                    Interested in {service.name}?
-                  </h3>
-                  <p className="text-muted-foreground mt-2">
-                    Get in touch to discuss your project requirements. We
-                    provide free quotes for all work.
-                  </p>
-                  <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              {service.image ? (
+                <div className="relative aspect-video overflow-hidden rounded-lg">
+                  <Image
+                    src={urlFor(service.image).width(800).height(450).url()}
+                    alt={service.image.alt ?? service.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
+                  />
+                </div>
+              ) : (
+                <Card className="border-border/50 bg-card/50">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold">
+                      Interested in {service.name}?
+                    </h3>
+                    <p className="text-muted-foreground mt-2">
+                      Get in touch to discuss your project requirements. We
+                      provide free quotes for all work.
+                    </p>
+                    <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                      <Button asChild className="bg-green-600 hover:bg-green-500">
+                        <a href="tel:01225350376">
+                          <Phone className="mr-2 h-4 w-4" />
+                          Call Us
+                        </a>
+                      </Button>
+                      <Button asChild variant="outline">
+                        <Link href="/contact">Request a Quote</Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          </div>
+
+          {/* CTA Card - shown when there's an image above */}
+          {service.image && (
+            <Card className="border-border/50 bg-card/50 mt-12">
+              <CardContent className="p-6">
+                <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+                  <div>
+                    <h3 className="text-xl font-semibold">
+                      Interested in {service.name}?
+                    </h3>
+                    <p className="text-muted-foreground mt-1">
+                      Get in touch to discuss your project requirements. We provide free quotes for all work.
+                    </p>
+                  </div>
+                  <div className="flex shrink-0 gap-3">
                     <Button asChild className="bg-green-600 hover:bg-green-500">
                       <a href="tel:01225350376">
                         <Phone className="mr-2 h-4 w-4" />
@@ -156,10 +200,10 @@ export default async function ServicePage({ params }: PageProps) {
                       <Link href="/contact">Request a Quote</Link>
                     </Button>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </section>
 
