@@ -211,12 +211,13 @@ git flow feature finish <name>
 
 See `docs/state.json` for machine-readable project state. **Keep this section in sync with state.json.**
 
-- **Current Phase**: 2.5 (Design) blocked, 2.8 (Launch) next
+- **Current Phase**: 2.5 (Design) blocked, then 2.8 (Launch), 2.9 (Content Automation)
 - **Completed**: 2.1, 2.2, 2.3, 2.4, 2.6, 2.7
 - **Launch Date**: 2026-01-29
 - **Services**: 11 (in Sanity)
 - **Projects**: 12 (in Sanity)
 - **Blog Posts**: 4 (in Sanity)
+- **Hosting**: Vercel (dev.clarkecarpentry.co.uk active)
 - **CMS**: Sanity fully integrated, content migrated
 - **Contact Form**: Complete
 - **SEO**: Complete (meta tags, JSON-LD, sitemap)

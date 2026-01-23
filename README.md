@@ -13,7 +13,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Project Status
 
-**Current Phase:** 2.5 Design (blocked), 2.8 Launch next
+**Current Phase:** 2.5 Design (blocked), then 2.8 Launch, 2.9 Content Automation
 **Target Launch:** Wednesday, January 29, 2026
 
 See [docs/roadmap.md](docs/roadmap.md) for detailed task breakdown and [docs/state.json](docs/state.json) for machine-readable status.
@@ -71,8 +71,8 @@ scripts/                 # Migration and setup scripts
 
 | Environment | Domain | Status |
 |-------------|--------|--------|
-| Production | clarkecarpentry.co.uk | Not deployed |
-| Staging | next.clarkecarpentry.co.uk | Not deployed |
+| Development | dev.clarkecarpentry.co.uk | Active |
+| Production | clarkecarpentry.co.uk | Configured |
 
 ## Key Commands
 

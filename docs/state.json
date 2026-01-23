@@ -4,9 +4,9 @@
   "launchDate": "2026-01-29",
   "currentPhase": "2.5",
   "phaseStatus": "blocked",
-  "phaseBlocker": "Awaiting model website URL for design reference",
+  "phaseBlocker": "Awaiting design reference images from user",
   "completedPhases": ["2.1", "2.2", "2.3", "2.4", "2.6", "2.7"],
-  "nextPhases": ["2.5", "2.8"],
+  "nextPhases": ["2.5", "2.8", "2.9"],
   "techStack": {
     "framework": "Next.js 15",
     "react": "19",
@@ -20,7 +20,7 @@
   },
   "domains": {
     "production": "clarkecarpentry.co.uk",
-    "staging": "next.clarkecarpentry.co.uk"
+    "development": "dev.clarkecarpentry.co.uk"
   },
   "sanity": {
     "projectId": "07w52gq6",
@@ -39,7 +39,8 @@
     "contactForm": "complete",
     "email": "configured",
     "analytics": "planned",
-    "seo": "complete"
+    "seo": "complete",
+    "hosting": "active"
   },
   "testing": {
     "unit": "15 tests (Vitest)",

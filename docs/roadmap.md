@@ -58,10 +58,12 @@ Restructure project documentation for compatibility with any LLM coding assistan
 
 - [x] Create `docs/` directory for shared documentation
 - [x] Move `roadmap.md` from `.claude/` to `docs/`
-- [x] Move `progress.md` from `.claude/` to `docs/`
-- [x] Create `docs/README.md` with project overview for LLMs
+- [x] Create `docs/llm.md` with project context for LLMs
+- [x] Create `docs/handoff.md` for session continuity
+- [x] Create `docs/state.json` for machine-readable state
 - [x] Update `CLAUDE.md` to reference new locations
 - [x] Keep `.claude/` for Claude-specific settings only
+- [x] Consolidate redundant docs (progress.md → roadmap.md, docs/README.md → root README.md)
 
 ---
 
@@ -208,16 +210,25 @@ CONTACT_EMAIL=clarkecarpentry@proton.me
 
 ### 2.5 Design Beautification
 
-> **REMINDER:** When starting this phase, ask user for:
-> - Model website URL(s) for design reference
-> - Any specific design preferences or brand guidelines
+> **REMINDER:** When starting this phase:
+> - User will provide screenshot images of websites for design inspiration
+> - Complete image integration (2.5.1) before full design overhaul (2.5.2)
 
-#### Design Tasks
-- [ ] Review model website for inspiration
+#### 2.5.1 Image Integration
+- [ ] Add image fields to Sanity schemas (service, project, blogPost)
+- [ ] Upload images to Sanity for services (from legacy/content/images or new)
+- [ ] Upload images to Sanity for projects (from legacy/content/images or new)
+- [ ] Upload featured images for blog posts
+- [ ] Update service pages to display images
+- [ ] Update project pages to display images (gallery support)
+- [ ] Update blog listing and post pages to display featured images
+- [ ] Configure next/image for Sanity CDN optimization
+
+#### 2.5.2 Design Overhaul
+- [ ] Review provided design reference screenshots for inspiration
 - [ ] Create consistent component library
 - [ ] Design hero sections for each page
 - [ ] Create Open Graph image (`public/og-image.png`, 1200×630px)
-- [ ] Image optimization pipeline (next/image, WebP)
 - [ ] Responsive design verification (mobile-first)
 - [ ] Typography and spacing refinement
 - [ ] Micro-interactions and hover states
@@ -279,11 +290,11 @@ pnpm test:e2e      # Run E2E tests
 
 ### 2.8 Infrastructure & Launch
 
-#### Vercel Setup
-- [ ] Connect repository to Vercel
-- [ ] Configure environment variables in Vercel dashboard
-- [ ] Set up staging domain (next.clarkecarpentry.co.uk)
-- [ ] Set up production domain (clarkecarpentry.co.uk)
+#### Vercel Setup ✅
+- [x] Connect repository to Vercel
+- [x] Configure environment variables in Vercel dashboard
+- [x] Set up staging domain (dev.clarkecarpentry.co.uk)
+- [x] Set up production domain (clarkecarpentry.co.uk)
 
 #### Analytics
 - [ ] Enable Vercel Web Analytics (free tier)
@@ -299,14 +310,43 @@ pnpm test:e2e      # Run E2E tests
 - [ ] 404 page styled
 - [ ] Favicon and app icons
 
+#### Client Handoff Document
+- [ ] Create `docs/client-handoff.md` with:
+  - [ ] Environment variables reference (what each one does, where to get new keys)
+  - [ ] How the website works in plain English (pages, CMS, contact form flow)
+  - [ ] Sanity login instructions and basic content editing guide
+  - [ ] Resend login instructions and email monitoring
+  - [ ] Vercel deployment overview (auto-deploys from main branch)
+
+---
+
+### 2.9 Automated Content Generation (Post-Launch)
+
+> **Note:** This is a future enhancement to be planned after launch. Details TBD.
+
+#### Concept
+Automated blog content generation using GitHub Issues/Actions to trigger an AI content agent.
+
+#### High-Level Goals
+- [ ] Define trigger mechanism (GitHub Issue with specific labels/template)
+- [ ] Set up GitHub Action workflow to spin up content generation agent
+- [ ] Agent researches topic and writes draft blog post
+- [ ] Draft pushed to Sanity as unpublished content for review
+- [ ] Notification sent when draft is ready
+
+#### Planning Notes
+- Will break this down into detailed tasks when we reach this phase
+- Consider: topic research sources, brand voice compliance, image generation
+- Review existing `docs/content-brief.md` for voice guidelines
+
 ---
 
 ## Deployment
 
 | Environment | Domain | Status |
 |-------------|--------|--------|
-| Staging | next.clarkecarpentry.co.uk | Not deployed |
-| Production | clarkecarpentry.co.uk | Not deployed |
+| Development | dev.clarkecarpentry.co.uk | Active |
+| Production | clarkecarpentry.co.uk | Configured (not live) |
 
 ---
 

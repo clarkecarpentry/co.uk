@@ -48,8 +48,9 @@ docs/
 
 All of these are detailed in `docs/llm.md` and `docs/state.json`:
 
-- **Current Phase**: 2.5 blocked (needs design reference), 2.8 next
+- **Current Phase**: 2.5 blocked (awaiting design images), then 2.8, 2.9
 - **Completed Phases**: 2.1, 2.2, 2.3, 2.4, 2.6, 2.7
+- **Hosting**: Vercel (dev.clarkecarpentry.co.uk active)
 - **Launch Date**: Wednesday, January 29, 2026
 - **Tech Stack**: Next.js 15, tRPC, Tailwind v4, Sanity CMS
 - **Package Manager**: pnpm only
