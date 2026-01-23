@@ -188,6 +188,7 @@ Created blog posts in `src/lib/data/blog-posts.ts` and migrated to Sanity:
 - [x] Create tRPC mutation for form submission
 - [x] Set up Resend email template (React Email)
 - [x] Configure environment variables
+- [x] Add Cloudflare Turnstile CAPTCHA (spam protection)
 
 #### Email Configuration
 - **Development/Testing:** `clarkecarpentry@proton.me`
@@ -305,9 +306,10 @@ pnpm test:e2e      # Run E2E tests
 - [x] Set up staging domain (dev.clarkecarpentry.co.uk)
 - [x] Set up production domain (clarkecarpentry.co.uk)
 
-#### Analytics
-- [ ] Enable Vercel Web Analytics (free tier)
-- [ ] Verify tracking is working
+#### Analytics ✅
+- [x] Enable Vercel Web Analytics (free tier)
+- [x] Enable Vercel Speed Insights
+- [x] Add @vercel/analytics and @vercel/speed-insights packages
 
 #### Pre-Launch Checklist
 - [ ] All pages rendering correctly
