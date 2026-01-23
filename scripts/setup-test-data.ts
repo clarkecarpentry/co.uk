@@ -1,17 +1,16 @@
 /**
- * Migration script to push static data from src/lib/data/ to Sanity.
+ * Test data setup script - migrates content to development dataset with a test marker.
+ *
+ * This script is run before E2E tests to:
+ * 1. Populate the development dataset with test data
+ * 2. Add a TEST_MARKER to one service name to verify content comes from Sanity
  *
  * Usage:
- *   pnpm migrate
+ *   NEXT_PUBLIC_SANITY_DATASET=development pnpm test:setup
  *
- * Requirements:
- *   - SANITY_API_KEY env var must be set (write token)
- *   - Run `sanity login` first if you haven't
- *
- * This script will:
- *   1. Read services, projects, and testimonials from static data files
- *   2. Transform them to match Sanity schema format
- *   3. Create documents in Sanity (or update if they exist)
+ * The marker allows E2E tests to verify that:
+ * - Content is actually being fetched from Sanity (not static fallback)
+ * - The correct dataset (development) is being used
  */
 
 import {createClient} from '@sanity/client'
@@ -19,6 +18,9 @@ import {services} from '../src/lib/data/services'
 import {projects} from '../src/lib/data/projects'
 import {testimonials} from '../src/lib/data/testimonials'
 import {blogPosts} from '../src/lib/data/blog-posts'
+
+// Test marker that will be prepended to the first service name
+export const TEST_MARKER = '[TEST]'
 
 // Check for API key
 const token = process.env.SANITY_API_KEY
@@ -28,8 +30,14 @@ if (!token) {
   process.exit(1)
 }
 
-// Get dataset from env var (defaults to 'production')
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production'
+// Get dataset from env var - should be 'development' for tests
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'development'
+
+if (dataset === 'production') {
+  console.error('❌ Cannot run test setup against production dataset!')
+  console.error('   Set NEXT_PUBLIC_SANITY_DATASET=development')
+  process.exit(1)
+}
 
 // Create client with write access
 const client = createClient({
@@ -46,14 +54,18 @@ function slugToId(type: string, slug: string): string {
 }
 
 async function migrateServices() {
-  console.log('\n📦 Migrating services...')
+  console.log('\n📦 Migrating services (with test marker on first service)...')
 
   for (let i = 0; i < services.length; i++) {
     const service = services[i]!
+
+    // Add TEST_MARKER to the first service name
+    const name = i === 0 ? `${TEST_MARKER} ${service.name}` : service.name
+
     const doc = {
       _id: slugToId('service', service.slug),
       _type: 'service',
-      name: service.name,
+      name,
       slug: {_type: 'slug', current: service.slug},
       description: service.description,
       features: service.features,
@@ -62,9 +74,9 @@ async function migrateServices() {
 
     try {
       await client.createOrReplace(doc)
-      console.log(`  ✓ ${service.name}`)
+      console.log(`  ✓ ${name}`)
     } catch (error) {
-      console.error(`  ✗ ${service.name}:`, error)
+      console.error(`  ✗ ${name}:`, error)
     }
   }
 
@@ -75,9 +87,7 @@ async function migrateProjects() {
   console.log('\n🏗️  Migrating projects...')
 
   for (const project of projects) {
-    // Map service names to service references
     const serviceRefs = project.services.map((serviceName) => {
-      // Find the service by name to get its slug
       const service = services.find((s) => s.name === serviceName)
       if (service) {
         return {
@@ -117,7 +127,6 @@ async function migrateTestimonials() {
 
   for (let i = 0; i < testimonials.length; i++) {
     const testimonial = testimonials[i]!
-    // Create a slug from client name
     const slug = testimonial.clientName
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
@@ -130,7 +139,7 @@ async function migrateTestimonials() {
       clientName: testimonial.clientName,
       company: testimonial.company ?? undefined,
       project: testimonial.project ?? undefined,
-      featured: i < 3, // First 3 are featured
+      featured: i < 3,
       order: i,
     }
 
@@ -149,7 +158,6 @@ async function migrateBlogPosts() {
   console.log('\n📝 Migrating blog posts...')
 
   for (const post of blogPosts) {
-    // Map service slugs to service references
     const serviceRefs = post.relatedServices.map((serviceSlug) => {
       return {
         _type: 'reference',
@@ -158,13 +166,11 @@ async function migrateBlogPosts() {
       }
     })
 
-    // Transform content blocks to include unique keys
     let blockIndex = 0
     const contentWithKeys = post.content.map((contentBlock) => {
       blockIndex++
       const blockKey = `block-${blockIndex}`
 
-      // Process children to ensure unique keys
       let spanIndex = 0
       const childrenWithKeys = contentBlock.children.map((child) => {
         spanIndex++
@@ -174,7 +180,6 @@ async function migrateBlogPosts() {
         }
       })
 
-      // Process markDefs if present
       let markIndex = 0
       const markDefsWithKeys = contentBlock.markDefs.map((mark) => {
         markIndex++
@@ -244,9 +249,10 @@ async function migrateSiteSettings() {
 }
 
 async function main() {
-  console.log('🚀 Starting Sanity migration...')
+  console.log('🧪 Setting up test data...')
   console.log(`   Project: 07w52gq6`)
   console.log(`   Dataset: ${dataset}`)
+  console.log(`   Test marker: "${TEST_MARKER}" will be added to first service`)
 
   await migrateServices()
   await migrateProjects()
@@ -254,11 +260,11 @@ async function main() {
   await migrateBlogPosts()
   await migrateSiteSettings()
 
-  console.log('\n✅ Migration complete!')
-  console.log('   Visit http://localhost:3000/studio to see the content')
+  console.log('\n✅ Test data setup complete!')
+  console.log(`   First service should now be named "${TEST_MARKER} Project Management"`)
 }
 
 main().catch((error) => {
-  console.error('Migration failed:', error)
+  console.error('Test setup failed:', error)
   process.exit(1)
 })

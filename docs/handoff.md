@@ -20,13 +20,21 @@ Testing infrastructure set up with Vitest for unit tests and Playwright for E2E 
 
 ## Recent Work
 
-1. **Testing (Phase 2.7)**
+1. **Testing with Sanity Development Dataset**
+   - Created development Sanity dataset for safe E2E testing
+   - Added `.env.test` for test environment configuration
+   - Created `scripts/setup-test-data.ts` to populate dev dataset with test marker
+   - Added Playwright global setup to auto-run migration before tests
+   - Added `e2e/sanity-content.spec.ts` to verify Sanity content appears
+   - Tests gracefully skip when development dataset is empty
+
+2. **Testing (Phase 2.7)**
    - Configured Vitest for unit testing
    - Configured Playwright for E2E testing
    - Added unit tests for contact form validation (9 tests)
    - Added unit tests for utility functions (6 tests)
    - Added E2E tests for homepage, navigation, contact form, services, and projects (8 tests)
-   - All 15 unit tests and 8 E2E tests passing
+   - All 15 unit tests and 8 E2E tests passing (6 Sanity content tests skip when no API key)
 
 2. **SEO Technical (Phase 2.6)**
    - Added comprehensive metadata to root layout (title template, description, keywords)
@@ -60,6 +68,7 @@ Testing infrastructure set up with Vitest for unit tests and Playwright for E2E 
 pnpm test          # Run unit tests with Vitest
 pnpm test:watch    # Run unit tests in watch mode
 pnpm test:e2e      # Run E2E tests with Playwright
+pnpm test:setup    # Populate development Sanity dataset with test data
 ```
 
 ### Test Files
@@ -72,10 +81,31 @@ pnpm test:e2e      # Run E2E tests with Playwright
 | `e2e/contact-form.spec.ts` | E2E | Contact form UI and validation |
 | `e2e/services.spec.ts` | E2E | Services page and navigation |
 | `e2e/projects.spec.ts` | E2E | Projects page and navigation |
+| `e2e/sanity-content.spec.ts` | E2E | Sanity CMS content verification |
+
+### Sanity Development Dataset Testing
+
+E2E tests use a **development** Sanity dataset (not production) to allow safe testing of content mutations.
+
+**Setup:**
+1. Create a `development` dataset in Sanity (already done)
+2. Set `SANITY_API_KEY` in `.env.local` (write token from Sanity)
+3. Run `pnpm test:e2e` - it will auto-populate development dataset
+
+**How it works:**
+- `.env.test` sets `NEXT_PUBLIC_SANITY_DATASET=development`
+- `e2e/global-setup.ts` loads env and runs test data migration
+- Test data has `[TEST]` marker on first service to verify Sanity content
+- Tests gracefully skip if development dataset is empty
+
+**Key files:**
+- `.env.test` - Test environment variables
+- `scripts/setup-test-data.ts` - Populates development dataset with test marker
+- `e2e/global-setup.ts` - Playwright global setup that runs migration
 
 ### Configuration
 - `vitest.config.ts` - Vitest configuration with path aliases
-- `playwright.config.ts` - Playwright configuration with Chromium only
+- `playwright.config.ts` - Playwright configuration with Chromium, loads .env.test
 
 ---
 
@@ -119,7 +149,8 @@ pnpm test:e2e      # Run E2E tests with Playwright
 | Item | Value |
 |------|-------|
 | Project ID | `07w52gq6` |
-| Dataset | `production` |
+| Production Dataset | `production` |
+| Development Dataset | `development` (for testing) |
 | Studio URL | `http://localhost:3000/studio` |
 | Schemas | `src/sanity/schemaTypes/` |
 | Client | `src/sanity/lib/client.ts` |
@@ -127,11 +158,13 @@ pnpm test:e2e      # Run E2E tests with Playwright
 | Fetch helpers | `src/sanity/lib/fetch.ts` |
 | Types | `src/sanity/lib/types.ts` |
 | Migration | `scripts/migrate-to-sanity.ts` |
+| Test Migration | `scripts/setup-test-data.ts` |
 
 **Commands:**
 ```bash
 pnpm dev                                    # Run Next.js + Studio
-export $(grep -v '^#' .env | xargs) && pnpm migrate   # Migrate content to Sanity
+export $(grep -v '^#' .env.local | xargs) && pnpm migrate   # Migrate content to Sanity (production)
+export $(grep -v '^#' .env.local | xargs) && NEXT_PUBLIC_SANITY_DATASET=development pnpm test:setup  # Populate dev dataset
 ```
 
 ---
@@ -158,7 +191,7 @@ export $(grep -v '^#' .env | xargs) && pnpm migrate   # Migrate content to Sanit
 
 **Created:**
 - `vitest.config.ts` - Vitest configuration
-- `playwright.config.ts` - Playwright configuration
+- `playwright.config.ts` - Playwright configuration (with .env.test loading)
 - `src/lib/validations/contact.test.ts` - Contact form validation unit tests
 - `src/lib/utils.test.ts` - Utility function unit tests
 - `e2e/homepage.spec.ts` - Homepage E2E test
@@ -166,14 +199,21 @@ export $(grep -v '^#' .env | xargs) && pnpm migrate   # Migrate content to Sanit
 - `e2e/contact-form.spec.ts` - Contact form E2E tests
 - `e2e/services.spec.ts` - Services page E2E tests
 - `e2e/projects.spec.ts` - Projects page E2E tests
+- `e2e/sanity-content.spec.ts` - Sanity content verification tests
+- `e2e/global-setup.ts` - Playwright global setup for test data migration
+- `.env.test` - Test environment variables (development dataset)
+- `scripts/setup-test-data.ts` - Test data migration with [TEST] marker
 
 **Modified:**
-- `package.json` - Added Vitest, Playwright, and test scripts
+- `package.json` - Added Vitest, Playwright, and test scripts (test:setup)
+- `scripts/migrate-to-sanity.ts` - Now reads dataset from env var
 - `docs/roadmap.md` - Marked Phase 2.7 complete
+- `docs/handoff.md` - Updated with Sanity testing documentation
 
 ---
 
 ## Git Status
 
 - Branch: `develop`
-- Changes: Phase 2.7 Testing implementation (uncommitted)
+- Previous commits: Phase 2.6 SEO, Phase 2.7 Testing
+- Uncommitted: Sanity development dataset testing setup

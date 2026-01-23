@@ -19,6 +19,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:setup": "tsx scripts/setup-test-data.ts",
     "test:e2e": "playwright test"
   },
   "dependencies": {
