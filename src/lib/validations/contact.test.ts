@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { contactFormSchema } from "./contact";
+import { contactFormSchema, contactSubmissionSchema } from "./contact";
 
 describe("contactFormSchema", () => {
   const validData = {
@@ -104,6 +104,42 @@ describe("contactFormSchema", () => {
     if (!result.success) {
       expect(result.error.issues[0]?.message).toBe(
         "Message must be less than 5000 characters",
+      );
+    }
+  });
+});
+
+describe("contactSubmissionSchema", () => {
+  const validSubmission = {
+    firstName: "John",
+    lastName: "Smith",
+    email: "john@example.com",
+    phone: "07700 900000",
+    service: "first-fix",
+    message: "I need carpentry work done on my property.",
+    turnstileToken: "test-token-123",
+  };
+
+  it("validates correct submission data with token", () => {
+    const result = contactSubmissionSchema.safeParse(validSubmission);
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects missing turnstile token", () => {
+    const { turnstileToken: _, ...withoutToken } = validSubmission;
+    const result = contactSubmissionSchema.safeParse(withoutToken);
+    expect(result.success).toBe(false);
+  });
+
+  it("rejects empty turnstile token", () => {
+    const result = contactSubmissionSchema.safeParse({
+      ...validSubmission,
+      turnstileToken: "",
+    });
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.issues[0]?.message).toBe(
+        "Please complete the security check",
       );
     }
   });

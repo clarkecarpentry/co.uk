@@ -2,14 +2,16 @@
 
 import * as React from "react";
 import { CheckCircle, Loader2, AlertCircle } from "lucide-react";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 
+import { env } from "~/env";
 import { api } from "~/trpc/react";
 import {
   contactFormSchema,
   type ContactFormData,
 } from "~/lib/validations/contact";
 
-type FormErrors = Partial<Record<keyof ContactFormData, string>>;
+type FormErrors = Partial<Record<keyof ContactFormData | "turnstile", string>>;
 
 export function ContactForm() {
   const [formData, setFormData] = React.useState<ContactFormData>({
@@ -22,6 +24,8 @@ export function ContactForm() {
   });
   const [errors, setErrors] = React.useState<FormErrors>({});
   const [submitted, setSubmitted] = React.useState(false);
+  const [turnstileToken, setTurnstileToken] = React.useState<string | null>(null);
+  const turnstileRef = React.useRef<TurnstileInstance>(null);
 
   const submitMutation = api.contact.submit.useMutation({
     onSuccess: () => {
@@ -34,6 +38,13 @@ export function ContactForm() {
         service: "",
         message: "",
       });
+      setTurnstileToken(null);
+      turnstileRef.current?.reset();
+    },
+    onError: () => {
+      // Reset Turnstile on error so user can try again
+      turnstileRef.current?.reset();
+      setTurnstileToken(null);
     },
   });
 
@@ -66,7 +77,13 @@ export function ContactForm() {
       return;
     }
 
-    submitMutation.mutate(result.data);
+    // Check for Turnstile token
+    if (!turnstileToken) {
+      setErrors((prev) => ({ ...prev, turnstile: "Please complete the security check" }));
+      return;
+    }
+
+    submitMutation.mutate({ ...result.data, turnstileToken });
   };
 
   if (submitted) {
@@ -223,6 +240,23 @@ export function ContactForm() {
         />
         {errors.message && (
           <p className="mt-1 text-sm text-red-500">{errors.message}</p>
+        )}
+      </div>
+
+      {/* Turnstile CAPTCHA */}
+      <div>
+        <Turnstile
+          ref={turnstileRef}
+          siteKey={env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+          onSuccess={setTurnstileToken}
+          onError={() => setTurnstileToken(null)}
+          onExpire={() => setTurnstileToken(null)}
+          options={{
+            theme: "dark",
+          }}
+        />
+        {errors.turnstile && (
+          <p className="mt-1 text-sm text-red-500">{errors.turnstile}</p>
         )}
       </div>
 

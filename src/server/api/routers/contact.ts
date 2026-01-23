@@ -3,8 +3,31 @@ import { Resend } from "resend";
 
 import { env } from "~/env";
 import { ContactFormEmail } from "~/emails/contact-form";
-import { contactFormSchema } from "~/lib/validations/contact";
+import { contactSubmissionSchema } from "~/lib/validations/contact";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+
+// Cloudflare Turnstile verification
+interface TurnstileVerifyResponse {
+  success: boolean;
+  "error-codes"?: string[];
+}
+
+async function verifyTurnstileToken(token: string): Promise<boolean> {
+  const response = await fetch(
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        secret: env.TURNSTILE_SECRET_KEY,
+        response: token,
+      }),
+    }
+  );
+
+  const data = (await response.json()) as TurnstileVerifyResponse;
+  return data.success;
+}
 
 const resend = new Resend(env.RESEND_API_KEY);
 
@@ -26,9 +49,18 @@ const serviceNames: Record<string, string> = {
 
 export const contactRouter = createTRPCRouter({
   submit: publicProcedure
-    .input(contactFormSchema)
+    .input(contactSubmissionSchema)
     .mutation(async ({ input }) => {
-      const { firstName, lastName, email, phone, service, message } = input;
+      const { firstName, lastName, email, phone, service, message, turnstileToken } = input;
+
+      // Verify Turnstile token
+      const isValidToken = await verifyTurnstileToken(turnstileToken);
+      if (!isValidToken) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Security verification failed. Please try again.",
+        });
+      }
 
       // Map service slug to readable name
       const serviceName = service

@@ -23,3 +23,10 @@ export const contactFormSchema = z.object({
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
+
+// Extended schema for server submission (includes Turnstile token)
+export const contactSubmissionSchema = contactFormSchema.extend({
+  turnstileToken: z.string().min(1, "Please complete the security check"),
+});
+
+export type ContactSubmissionData = z.infer<typeof contactSubmissionSchema>;
