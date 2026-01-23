@@ -4,7 +4,7 @@
   "launchDate": "2026-01-29",
   "currentPhase": "2.5",
   "phaseStatus": "blocked",
-  "phaseBlocker": "Awaiting design reference images from user",
+  "phaseBlocker": "Phase 2.5.1 complete, awaiting design reference images for 2.5.2",
   "completedPhases": ["2.1", "2.2", "2.3", "2.4", "2.6", "2.7"],
   "nextPhases": ["2.5", "2.8", "2.9"],
   "techStack": {

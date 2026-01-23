@@ -214,15 +214,18 @@ CONTACT_EMAIL=clarkecarpentry@proton.me
 > - User will provide screenshot images of websites for design inspiration
 > - Complete image integration (2.5.1) before full design overhaul (2.5.2)
 
-#### 2.5.1 Image Integration
-- [ ] Add image fields to Sanity schemas (service, project, blogPost)
-- [ ] Upload images to Sanity for services (from legacy/content/images or new)
-- [ ] Upload images to Sanity for projects (from legacy/content/images or new)
-- [ ] Upload featured images for blog posts
-- [ ] Update service pages to display images
-- [ ] Update project pages to display images (gallery support)
-- [ ] Update blog listing and post pages to display featured images
-- [ ] Configure next/image for Sanity CDN optimization
+#### 2.5.1 Image Integration ✅
+
+**Status:** Complete
+
+- [x] Add image fields to Sanity schemas (service, project, blogPost) - already existed
+- [x] Upload images to Sanity for services (10/11 have images, dry-lining missing)
+- [x] Upload images to Sanity for projects (3/12: Wilder House, Walcot House, Box Hill)
+- [ ] Upload featured images for blog posts (schema ready, no images yet)
+- [x] Update service pages to display images
+- [x] Update project pages to display images (gallery support)
+- [x] Update blog listing and post pages to display featured images
+- [x] Configure next/image for Sanity CDN optimization
 
 #### 2.5.2 Design Overhaul
 - [ ] Review provided design reference screenshots for inspiration

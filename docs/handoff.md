@@ -12,9 +12,9 @@ Current status for context continuity between sessions. Update this at the end o
 
 ## Current Focus
 
-**Phase 2.5 Design Beautification** - READY TO START
+**Phase 2.5.1 Image Integration** - COMPLETE
 
-Next step is **2.5.1 Image Integration** - add images to Sanity schemas and display on pages. User will provide design reference images for 2.5.2 design overhaul.
+Images now display on service, project, and blog pages. Ready for **2.5.2 Design Overhaul** when user provides design reference images.
 
 **Vercel hosting is live** at dev.clarkecarpentry.co.uk.
 
@@ -22,7 +22,15 @@ Next step is **2.5.1 Image Integration** - add images to Sanity schemas and disp
 
 ## Recent Work
 
-1. **Roadmap Updates**
+1. **Image Integration (Phase 2.5.1)**
+   - Updated migration script to upload images from `legacy/content/images`
+   - Configured next/image for Sanity CDN
+   - Added image display to service pages (list + detail)
+   - Added image display to project pages (featured + gallery)
+   - Added image display to blog pages (list + post)
+   - Uploaded 10 service images, 3 project images to Sanity
+
+2. **Roadmap Updates**
    - Marked Vercel setup complete (dev.clarkecarpentry.co.uk active)
    - Split Phase 2.5 into 2.5.1 (Image Integration) and 2.5.2 (Design Overhaul)
    - Changed design approach from model URL to reference images
@@ -241,5 +249,5 @@ export $(grep -v '^#' .env.local | xargs) && NEXT_PUBLIC_SANITY_DATASET=developm
 ## Git Status
 
 - Branch: `develop`
-- Ahead of origin by 10 commits (ready to push)
-- Last commit: `5eb2565` - Roadmap updates
+- Ahead of origin by 1 commit (ready to push)
+- Last commit: `c102be2` - Image integration
