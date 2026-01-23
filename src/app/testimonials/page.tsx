@@ -2,8 +2,8 @@ import { type Metadata } from "next";
 import Link from "next/link";
 import { Card, CardContent } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
-import { Quote, Phone, ArrowRight, Star } from "lucide-react";
-import { getTestimonials } from "~/sanity/lib/fetch";
+import { Quote, Phone, ArrowRight, MessageSquare } from "lucide-react";
+import { getTestimonials, getProjects } from "~/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Testimonials",
@@ -28,7 +28,10 @@ export const metadata: Metadata = {
 };
 
 export default async function TestimonialsPage() {
-  const testimonials = await getTestimonials();
+  const [testimonials, projects] = await Promise.all([
+    getTestimonials(),
+    getProjects(),
+  ]);
 
   return (
     <main className="min-h-screen">
@@ -42,13 +45,10 @@ export default async function TestimonialsPage() {
 
         <div className="relative container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 flex justify-center gap-1">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className="h-6 w-6 fill-green-500 text-green-500"
-                />
-              ))}
+            <div className="mb-6 flex justify-center">
+              <div className="rounded-full bg-green-500/10 p-3 ring-1 ring-green-500/20">
+                <MessageSquare className="h-8 w-8 text-green-500" />
+              </div>
             </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               What Our Clients Say
@@ -89,28 +89,18 @@ export default async function TestimonialsPage() {
                     >
                       &ldquo;{testimonial.quote}&rdquo;
                     </blockquote>
-                    <div className="mt-6 flex items-center justify-between">
-                      <div>
-                        <p className="font-semibold">{testimonial.clientName}</p>
-                        {testimonial.company && (
-                          <p className="text-sm text-green-500">
-                            {testimonial.company}
-                          </p>
-                        )}
-                        {testimonial.project && (
-                          <p className="text-muted-foreground mt-1 text-xs">
-                            Project: {testimonial.project}
-                          </p>
-                        )}
-                      </div>
-                      <div className="flex gap-0.5">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <Star
-                            key={i}
-                            className="h-4 w-4 fill-green-500/50 text-green-500/50"
-                          />
-                        ))}
-                      </div>
+                    <div className="mt-6">
+                      <p className="font-semibold">{testimonial.clientName}</p>
+                      {testimonial.company && (
+                        <p className="text-sm text-green-500">
+                          {testimonial.company}
+                        </p>
+                      )}
+                      {testimonial.project && (
+                        <p className="text-muted-foreground mt-1 text-xs">
+                          Project: {testimonial.project}
+                        </p>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -129,16 +119,16 @@ export default async function TestimonialsPage() {
               <p className="text-muted-foreground mt-1 text-sm">Years Experience</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-green-500">100+</p>
-              <p className="text-muted-foreground mt-1 text-sm">Projects Completed</p>
+              <p className="text-3xl font-bold text-green-500">{projects.length}</p>
+              <p className="text-muted-foreground mt-1 text-sm">Featured Projects</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-green-500">{testimonials.length}</p>
+              <p className="text-muted-foreground mt-1 text-sm">Happy Clients</p>
             </div>
             <div>
               <p className="text-3xl font-bold text-green-500">100%</p>
               <p className="text-muted-foreground mt-1 text-sm">CSCS Certified</p>
-            </div>
-            <div>
-              <p className="text-3xl font-bold text-green-500">5</p>
-              <p className="text-muted-foreground mt-1 text-sm">Star Service</p>
             </div>
           </div>
         </div>
