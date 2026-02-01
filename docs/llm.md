@@ -9,6 +9,7 @@ Essential context for LLM coding assistants. Read this at session start alongsid
 | `AGENTS.md` | Operational rules, agent conduct, working agreement |
 | `docs/state.json` | Machine-readable project state (phases, integrations) |
 | `docs/roadmap.md` | Task checklist with completion status |
+| `docs/releasing.md` | Release process and versioning |
 | `docs/handoff.md` | Where the last session left off |
 
 ---

@@ -161,6 +161,7 @@ Keep these updated as you work:
 | `docs/handoff.md`  | Current status, where we left off  | End of every session or major task |
 | `docs/roadmap.md`  | Task checklist with completion     | Tick items as completed            |
 | `docs/state.json`  | Machine-readable project state     | When phases/integrations change    |
+| `docs/releasing.md`| Release process and versioning     | When release steps change          |
 
 ### Updating state.json
 
@@ -197,6 +198,11 @@ pnpm format:write # Format with Prettier
 # Git flow
 git flow feature start <name>
 git flow feature finish <name>
+
+# Releases — see docs/releasing.md for full process
+git flow release start X.Y.Z
+pnpm version:bump X.Y.Z           # update package.json
+git flow release finish X.Y.Z
 ```
 
 ### Token-aware verification

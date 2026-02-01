@@ -134,16 +134,24 @@ pnpm format:write     # Format with Prettier
 
 ## Git Workflow
 
-Uses **git flow**. See `AGENTS.md` for full details.
+Uses **git flow**. See `AGENTS.md` for full details and `docs/releasing.md` for the release process.
 
 ```bash
 git flow feature start <name>    # Create feature
 git flow feature finish <name>   # Merge to develop
 ```
 
+**Releases** (see `docs/releasing.md`):
+```bash
+git flow release start X.Y.Z
+pnpm version:bump X.Y.Z         # sync package.json with release
+git flow release finish X.Y.Z
+```
+
 **Rules:**
 - Never commit directly to `main`
 - Features branch from `develop`
+- Always bump `package.json` via `pnpm version:bump` before finishing a release
 - No `Co-Authored-By` in commit messages
 
 ---
