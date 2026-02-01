@@ -8,6 +8,13 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+    RESEND_API_KEY: z.string().min(1),
+    CONTACT_EMAIL: z.string().email(),
+    CONTACT_FORM_FROM_ADDRESS: z.string().email().default("no-reply@site.clarkecarpentry.co.uk"),
+    TURNSTILE_SECRET_KEY: z.string().min(1),
+    // Optional: Only needed for server-side write operations (content migration scripts)
+    // Studio uses browser auth, not hardcoded tokens
+    SANITY_API_KEY: z.string().min(1).optional(),
   },
 
   /**
@@ -16,7 +23,10 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_SANITY_PROJECT_ID: z.string().min(1),
+    NEXT_PUBLIC_SANITY_DATASET: z.string().min(1),
+    NEXT_PUBLIC_SANITY_API_VERSION: z.string().optional(),
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1),
   },
 
   /**
@@ -25,7 +35,15 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    CONTACT_EMAIL: process.env.CONTACT_EMAIL,
+    CONTACT_FORM_FROM_ADDRESS: process.env.CONTACT_FORM_FROM_ADDRESS,
+    TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
+    SANITY_API_KEY: process.env.SANITY_API_KEY,
+    NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    NEXT_PUBLIC_SANITY_API_VERSION: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

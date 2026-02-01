@@ -1,187 +1,167 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with this repository.
 
-## Project Progress
+## Start Here
 
-- **Roadmap:** [.claude/roadmap.md](.claude/roadmap.md) - Current phase and planned work
-- **History:** [.claude/progress.md](.claude/progress.md) - Completed work log
+1. **Read `AGENTS.md`** - shared rules, agent conduct, and workflow (applies to all LLM tools)
+2. **Read `docs/llm.md`** - full project context, current state, decisions
+3. **Read `docs/handoff.md`** - where the last session left off
 
-**Current Priority:** Phase 1 - Simple placeholder landing page (logo, services overview, contact info)
+This file contains **Claude Code specific** architecture details that supplement the shared documentation.
+
+---
 
 ## Project Overview
 
-This is a T3 Stack project (Next.js + tRPC + TypeScript + Tailwind CSS) initialized with `create-t3-app` v7.40.0. It uses modern React 19, Next.js 15 App Router, and Tailwind CSS v4.
+T3 Stack project (Next.js + tRPC + TypeScript + Tailwind CSS) initialized with `create-t3-app` v7.40.0.
+
+- **Framework**: Next.js 15 App Router, React 19
+- **Styling**: Tailwind CSS v4 + shadcn/ui
+- **API**: tRPC with SuperJSON
+- **Package Manager**: pnpm only
 
 ### Business Context
 
-**Client**: Clarke Carpentry Contractors Ltd.
-**Purpose**: Professional business website serving as a virtual business card for tender submissions to construction companies
+**Client**: Clarke Carpentry Contractors Ltd
+**Purpose**: Professional website for tender submissions to construction companies
+**Domains**: `clarkecarpentry.co.uk` (prod), `next.clarkecarpentry.co.uk` (staging)
 
-**Domains**:
-- Production: `clarkecarpentry.co.uk`
-- Staging: `next.clarkecarpentry.co.uk`
+---
 
-**Services**: Carpentry and related building services for contractors working on projects like housing developments
-
-**Site Structure**:
-1. **Landing Page** (Home)
-   - Company logo
-   - Key values
-   - Service overview
-   - Contact form
-2. **About Page**
-   - Company information and background
-3. **Services Page**
-   - Detailed service offerings
-
-**Target Audience**: Construction companies and building contractors reviewing tender submissions
-
-## Development Commands
-
-```bash
-# Development
-pnpm dev              # Start dev server with Turbopack
-pnpm build            # Production build
-pnpm start            # Start production server
-pnpm preview          # Build and start production server
-
-# Code Quality
-pnpm check            # Run linting and type checking
-pnpm lint             # Run ESLint
-pnpm lint:fix         # Fix ESLint issues
-pnpm typecheck        # Run TypeScript compiler without emitting
-pnpm format:check     # Check code formatting with Prettier
-pnpm format:write     # Format code with Prettier
-```
-
-## Git Workflow
-
-This project uses **git flow** for branch management.
-
-### Branch Structure
-
-| Branch | Purpose |
-|--------|---------|
-| `main` | Production releases only |
-| `develop` | Integration branch for features |
-| `feature/*` | New features |
-| `bugfix/*` | Bug fixes for develop |
-| `release/*` | Release preparation |
-| `hotfix/*` | Urgent production fixes |
-
-### Common Commands
-
-```bash
-# Features
-git flow feature start my-feature    # Create feature branch from develop
-git flow feature finish my-feature   # Merge feature into develop
-
-# Releases
-git flow release start 1.0.0         # Create release branch
-git flow release finish 1.0.0        # Merge to main and develop, tag
-
-# Hotfixes
-git flow hotfix start fix-name       # Create hotfix from main
-git flow hotfix finish fix-name      # Merge to main and develop, tag
-```
-
-### Workflow Rules
-
-1. **Never commit directly to `main`** - only via release or hotfix finish
-2. **Features branch from `develop`** - not from main
-3. **Use descriptive branch names** - e.g., `feature/contact-form`, `hotfix/phone-link`
-4. **Tag releases** - git flow handles this automatically on release finish
-
-### Commit Messages
-
-- Use concise, descriptive commit messages
-- Add bullet points for details when helpful
-- **Do NOT include `Co-Authored-By` trailers** - keep messages clean
-
-## Architecture
+## Architecture Details
 
 ### tRPC Setup
 
-The project uses a full-stack type-safe API pattern with tRPC:
+The project uses full-stack type-safe API with tRPC:
 
-- **API Routes**: Located in `src/server/api/routers/`. Each router is a collection of related procedures (queries/mutations).
-- **Root Router**: `src/server/api/root.ts` is where all routers are combined into the main `appRouter`. New routers must be manually added here.
-- **tRPC Context**: Defined in `src/server/api/trpc.ts`. This is where you add things like database connections, authentication, etc.
-- **Client Setup**: `src/trpc/react.tsx` provides the `api` hook for client-side tRPC calls and the `TRPCReactProvider` wrapper.
-- **Server Calls**: `src/trpc/server.ts` provides server-side tRPC caller for use in Server Components.
-- **API Endpoint**: All tRPC requests go through `src/app/api/trpc/[trpc]/route.ts`.
+| Location | Purpose |
+|----------|---------|
+| `src/server/api/routers/` | Router files (procedures/mutations) |
+| `src/server/api/root.ts` | Main router - **register new routers here** |
+| `src/server/api/trpc.ts` | tRPC init, context, middleware |
+| `src/trpc/react.tsx` | Client-side `api` hook and provider |
+| `src/trpc/server.ts` | Server-side caller for RSC |
+| `src/app/api/trpc/[trpc]/route.ts` | API endpoint handler |
 
-The tRPC setup includes:
-- SuperJSON transformer for serialization of complex types (Dates, Maps, Sets, etc.)
-- Artificial timing delay in development (100-500ms) to catch unwanted waterfalls
-- Logging middleware that logs execution time of each procedure
-- ZodError formatting for type-safe validation errors on the frontend
+**Features:**
+- SuperJSON transformer (Dates, Maps, Sets serialization)
+- Dev timing delay (100-500ms) to catch waterfalls
+- Logging middleware (execution time)
+- ZodError formatting for frontend validation errors
 
-### Project Structure
+### Adding a New tRPC Router
+
+1. Create router in `src/server/api/routers/`
+2. Use `publicProcedure` from `~/server/api/trpc`
+3. **Register in `src/server/api/root.ts`** (required!)
+4. Client: `api.yourRouter.yourProcedure.useQuery()` or `.useMutation()`
+5. Server: `await api.yourRouter.yourProcedure()`
+
+### Server vs Client Components
+
+- Default: Server Components
+- Add `"use client"` only for interactivity or browser APIs
+- tRPC hooks (`useQuery`, `useMutation`) require `"use client"`
+- Server Components use caller from `~/trpc/server`
+
+---
+
+## Project Structure
 
 ```
 src/
-├── app/                      # Next.js App Router
-│   ├── _components/          # Server Components
+├── app/                      # Next.js App Router pages
 │   ├── api/trpc/[trpc]/     # tRPC API handler
-│   ├── layout.tsx           # Root layout with TRPCReactProvider
+│   ├── layout.tsx           # Root layout
 │   └── page.tsx             # Homepage
-├── server/
-│   └── api/
-│       ├── routers/         # tRPC routers (add new ones here)
-│       ├── root.ts          # Main router - register all routers here
-│       └── trpc.ts          # tRPC initialization and context
-├── trpc/
-│   ├── query-client.ts      # React Query client configuration
-│   ├── react.tsx            # Client-side tRPC provider and hooks
-│   └── server.ts            # Server-side tRPC caller
-├── styles/
-│   └── globals.css          # Tailwind CSS v4 imports and theme
-└── env.js                   # Environment variable validation with Zod
+├── components/              # React components
+│   └── ui/                  # shadcn/ui components
+├── emails/                  # React Email templates
+├── lib/
+│   ├── data/               # Static data (services, projects)
+│   ├── validations/        # Zod schemas
+│   └── utils.ts            # Utilities
+├── server/api/
+│   ├── routers/            # tRPC routers
+│   ├── root.ts             # Router registry
+│   └── trpc.ts             # tRPC setup
+├── trpc/                   # tRPC client setup
+├── styles/globals.css      # Tailwind theme
+└── env.js                  # Env validation (Zod)
 ```
 
 ### Path Aliases
 
-The project uses `~/*` as an alias for `./src/*`. Example: `import { api } from "~/trpc/react"`.
+`~/*` → `./src/*`
 
-### Environment Variables
+Example: `import { api } from "~/trpc/react"`
 
-Environment variables are validated using `@t3-oss/env-nextjs` in `src/env.js`. Add new variables to the Zod schemas and the `runtimeEnv` object. Client-side variables must be prefixed with `NEXT_PUBLIC_`.
+---
 
-### Styling
+## Environment Variables
 
-- Uses Tailwind CSS v4 with the new `@theme` directive
-- Custom font: Geist Sans (loaded via Google Fonts)
-- Global styles: `src/styles/globals.css`
-- Font variable: `--font-geist-sans`
+Validated with `@t3-oss/env-nextjs` in `src/env.js`.
 
-### TypeScript Configuration
+**To add a new variable:**
+1. Add to Zod schema (server or client section)
+2. Add to `runtimeEnv` object
+3. Add to `.env.example`
 
-- Strict mode enabled with `noUncheckedIndexedAccess`
-- Path alias: `~/*` maps to `./src/*`
-- ESLint configured with TypeScript-specific rules, including:
-  - Consistent type imports with inline style
-  - Unused variables allowed if prefixed with `_`
-  - Custom rules for Next.js and React patterns
+Client-side vars must be prefixed with `NEXT_PUBLIC_`.
 
-## Adding New Features
+---
 
-### Adding a New tRPC Router
+## TypeScript Configuration
 
-1. Create a new router file in `src/server/api/routers/`
-2. Define procedures using `publicProcedure` from `~/server/api/trpc`
-3. Import and add the router to `appRouter` in `src/server/api/root.ts`
-4. Use the router on the client with `api.yourRouter.yourProcedure.useQuery()` or `.useMutation()`
-5. Use on the server with `await api.yourRouter.yourProcedure()`
+- Strict mode with `noUncheckedIndexedAccess`
+- Path alias: `~/*` → `./src/*`
+- Unused vars allowed if prefixed with `_`
+- Consistent type imports (inline style)
 
-### Server vs Client Components
+---
 
-- By default, components in `src/app/_components/` are Server Components
-- Use `"use client"` directive for components that need interactivity or browser APIs
-- tRPC client hooks (`useQuery`, `useMutation`) require `"use client"`
-- Server Components can call tRPC procedures directly using the server-side caller from `~/trpc/server`
+## Commands
 
-## Package Manager
+```bash
+pnpm dev              # Dev server (Turbopack)
+pnpm build:quiet      # Production build (preferred, prints only pass/fail)
+pnpm check            # Lint + typecheck
+pnpm format:write     # Format with Prettier
+```
 
-This project uses `pnpm@10.28.1` as specified in package.json. Always use `pnpm` instead of `npm` or `yarn`.
+---
+
+## Git Workflow
+
+Uses **git flow**. See `AGENTS.md` for full details and `docs/releasing.md` for the release process.
+
+```bash
+git flow feature start <name>    # Create feature
+git flow feature finish <name>   # Merge to develop
+```
+
+**Releases** (see `docs/releasing.md`):
+```bash
+git flow release start X.Y.Z
+pnpm version:bump X.Y.Z         # sync package.json with release
+git flow release finish X.Y.Z
+```
+
+**Rules:**
+- Never commit directly to `main`
+- Features branch from `develop`
+- Always bump `package.json` via `pnpm version:bump` before finishing a release
+- No `Co-Authored-By` in commit messages
+
+---
+
+## Living Documentation
+
+Update these as you work:
+
+| File | When |
+|------|------|
+| `docs/handoff.md` | End of session |
+| `docs/roadmap.md` | Tick completed items |
+| `docs/state.json` | When phases/integrations change |

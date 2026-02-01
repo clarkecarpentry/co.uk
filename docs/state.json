@@ -1,0 +1,66 @@
+{
+  "project": "Clarke Carpentry Website",
+  "lastUpdated": "2026-01-23",
+  "launchDate": "2026-01-29",
+  "currentPhase": "2.5",
+  "phaseStatus": "in-progress",
+  "phaseBlocker": "Services and projects pages beautified, continuing with remaining pages",
+  "completedPhases": ["2.1", "2.2", "2.3", "2.4", "2.6", "2.7"],
+  "nextPhases": ["2.5", "2.8", "2.9"],
+  "techStack": {
+    "framework": "Next.js 15",
+    "react": "19",
+    "styling": "Tailwind CSS v4",
+    "ui": "shadcn/ui",
+    "api": "tRPC",
+    "cms": "Sanity.io",
+    "email": "Resend",
+    "hosting": "Vercel",
+    "testing": "Vitest + Playwright"
+  },
+  "domains": {
+    "production": "clarkecarpentry.co.uk",
+    "development": "dev.clarkecarpentry.co.uk"
+  },
+  "sanity": {
+    "projectId": "07w52gq6",
+    "productionDataset": "production",
+    "developmentDataset": "development",
+    "studioPath": "/studio"
+  },
+  "content": {
+    "services": 11,
+    "projects": 12,
+    "testimonials": 6,
+    "blogPosts": 4
+  },
+  "integrations": {
+    "cms": "complete",
+    "contactForm": "complete",
+    "email": "configured",
+    "analytics": "planned",
+    "seo": "complete",
+    "hosting": "active"
+  },
+  "testing": {
+    "unit": "15 tests (Vitest)",
+    "e2e": "14 tests (Playwright)",
+    "sanityDataset": "development"
+  },
+  "build": {
+    "status": "passing",
+    "pages": 32,
+    "staticPages": 30,
+    "dynamicPages": 2
+  },
+  "git": {
+    "workflow": "git-flow",
+    "mainBranch": "main",
+    "developBranch": "develop",
+    "currentBranch": "develop"
+  },
+  "theme": {
+    "mode": "dark-only",
+    "accent": "green"
+  }
+}

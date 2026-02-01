@@ -46,3 +46,12 @@ yarn-error.log*
 .idea
 # Claude Code local settings
 .claude/settings.local.json
+
+# generated sitemap (created by next-sitemap during build)
+public/sitemap*.xml
+public/robots.txt
+test-results/
+
+# Downloaded/generated images (uploaded to Sanity)
+legacy/content/images/projects/
+legacy/generated/
