@@ -125,7 +125,7 @@ Client-side vars must be prefixed with `NEXT_PUBLIC_`.
 
 ```bash
 pnpm dev              # Dev server (Turbopack)
-pnpm build            # Production build
+pnpm build:quiet      # Production build (preferred, prints only pass/fail)
 pnpm check            # Lint + typecheck
 pnpm format:write     # Format with Prettier
 ```

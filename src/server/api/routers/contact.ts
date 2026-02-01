@@ -69,7 +69,7 @@ export const contactRouter = createTRPCRouter({
 
       try {
         const { error } = await resend.emails.send({
-          from: "Clarke Carpentry Website <noreply@clarkecarpentry.co.uk>",
+          from: `Clarke Carpentry Website <${env.CONTACT_FORM_FROM_ADDRESS}>`,
           to: env.CONTACT_EMAIL,
           replyTo: email,
           subject: `Website Enquiry from ${firstName} ${lastName}`,
