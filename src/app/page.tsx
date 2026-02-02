@@ -5,13 +5,16 @@ import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import { Phone, ArrowRight, Quote } from "lucide-react";
-import { getServices, getFeaturedTestimonials } from "~/sanity/lib/fetch";
+import { getServices, getFeaturedTestimonials, getSiteSettings } from "~/sanity/lib/fetch";
 
 export default async function Home() {
-  const [services, featuredTestimonials] = await Promise.all([
+  const [services, featuredTestimonials, settings] = await Promise.all([
     getServices(),
     getFeaturedTestimonials(),
+    getSiteSettings(),
   ]);
+  const phone = settings?.contact?.mobile ?? "07540 150412";
+  const phoneTel = phone.replace(/\s/g, '');
 
   return (
     <main className="bg-background min-h-screen">
@@ -62,7 +65,7 @@ export default async function Home() {
             size="lg"
             className="animate-glow-pulse mt-10 bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-6 text-lg font-semibold text-white transition-all duration-300 hover:scale-105 hover:from-green-500 hover:to-emerald-500"
           >
-            <a href="tel:01225350376">
+            <a href={`tel:${phoneTel}`}>
               <Phone className="mr-2.5 h-5 w-5" />
               Call Us Today
             </a>
@@ -198,9 +201,9 @@ export default async function Home() {
                   size="lg"
                   className="bg-green-600 hover:bg-green-500"
                 >
-                  <a href="tel:01225350376">
+                  <a href={`tel:${phoneTel}`}>
                     <Phone className="mr-2 h-4 w-4" />
-                    Call 01225 350376
+                    Call {phone}
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg">

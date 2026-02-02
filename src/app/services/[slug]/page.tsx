@@ -6,7 +6,7 @@ import { Card, CardContent } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { ArrowLeft, ArrowRight, CheckCircle, Phone } from "lucide-react";
-import { getServices, getServiceBySlug, getProjects } from "~/sanity/lib/fetch";
+import { getServices, getServiceBySlug, getProjects, getSiteSettings } from "~/sanity/lib/fetch";
 import { ServiceJsonLd } from "~/components/json-ld";
 import { urlFor } from "~/sanity/lib/image";
 
@@ -55,11 +55,14 @@ export async function generateMetadata({
 
 export default async function ServicePage({ params }: PageProps) {
   const { slug } = await params;
-  const [service, services, projects] = await Promise.all([
+  const [service, services, projects, settings] = await Promise.all([
     getServiceBySlug(slug),
     getServices(),
     getProjects(),
+    getSiteSettings(),
   ]);
+  const phone = settings?.contact?.mobile ?? "07540 150412";
+  const phoneTel = phone.replace(/\s/g, '');
 
   if (!service) {
     notFound();
@@ -161,7 +164,7 @@ export default async function ServicePage({ params }: PageProps) {
                     </p>
                     <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                       <Button asChild className="bg-green-600 hover:bg-green-500">
-                        <a href="tel:01225350376">
+                        <a href={`tel:${phoneTel}`}>
                           <Phone className="mr-2 h-4 w-4" />
                           Call Us
                         </a>
@@ -191,7 +194,7 @@ export default async function ServicePage({ params }: PageProps) {
                   </div>
                   <div className="flex shrink-0 gap-3">
                     <Button asChild className="bg-green-600 hover:bg-green-500">
-                      <a href="tel:01225350376">
+                      <a href={`tel:${phoneTel}`}>
                         <Phone className="mr-2 h-4 w-4" />
                         Call Us
                       </a>

@@ -2,6 +2,7 @@ import { type Metadata } from "next";
 import { Card, CardContent } from "~/components/ui/card";
 import { ContactForm } from "~/components/contact-form";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { getSiteSettings } from "~/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -25,7 +26,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const settings = await getSiteSettings();
+  const phone = settings?.contact?.mobile ?? "07540 150412";
+  const phoneTel = phone.replace(/\s/g, '');
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -86,18 +90,12 @@ export default function ContactPage() {
                       <Phone className="mt-0.5 h-5 w-5 shrink-0 text-green-500" />
                       <div>
                         <dt className="font-medium">Phone</dt>
-                        <dd className="text-muted-foreground mt-1 space-y-1 text-sm">
+                        <dd className="text-muted-foreground mt-1 text-sm">
                           <a
-                            href="tel:01225350376"
+                            href={`tel:${phoneTel}`}
                             className="hover:text-foreground block"
                           >
-                            01225 350376 (Office)
-                          </a>
-                          <a
-                            href="tel:07540150412"
-                            className="hover:text-foreground block"
-                          >
-                            07540 150412 (Mobile)
+                            {phone}
                           </a>
                         </dd>
                       </div>
@@ -140,11 +138,11 @@ export default function ContactPage() {
                     project.
                   </p>
                   <a
-                    href="tel:01225350376"
+                    href={`tel:${phoneTel}`}
                     className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-green-600 px-4 py-3 font-medium text-white transition-colors hover:bg-green-500"
                   >
                     <Phone className="h-4 w-4" />
-                    Call 01225 350376
+                    Call {phone}
                   </a>
                 </CardContent>
               </Card>

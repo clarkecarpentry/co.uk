@@ -125,7 +125,7 @@ export const blogPosts: BlogPost[] = [
       block("h2", "Planning Your Project"),
       block("normal", "If you're a main contractor putting together a build programme, or a homeowner planning an extension, understanding first and second fix helps you plan realistically. First fix needs to happen before the plasterers. Second fix needs to happen after decoration is largely complete. Getting this sequencing wrong causes delays that ripple through the whole project."),
       block("normal", "We work with clients to coordinate both stages with other trades. Our experience across commercial developments and domestic projects means we understand how carpentry fits into the broader build programme."),
-      block("normal", "Call us on 01225 350376 to discuss your carpentry requirements. Whether you need first fix, second fix, or a complete carpentry package, we're here to help."),
+      block("normal", "Call us on 07540 150412 to discuss your carpentry requirements. Whether you need first fix, second fix, or a complete carpentry package, we're here to help."),
     ],
   },
 
@@ -179,7 +179,7 @@ export const blogPosts: BlogPost[] = [
 
       block("h2", "Is a Cut Roof Right for Your Project?"),
       block("normal", "If you're planning an extension, renovation, or new build with a complex or restricted site, a cut roof might be the answer. We're happy to discuss your project and advise whether traditional construction makes sense."),
-      block("normal", "Call us on 01225 350376 to talk through your requirements. We cover Bristol, Bath and the South West."),
+      block("normal", "Call us on 07540 150412 to talk through your requirements. We cover Bristol, Bath and the South West."),
     ],
   },
 
@@ -225,7 +225,7 @@ export const blogPosts: BlogPost[] = [
       block("h2", "The Relationship We're Looking For"),
       block("normal", "We work best with main contractors who value reliability over price alone. If you're looking for the cheapest possible labour, we're probably not the right fit."),
       block("normal", "But if you want a carpentry subcontractor who turns up when agreed, delivers quality work, and communicates clearly throughout the project, we'd like to hear from you."),
-      block("normal", "Call us on 01225 350376 to discuss your upcoming projects. We handle first fix, second fix, and complete carpentry packages across Bristol, Bath and the South West."),
+      block("normal", "Call us on 07540 150412 to discuss your upcoming projects. We handle first fix, second fix, and complete carpentry packages across Bristol, Bath and the South West."),
     ],
   },
 
@@ -264,7 +264,7 @@ export const blogPosts: BlogPost[] = [
 
       block("h2", "Work With Us"),
       block("normal", "If you're planning a multi-unit residential development or a commercial conversion in Bristol, Bath or the South West, we'd welcome the opportunity to discuss your carpentry requirements."),
-      block("normal", "Call us on 01225 350376 or email info@clarkecarpentry.co.uk."),
+      block("normal", "Call us on 07540 150412 or email info@clarkecarpentry.co.uk."),
     ],
   },
 ];

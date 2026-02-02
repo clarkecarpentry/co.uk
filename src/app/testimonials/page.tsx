@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Card, CardContent } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
 import { Quote, Phone, ArrowRight, MessageSquare } from "lucide-react";
-import { getTestimonials, getProjects } from "~/sanity/lib/fetch";
+import { getTestimonials, getProjects, getSiteSettings } from "~/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Testimonials",
@@ -28,10 +28,13 @@ export const metadata: Metadata = {
 };
 
 export default async function TestimonialsPage() {
-  const [testimonials, projects] = await Promise.all([
+  const [testimonials, projects, settings] = await Promise.all([
     getTestimonials(),
     getProjects(),
+    getSiteSettings(),
   ]);
+  const phone = settings?.contact?.mobile ?? "07540 150412";
+  const phoneTel = phone.replace(/\s/g, '');
 
   return (
     <main className="min-h-screen">
@@ -152,9 +155,9 @@ export default async function TestimonialsPage() {
                   size="lg"
                   className="bg-green-600 hover:bg-green-500"
                 >
-                  <a href="tel:01225350376">
+                  <a href={`tel:${phoneTel}`}>
                     <Phone className="mr-2 h-4 w-4" />
-                    Call 01225 350376
+                    Call {phone}
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg">

@@ -6,7 +6,7 @@ import { Card, CardContent } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { ArrowLeft, Calendar, User, Phone, ArrowRight, BookOpen } from "lucide-react";
-import { getBlogPosts, getBlogPostBySlug } from "~/sanity/lib/fetch";
+import { getBlogPosts, getBlogPostBySlug, getSiteSettings } from "~/sanity/lib/fetch";
 import { PortableText } from "~/components/portable-text";
 import type { PortableTextBlock } from "next-sanity";
 import { ArticleJsonLd } from "~/components/json-ld";
@@ -59,10 +59,13 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const [postData, allPosts] = await Promise.all([
+  const [postData, allPosts, settings] = await Promise.all([
     getBlogPostBySlug(slug),
     getBlogPosts(),
+    getSiteSettings(),
   ]);
+  const phone = settings?.contact?.mobile ?? "07540 150412";
+  const phoneTel = phone.replace(/\s/g, '');
 
   if (!postData) {
     notFound();
@@ -205,9 +208,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </p>
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                   <Button asChild size="lg" className="bg-green-600 hover:bg-green-500">
-                    <a href="tel:01225350376">
+                    <a href={`tel:${phoneTel}`}>
                       <Phone className="mr-2 h-4 w-4" />
-                      Call 01225 350376
+                      Call {phone}
                     </a>
                   </Button>
                   <Button asChild variant="outline" size="lg">
