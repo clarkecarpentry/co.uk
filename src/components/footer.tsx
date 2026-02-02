@@ -18,7 +18,12 @@ const footerLinks = {
   ],
 };
 
-export function Footer() {
+interface FooterProps {
+  phone: string;
+}
+
+export function Footer({ phone }: FooterProps) {
+  const phoneTel = phone.replace(/\s/g, '');
   return (
     <footer className="border-border/50 bg-card/30 border-t">
       <div className="container mx-auto px-4 py-12">
@@ -97,11 +102,11 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="tel:01225350376"
+                  href={`tel:${phoneTel}`}
                   className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors"
                 >
                   <Phone className="h-4 w-4" />
-                  01225 350376
+                  {phone}
                 </a>
               </li>
               <li>

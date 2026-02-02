@@ -6,9 +6,10 @@
 
 interface LocalBusinessProps {
   url?: string;
+  telephone?: string;
 }
 
-export function LocalBusinessJsonLd({ url = "https://clarkecarpentry.co.uk" }: LocalBusinessProps) {
+export function LocalBusinessJsonLd({ url = "https://clarkecarpentry.co.uk", telephone = "+447540150412" }: LocalBusinessProps) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -19,7 +20,7 @@ export function LocalBusinessJsonLd({ url = "https://clarkecarpentry.co.uk" }: L
     url: url,
     logo: `${url}/logo.png`,
     image: `${url}/og-image.png`,
-    telephone: "+441225350376",
+    telephone: telephone,
     email: "info@clarkecarpentry.co.uk",
     address: {
       "@type": "PostalAddress",

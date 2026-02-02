@@ -10,6 +10,7 @@ import { ThemeProvider } from "~/components/theme-provider";
 import { Nav } from "~/components/nav";
 import { Footer } from "~/components/footer";
 import { LocalBusinessJsonLd } from "~/components/json-ld";
+import { getSiteSettings } from "~/sanity/lib/fetch";
 
 const siteUrl = "https://clarkecarpentry.co.uk";
 
@@ -96,13 +97,16 @@ const unbounded = Unbounded({
   variable: "--font-unbounded",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const settings = await getSiteSettings();
+  const phone = settings?.contact?.mobile ?? "07540 150412";
+
   return (
     <html lang="en" className={`${geist.variable} ${unbounded.variable}`} suppressHydrationWarning>
       <head>
-        <LocalBusinessJsonLd />
+        <LocalBusinessJsonLd telephone={`+44${phone.replace(/\s/g, '').slice(1)}`} />
       </head>
       <body>
         <ThemeProvider
@@ -112,9 +116,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TRPCReactProvider>
-            <Nav />
+            <Nav phone={phone} />
             {children}
-            <Footer />
+            <Footer phone={phone} />
           </TRPCReactProvider>
         </ThemeProvider>
         <SpeedInsights />

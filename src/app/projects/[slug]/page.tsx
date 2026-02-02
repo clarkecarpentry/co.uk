@@ -12,7 +12,7 @@ import {
   Building2,
   Phone,
 } from "lucide-react";
-import { getProjects, getProjectBySlug } from "~/sanity/lib/fetch";
+import { getProjects, getProjectBySlug, getSiteSettings } from "~/sanity/lib/fetch";
 import { urlFor } from "~/sanity/lib/image";
 import { GalleryLightbox } from "~/components/gallery-lightbox";
 
@@ -78,10 +78,13 @@ function getServiceNames(
 
 export default async function ProjectPage({ params }: PageProps) {
   const { slug } = await params;
-  const [project, projects] = await Promise.all([
+  const [project, projects, settings] = await Promise.all([
     getProjectBySlug(slug),
     getProjects(),
+    getSiteSettings(),
   ]);
+  const phone = settings?.contact?.mobile ?? "07540 150412";
+  const phoneTel = phone.replace(/\s/g, '');
 
   if (!project) {
     notFound();
@@ -248,7 +251,7 @@ export default async function ProjectPage({ params }: PageProps) {
                       asChild
                       className="w-full bg-green-600 hover:bg-green-500"
                     >
-                      <a href="tel:01225350376">
+                      <a href={`tel:${phoneTel}`}>
                         <Phone className="mr-2 h-4 w-4" />
                         Call Us
                       </a>

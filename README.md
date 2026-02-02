@@ -58,26 +58,27 @@ scripts/                 # Migration and setup scripts
 
 ## Documentation
 
-| File | Description |
-|------|-------------|
-| [AGENTS.md](AGENTS.md) | LLM assistant rules and working agreement |
-| [CLAUDE.md](CLAUDE.md) | Claude Code specific architecture details |
-| [docs/roadmap.md](docs/roadmap.md) | Current phase, tasks, and checklist |
-| [docs/handoff.md](docs/handoff.md) | Session handoff notes |
-| [docs/llm.md](docs/llm.md) | Project context for LLM assistants |
-| [docs/state.json](docs/state.json) | Machine-readable project state |
+| File                               | Description                               |
+| ---------------------------------- | ----------------------------------------- |
+| [AGENTS.md](AGENTS.md)             | LLM assistant rules and working agreement |
+| [CLAUDE.md](CLAUDE.md)             | Claude Code specific architecture details |
+| [docs/roadmap.md](docs/roadmap.md) | Current phase, tasks, and checklist       |
+| [docs/handoff.md](docs/handoff.md) | Session handoff notes                     |
+| [docs/llm.md](docs/llm.md)         | Project context for LLM assistants        |
+| [docs/state.json](docs/state.json) | Machine-readable project state            |
 
 ## Environments
 
-| Environment | Domain | Status |
-|-------------|--------|--------|
-| Development | dev.clarkecarpentry.co.uk | Active |
-| Production | clarkecarpentry.co.uk | Configured |
+| Environment | Domain                    | Status     |
+| ----------- | ------------------------- | ---------- |
+| Development | dev.clarkecarpentry.co.uk | Active     |
+| Production  | clarkecarpentry.co.uk     | Configured |
 
 ## Key Commands
 
 ```bash
 pnpm dev          # Development server
+pnpm build:quiet  # (preferred build for CI and LLM agents, no progress)
 pnpm build        # Production build
 pnpm check        # Lint + typecheck
 pnpm format:write # Format code

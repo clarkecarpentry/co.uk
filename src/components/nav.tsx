@@ -18,9 +18,14 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-export function Nav() {
+interface NavProps {
+  phone: string;
+}
+
+export function Nav({ phone }: NavProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const pathname = usePathname();
+  const phoneTel = phone.replace(/\s/g, '');
 
   return (
     <header className="border-border/50 bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 border-b backdrop-blur">
@@ -58,11 +63,11 @@ export function Nav() {
         {/* Desktop Contact */}
         <div className="hidden items-center gap-3 lg:flex">
           <a
-            href="tel:01225350376"
+            href={`tel:${phoneTel}`}
             className="flex items-center gap-2 rounded-full bg-green-600/10 px-4 py-2 text-sm font-medium text-green-500 ring-1 ring-green-500/20 transition-all duration-200 hover:bg-green-600/20 hover:ring-green-500/40"
           >
             <Phone className="h-4 w-4" />
-            01225 350376
+            {phone}
           </a>
         </div>
 
@@ -102,11 +107,11 @@ export function Nav() {
             ))}
             <div className="border-border/50 mt-4 flex flex-col gap-2 border-t pt-4">
               <a
-                href="tel:01225350376"
+                href={`tel:${phoneTel}`}
                 className="flex items-center gap-2 rounded-full bg-green-600/10 px-4 py-3 text-sm font-medium text-green-500 ring-1 ring-green-500/20"
               >
                 <Phone className="h-4 w-4" />
-                01225 350376
+                {phone}
               </a>
               <a
                 href="mailto:info@clarkecarpentry.co.uk"
